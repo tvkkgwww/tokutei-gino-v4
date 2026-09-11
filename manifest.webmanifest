@@ -3,7 +3,7 @@
   "short_name": "JLPT GINOU",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#eefcf8",
-  "theme_color": "#0f766e",
+  "background_color": "#eef7ff",
+  "theme_color": "#0b5ea8",
   "lang": "vi"
 }

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0f766e">
 <link rel="manifest" href="manifest.webmanifest">
-<title>日本語 JLPT & GINOU v4.3</title>
+<title>日本語 JLPT & GINOU v4.4</title>
 <style>
 :root{
   --green:#0f766e; --green2:#0b5d55; --mint:#dff7f2; --ink:#10343b; --line:#b9e4db;
@@ -128,7 +128,7 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
 .focus-mode .mobilebar{display:none!important}
 
 
-/* v4.2 Tokutei Ginou 2 */
+/* v4.4 Tokutei Ginou 2 */
 .top-menu{display:flex;gap:8px;overflow:auto;margin:12px 0 0;padding-bottom:2px}
 .top-menu button{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:10px 14px;font-weight:800}
 .top-menu button.active{background:var(--green);color:#fff}
@@ -164,7 +164,7 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
   .mobilebar button{border:0;background:#fff;padding:10px;font-weight:800;color:var(--ink)}
 }
 
-/* v4.3 updates */
+/* v4.4 updates */
 .study-mode-switch{display:flex;gap:8px;justify-content:center;margin:12px 0 4px}
 .study-mode-switch button{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 16px;border-radius:14px;font-weight:900}
 .study-mode-switch button.active{background:var(--green);color:#fff}
@@ -184,6 +184,221 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
 @media(max-width:900px){
   .flash-status{bottom:18px}
   .kana-toggle{bottom:78px}
+}
+
+
+/* ===== v4.4 visual + interaction overrides ===== */
+:root{
+  --blue:#0b5ea8;
+  --blue2:#084a86;
+  --blue3:#1597ff;
+  --cream:#fffaf2;
+  --paper:#fff9f2;
+}
+.study-mode-switch{
+  display:flex!important;
+  justify-content:center;
+  gap:10px;
+  margin:12px auto 8px;
+  flex-wrap:wrap;
+}
+.study-mode-switch button{
+  min-width:150px;
+  border:1px solid #b9cfe0!important;
+  background:linear-gradient(#fff,#eef6ff)!important;
+  color:#0a3760!important;
+  padding:9px 14px!important;
+  border-radius:14px!important;
+  font-weight:900!important;
+  box-shadow:0 5px 0 #c6d7e5,0 10px 18px rgba(21,73,116,.12)!important;
+  transform:translateY(0);
+  transition:.12s ease;
+}
+.study-mode-switch button:active{transform:translateY(3px);box-shadow:0 2px 0 #c6d7e5,0 4px 10px rgba(21,73,116,.12)!important}
+.study-mode-switch button.active{
+  background:linear-gradient(#27a8ff,#0877d1)!important;
+  color:#fff!important;
+  border-color:#68c7ff!important;
+  box-shadow:0 5px 0 #065f9d,0 12px 20px rgba(0,110,210,.25)!important;
+}
+#cardStudyWrap{display:block}
+#cardStudyWrap.hidden,#listSection.hidden,#kanjiSection.hidden{display:none!important}
+
+.flash-stack{min-height:590px}
+.flash{
+  width:min(700px,95%);
+  min-height:520px;
+  border-radius:34px;
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,255,255,.9),transparent 22%),
+    linear-gradient(135deg,#fffdf9,#fff6ef 72%,#f8efe6);
+  border:1px solid #eadbce;
+  box-shadow:
+    0 28px 40px rgba(40,52,61,.24),
+    0 10px 0 #e7ddd3,
+    0 18px 0 #ded3c8,
+    inset 0 1px 0 #fff;
+}
+.flash:before{
+  inset:14px 12px -16px -14px!important;
+  background:linear-gradient(145deg,#fff7f0,#f2e8df)!important;
+  box-shadow:0 10px 18px rgba(0,0,0,.08)!important;
+}
+.flash:after{
+  inset:28px 24px -29px -28px!important;
+  background:linear-gradient(145deg,#f8eee6,#e8ddd4)!important;
+  box-shadow:0 10px 18px rgba(0,0,0,.08)!important;
+}
+.face{
+  overflow:hidden;
+  border-radius:34px;
+  padding:28px 34px 92px!important;
+}
+.face::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.95;
+  background:
+    radial-gradient(circle at 14% 20%,#f8a3b7 0 3px,transparent 4px),
+    radial-gradient(circle at 18% 16%,#ef7897 0 2px,transparent 3px),
+    radial-gradient(circle at 82% 77%,#f8a3b7 0 3px,transparent 4px),
+    linear-gradient(145deg,transparent 0 82%,rgba(238,145,171,.08));
+  mix-blend-mode:multiply;
+}
+.cherry{font-size:38px;filter:drop-shadow(0 3px 1px rgba(122,44,68,.12))}
+.jp{font-size:82px;letter-spacing:.02em;color:#0b3554;text-shadow:0 2px 0 #fff}
+.reading{font-size:28px;color:#173d58;margin-top:5px}
+.meaning{
+  display:inline-block;
+  min-width:220px;
+  background:linear-gradient(180deg,#ffe9e4,#fbd8d2);
+  border:1px solid #f2c6be;
+  color:#243b4f!important;
+  border-radius:22px;
+  padding:12px 24px;
+  box-shadow:inset 0 1px 0 #fff,0 6px 14px rgba(134,74,67,.10);
+}
+.example{display:none!important}
+.speak{
+  width:54px!important;height:54px!important;
+  background:linear-gradient(#28a9ff,#0873cc)!important;
+  color:#fff!important;
+  border:1px solid #68c7ff!important;
+  box-shadow:0 5px 0 #075e9f,0 9px 15px rgba(0,103,190,.22)!important;
+}
+.flash-status{
+  left:50%!important;
+  bottom:24px!important;
+  width:min(72%,440px)!important;
+  gap:14px!important;
+}
+.flash-status button{
+  padding:10px 14px!important;
+  border-radius:18px!important;
+  font-size:15px;
+  border:1px solid rgba(255,255,255,.55)!important;
+  box-shadow:0 5px 0 rgba(0,0,0,.22),0 9px 14px rgba(0,0,0,.13),inset 0 1px 0 rgba(255,255,255,.5)!important;
+  transition:.12s ease;
+}
+.flash-status button:active{transform:translateY(3px)!important;box-shadow:0 2px 0 rgba(0,0,0,.22),0 4px 8px rgba(0,0,0,.12)!important}
+.flash-status .known{order:1;background:linear-gradient(#24c06f,#0a9952)!important;color:#fff!important}
+.flash-status .unknown{order:2;background:linear-gradient(#ff5555,#d72a2a)!important;color:#fff!important}
+.back .flash-status{display:none!important}
+.kana-toggle{display:none!important}
+.jp-voice-note{display:none!important}
+.meaning-card{display:none!important}
+#memoryActions{display:none!important}
+
+.side-nav{margin-top:170px!important;gap:26px!important}
+.side-nav button{
+  width:72px;
+  min-height:72px;
+  border-radius:50%!important;
+  font-size:14px!important;
+  padding:10px!important;
+  background:linear-gradient(#2aa8ff,#0872c9)!important;
+  color:#fff!important;
+  border:1px solid #68c7ff!important;
+  box-shadow:0 6px 0 #075b98,0 11px 16px rgba(0,75,140,.22)!important;
+}
+.bottom-actions button{
+  border-radius:16px!important;
+  padding:10px 16px!important;
+  box-shadow:0 4px 0 #c8d2db,0 8px 14px rgba(0,0,0,.08)!important;
+}
+.bottom-actions .auto{
+  background:linear-gradient(#2aa8ff,#0872c9)!important;
+  border-color:#68c7ff!important;
+  box-shadow:0 5px 0 #075b98,0 10px 16px rgba(0,86,162,.20)!important;
+}
+.icon-btn{
+  width:44px!important;height:44px!important;
+  background:linear-gradient(#1c92f4,#075fa8)!important;
+  border:1px solid #6cc8ff!important;
+  box-shadow:0 5px 0 #074f87,0 8px 14px rgba(0,72,133,.2)!important;
+}
+.settings button{border-bottom:1px solid #eef2f5!important}
+#hiraganaSetting{font-weight:800!important;color:#0b5d8f!important}
+
+#listSection{
+  margin-top:10px;
+}
+.vocab-table th{background:#eaf5ff!important;color:#0d548f!important}
+.vocab-row-btn{color:#0b6fac!important}
+
+#kanjiSection{
+  margin-top:14px!important;
+}
+.kanji-stage{align-items:start}
+.kanji-guide{
+  position:relative;
+  min-height:360px;
+  border:1px solid #c7dce9;
+  border-radius:20px;
+  background:
+    linear-gradient(#0000 49.6%,#dce9f1 50%,#0000 50.4%),
+    linear-gradient(90deg,#0000 49.6%,#dce9f1 50%,#0000 50.4%),
+    #fff;
+  display:grid;place-items:center;
+}
+#kanjiBig{
+  border:0!important;
+  min-height:0!important;
+  padding:0!important;
+  font-size:220px!important;
+  color:#153d56;
+  background:transparent!important;
+}
+.stroke-numbers{
+  position:absolute;inset:0;pointer-events:none;
+}
+.stroke-numbers span{
+  position:absolute;
+  width:26px;height:26px;border-radius:50%;
+  background:#0b76c5;color:#fff;
+  display:grid;place-items:center;
+  font-size:13px;font-weight:900;
+  box-shadow:0 3px 0 #075186;
+}
+.kanji-tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.kanji-tools button{
+  border:1px solid #c8dbe8;background:#fff;border-radius:14px;
+  padding:9px 13px;font-weight:800;color:#143f5b;
+}
+canvas{background:
+  linear-gradient(#0000 49%,#d8e7e4 50%,#0000 51%),
+  linear-gradient(90deg,#0000 49%,#d8e7e4 50%,#0000 51%),
+  #fff!important
+}
+@media(max-width:900px){
+  .flash{min-height:470px}
+  .jp{font-size:62px}
+  .flash-status{width:82%!important}
+  .study-mode-switch button{min-width:0;flex:1 1 30%}
+  .side-nav{grid-template-columns:1fr 1fr!important;margin-top:0!important}
+  .side-nav button{width:auto;border-radius:16px!important;min-height:54px}
 }
 
 </style>
@@ -245,8 +460,10 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
     <div id="settingsPopup" class="settings hidden">
       <div style="font-weight:900;padding:8px 10px 6px;color:#0b5d55">⚙️ Cài đặt học tập</div>
       <button id="voiceSetting">🔊 Giọng đọc: Nhật + Việt</button>
+      <button id="hiraganaSetting">あ Hiragana mặt 1: Bật</button>
       <button id="autoFlipSetting">⏱ Tự động lật thẻ: Tắt</button>
-      <button id="flipTimeSetting">🕒 Thời gian lật: 4 giây</button>
+      <button id="frontTimeSetting">🕒 Mặt 1 → Mặt 2: 3 giây</button>
+      <button id="backTimeSetting">🕒 Mặt 2 → Thẻ tiếp: 5 giây</button>
       <button id="themeSetting">🎨 Giao diện: Xanh Nhật</button>
       <button id="focusSetting">🪟 Chế độ cửa sổ tập trung</button>
       <button id="avatarSetting">🖼 Ảnh đại diện</button>
@@ -254,18 +471,16 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
 
     <section id="studySection">
       <div class="study-mode-switch">
-        <button id="cardModeBtn" class="active" type="button">🃏 Học bằng thẻ</button>
         <button id="listModeBtn" type="button">📋 Danh sách từ vựng</button>
+        <button id="cardModeBtn" class="active" type="button">🃏 Thẻ 3D</button>
+        <button id="kanjiModeBtn" type="button">✍️ Luyện Kanji</button>
       </div>
       <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin:12px 2px 4px;color:#55777b;font-size:13px">
         <span id="lessonHint">Chạm vào thẻ để lật • Mặt sau tự đọc nghĩa tiếng Việt</span>
         <span id="syncHint">☁ Lưu tiến độ trên thiết bị</span>
       </div>
       <div id="ginouControls" class="hidden">
-        <div class="top-menu" style="margin-top:8px">
-          <button id="ginouListTab" class="active">1. Danh sách từ vựng</button>
-          <button id="ginouCardTab">2. Học dạng thẻ 3D</button>
-        </div>
+        
         <div class="ginou-tools">
           <label>Từ số<input id="rangeStart" type="number" min="1" value="1"></label>
           <label>Đến số<input id="rangeEnd" type="number" min="1" value="5"></label>
@@ -285,25 +500,19 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
                 <div id="illustration" class="illustration">🚶</div>
                 <div id="jp" class="jp">人</div>
                 <div id="reading" class="reading">ひと</div>
-                <button id="kanaToggleBtn" class="kana-toggle" type="button">あ Hiragana: Bật</button>
-                <div class="jp-voice-note">🔊 Chạm loa để nghe phát âm tiếng Nhật</div>
-                <button id="speakJp" class="speak" type="button">🔊</button>
+<button id="speakJp" class="speak" type="button">🔊</button>
                 <div class="flash-status">
-                  <button id="unknownBtnFront" class="unknown" type="button">✖ Chưa thuộc</button>
                   <button id="knownBtnFront" class="known" type="button">✓ Đã nhớ</button>
+                  <button id="unknownBtnFront" class="unknown" type="button">✖ Chưa thuộc</button>
                 </div>
               </div>
               <div class="face back">
                 <div class="cherry">🌸</div>
                 <div id="levelBadge2" class="badge">N5</div><div id="importanceBadge2" class="importance-badge">★★★</div>
                 <div id="jpBack" class="jp">人</div>
+                <div id="readingBack" class="reading">ひと</div>
                 <div id="meaning" class="meaning">Người</div>
-                <div id="example" class="example">あの人は先生です。</div>
-                <button id="speakVi" class="speak" type="button">🔊</button>
-                <div class="flash-status">
-                  <button id="unknownBtnBack" class="unknown" type="button">✖ Chưa thuộc</button>
-                  <button id="knownBtnBack" class="known" type="button">✓ Đã nhớ</button>
-                </div>
+<button id="speakVi" class="speak" type="button">🔊</button>
               </div>
             </div>
           </div>
@@ -313,11 +522,7 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
             
             <button id="autoBtn" class="auto">▶ Tự động lật</button>
           </div>
-          <div style="display:flex;justify-content:center;margin-top:12px">
-            <button id="quickKanjiBtn" style="border:1px solid var(--line);background:#fff;border-radius:14px;padding:11px 16px;font-weight:800;color:var(--ink)">
-              ✍️ Mở luyện Kanji
-            </button>
-          </div>
+          
         </div>
         <div class="side-nav">
           <button id="prevBtn">〈<br>Thẻ trước</button>
@@ -336,6 +541,27 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
           <tbody id="vocabListBody"></tbody>
         </table>
       </div>
+<section id="kanjiSection" class="kanji-panel hidden">
+        <h3>✍️ Luyện Kanji</h3>
+        <div class="kanji-stage">
+          <div>
+            <div class="kanji-guide">
+              <div id="kanjiBig" class="kanji-big">人</div>
+              <div id="strokeNumbers" class="stroke-numbers"></div>
+            </div>
+            <div class="kanji-tools">
+              <button id="toggleStrokeGuide" type="button">① Hiện/ẩn số nét</button>
+              <button id="clearCanvas" type="button">↻ Viết lại</button>
+            </div>
+          </div>
+          <div>
+            <canvas id="kanjiCanvas" width="700" height="500"></canvas>
+            <div class="kanji-tools">
+              <button id="snapCanvas" type="button">🧲 Bật hút nét</button>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
 
     <section id="calendarSection" class="calendar compact hidden">
@@ -351,22 +577,7 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
       </div>
     </section>
 
-    <section id="kanjiSection" class="kanji-panel hidden">
-      <h3>✍️ Luyện Kanji</h3>
-      <div class="kanji-stage">
-        <div>
-          <div id="kanjiBig" class="kanji-big">人</div>
-          <p>Trang 1: xem Kanji • Trang 2: đọc/nghĩa • Trang 3: luyện viết.</p>
-        </div>
-        <div>
-          <canvas id="kanjiCanvas" width="700" height="500"></canvas>
-          <div class="bottom-actions">
-            <button id="clearCanvas">Xóa nét</button>
-            <button id="snapCanvas">Hút nét về giữa</button>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
     <section id="adminSection" class="admin-panel hidden">
       <h3>🛠 Quản trị dữ liệu</h3>
@@ -400,7 +611,7 @@ const DEFAULT_USERS={
   admin:{password:'123456',role:'admin',name:'Quản trị viên'}
 };
 const $=id=>document.getElementById(id);
-let roleChoice='student', currentUser=null, level='N5', idx=0, flipped=false, autoTimer=null, autoFlip=false, flipSeconds=4, studyMode='card', showKana=true;
+let roleChoice='student', currentUser=null, level='N5', idx=0, flipped=false, autoTimer=null, autoFlip=false, flipSeconds=4, studyMode='card', showKana=true, frontSeconds=3, backSeconds=5;
 let data=loadData(), progress=loadProgress();
 
 function clone(x){return JSON.parse(JSON.stringify(x))}
@@ -455,21 +666,23 @@ function setMemory(status){
 }
 function updateMemoryButtons(){
   ensureMemory();const s=progress.memory[cardKey()]||'';
-  ['knownBtnFront','knownBtnBack'].forEach(id=>{if($(id))$(id).classList.toggle('active',s==='known')});
-  ['unknownBtnFront','unknownBtnBack'].forEach(id=>{if($(id))$(id).classList.toggle('active',s==='unknown')});
+  if($('knownBtnFront'))$('knownBtnFront').classList.toggle('active',s==='known');
+  if($('unknownBtnFront'))$('unknownBtnFront').classList.toggle('active',s==='unknown');
 }
 function applyKana(){
   if($('reading')) $('reading').classList.toggle('hidden',!showKana);
-  if($('kanaToggleBtn')) $('kanaToggleBtn').textContent='あ Hiragana: '+(showKana?'Bật':'Tắt');
+  if($('readingBack')) $('readingBack').classList.remove('hidden');
+  if($('hiraganaSetting')) $('hiraganaSetting').textContent='あ Hiragana mặt 1: '+(showKana?'Bật':'Tắt');
 }
 function speakJapanese(){
-  const x=current();
+  const x=current(); if(!('speechSynthesis' in window))return toast('Thiết bị này chưa hỗ trợ phát âm');
   speechSynthesis.cancel();
   const u=new SpeechSynthesisUtterance(x.reading||x.jp);
-  u.lang='ja-JP';u.rate=.88;u.pitch=1;
+  u.lang='ja-JP';u.rate=.86;u.pitch=1;u.volume=1;
   const voices=speechSynthesis.getVoices();
-  const jp=voices.find(v=>/^ja(-|_)/i.test(v.lang))||voices.find(v=>/Japanese|Kyoko|Otoya/i.test(v.name));
+  const jp=voices.find(v=>/^ja(-|_)/i.test(v.lang))||voices.find(v=>/Kyoko|Otoya|Japanese/i.test(v.name));
   if(jp)u.voice=jp;
+  speechSynthesis.resume();
   speechSynthesis.speak(u);
 }
 function renderList(){
@@ -483,19 +696,16 @@ function renderList(){
   body.querySelectorAll('.speak-row').forEach(b=>b.onclick=()=>{idx=+b.dataset.i;renderCard();speakJapanese()});
 }
 function setStudyMode(mode){
-  studyMode=mode==='list'?'list':'card';
-  $('cardModeBtn').classList.toggle('active',studyMode==='card');
-  $('listModeBtn').classList.toggle('active',studyMode==='list');
-  const cardArea=document.querySelector('#studySection .study-grid');
-  const hint=$('meaningCard');
-  const actions=document.querySelector('#studySection .bottom-actions');
-  const quick=$('quickKanjiBtn')?.parentElement;
-  if(cardArea)cardArea.classList.toggle('hidden',studyMode==='list');
-  if(hint)hint.classList.toggle('hidden',studyMode==='list');
-  if(actions)actions.classList.toggle('hidden',studyMode==='list');
-  if(quick)quick.classList.toggle('hidden',studyMode==='list');
-  $('listSection').classList.toggle('hidden',studyMode!=='list');
+  studyMode = (mode==='list'||mode==='kanji') ? mode : 'card';
+  ['cardModeBtn','listModeBtn','kanjiModeBtn'].forEach(id=>$(id)&&$(id).classList.remove('active'));
+  const activeId = studyMode==='list'?'listModeBtn':(studyMode==='kanji'?'kanjiModeBtn':'cardModeBtn');
+  $(activeId)&&$(activeId).classList.add('active');
+  const cardWrap=$('cardStudyWrap'), list=$('listSection'), kanji=$('kanjiSection');
+  if(cardWrap)cardWrap.classList.toggle('hidden',studyMode!=='card');
+  if(list)list.classList.toggle('hidden',studyMode!=='list');
+  if(kanji)kanji.classList.toggle('hidden',studyMode!=='kanji');
   if(studyMode==='list')renderList();
+  if(studyMode==='kanji'){updateStrokeNumbers();clearInterval(autoTimer);autoFlip=false;if($('autoBtn'))$('autoBtn').textContent='▶ Tự động lật';}
 }
 
 function renderCard(){
@@ -503,12 +713,12 @@ function renderCard(){
   $('counter').textContent=arr.length?(idx+1)+' / '+arr.length:'0 / 0';
   $('topTitle').textContent=(level==='GINOU2'?'Ginou 2':level)+' › '+(x.jp||'');
   $('levelBadge').textContent=level; $('levelBadge2').textContent=level; $('importanceBadge').textContent=importanceText(x); $('importanceBadge2').textContent=importanceText(x);
-  $('jp').textContent=x.jp; $('reading').textContent=x.reading; $('jpBack').textContent=x.jp;
-  $('meaning').textContent=x.vi; $('meaningCard').textContent=x.vi; $('example').textContent=x.example;
+  $('jp').textContent=x.jp; $('reading').textContent=x.reading; $('jpBack').textContent=x.jp; if($('readingBack'))$('readingBack').textContent=x.reading;
+  $('meaning').textContent=x.vi; $('meaningCard').textContent=x.vi;
   $('kanjiBig').textContent=x.kanji||x.jp[0]||'—';
   const emojiMap={'人':'🚶','家族':'👨‍👩‍👧‍👦','食べる':'🍚','飲む':'🥤','行く':'🚶','食品衛生管理':'🧼','温度管理':'🌡️','異物混入':'⚠️','作業手順':'📋','品質管理':'✅'};
   $('illustration').textContent=emojiMap[x.jp]||'🌸';
-  flipped=false;$('flash').classList.remove('flipped');applyKana();updateMemoryButtons();renderList(); updateGinouUI();
+  flipped=false;$('flash').classList.remove('flipped');applyKana();updateMemoryButtons();renderList(); updateGinouUI(); updateStrokeNumbers();
   progress.known=Math.max(progress.known,idx+1);progress.score=progress.known*10;progress.studied[new Date().toISOString().slice(0,10)]=true;saveProgress();renderProgress();
 }
 function next(){const a=data[level]||[];if(!a.length)return;idx=(idx+1)%a.length;renderCard()}
@@ -517,16 +727,35 @@ $('nextBtn').onclick=next;$('prevBtn').onclick=prev;$('mobileBack').onclick=prev
 $('flash').onclick=()=>{flipped=!flipped;$('flash').classList.toggle('flipped',flipped); if(flipped) speak(current().vi,'vi-VN')};
 $('shuffleBtn').onclick=()=>{const a=data[level]||[];if(a.length){idx=Math.floor(Math.random()*a.length);renderCard()}};
 function speak(text,lang){speakSafe(text,lang)}
-$('speakJp').onclick=e=>{e.stopPropagation();speakSafe((current().jp+' '+current().reading).trim(),'ja-JP')}; $('speakVi').onclick=e=>{e.stopPropagation();speak(current().vi,'vi-VN')};
+$('speakJp').onclick=e=>{e.stopPropagation();speakJapanese()}; $('speakVi').onclick=e=>{e.stopPropagation();speak(current().vi,'vi-VN')};speak(current().vi,'vi-VN')};
+function scheduleAutoStep(){
+  clearTimeout(autoTimer);
+  if(!autoFlip||studyMode!=='card')return;
+  const delay=(flipped?backSeconds:frontSeconds)*1000;
+  autoTimer=setTimeout(()=>{
+    if(!autoFlip)return;
+    if(!flipped){
+      flipped=true;$('flash').classList.add('flipped');
+      speak(current().vi,'vi-VN');
+    }else{
+      next();
+      flipped=false;$('flash').classList.remove('flipped');
+      speakJapanese();
+    }
+    scheduleAutoStep();
+  },delay);
+}
 function toggleAuto(){
-  autoFlip=!autoFlip;$('autoBtn').textContent=autoFlip?'⏸ Dừng tự động':'▶ Tự động lật';$('autoFlipSetting').textContent='⏱ Tự động lật thẻ: '+(autoFlip?'Bật':'Tắt');
-  clearInterval(autoTimer); if(autoFlip) autoTimer=setInterval(()=>{flipped=!flipped;$('flash').classList.toggle('flipped',flipped);if(flipped)speak(current().vi,'vi-VN');else next()},flipSeconds*1000)
+  autoFlip=!autoFlip;
+  $('autoBtn').textContent=autoFlip?'⏸ Dừng tự động':'▶ Tự động lật';
+  $('autoFlipSetting').textContent='⏱ Tự động lật thẻ: '+(autoFlip?'Bật':'Tắt');
+  clearTimeout(autoTimer);
+  if(autoFlip){speakJapanese();scheduleAutoStep();}
 }
 $('autoBtn').onclick=toggleAuto;$('autoFlipSetting').onclick=toggleAuto;
 
 $('settingsBtn').onclick=()=> $('settingsPopup').classList.toggle('hidden');
 
-$('quickKanjiBtn').onclick=()=>showSection('kanji');
 
 let focusMode=false;
 $('focusSetting').onclick=()=>{
@@ -536,8 +765,10 @@ $('focusSetting').onclick=()=>{
 };
 
 $('settingsMenu').onclick=()=> $('settingsPopup').classList.toggle('hidden');
-$('flipTimeSetting').onclick=()=>{flipSeconds=flipSeconds===4?6:4;$('flipTimeSetting').textContent='🕒 Thời gian lật: '+flipSeconds+' giây';if(autoFlip){toggleAuto();toggleAuto()}};
+$('frontTimeSetting').onclick=()=>{frontSeconds=frontSeconds===3?4:frontSeconds===4?5:frontSeconds===5?2:3;$('frontTimeSetting').textContent='🕒 Mặt 1 → Mặt 2: '+frontSeconds+' giây';if(autoFlip)scheduleAutoStep()};
+$('backTimeSetting').onclick=()=>{backSeconds=backSeconds===5?8:backSeconds===8?3:backSeconds===3?4:5;$('backTimeSetting').textContent='🕒 Mặt 2 → Thẻ tiếp: '+backSeconds+' giây';if(autoFlip)scheduleAutoStep()};
 $('voiceSetting').onclick=()=>toast('Giọng đọc Nhật + Việt đã bật');
+$('hiraganaSetting').onclick=()=>{showKana=!showKana;applyKana();localStorage.setItem('TG2_SHOW_KANA',showKana?'1':'0')};
 $('themeSetting').onclick=()=>toast('Đang dùng giao diện Xanh Nhật');
 $('avatarSetting').onclick=()=>$('avatarInput').click();
 document.addEventListener('click',e=>{
@@ -548,13 +779,13 @@ document.addEventListener('click',e=>{
 $('avatarInput').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{localStorage.setItem(KEYS.avatar+':'+currentUser.username,r.result);$('avatar').innerHTML='<img src="'+r.result+'">';toast('Đã đổi ảnh đại diện')};r.readAsDataURL(f)};
 
 function showSection(name){
-  ['studySection','calendarSection','progressSection','kanjiSection','adminSection'].forEach(id=>$(id).classList.add('hidden'));
-  const map={study:'studySection',calendar:'calendarSection',progress:'progressSection',kanji:'kanjiSection',admin:'adminSection'};
+  ['studySection','calendarSection','progressSection','adminSection'].forEach(id=>$(id).classList.add('hidden'));
+  const map={study:'studySection',calendar:'calendarSection',progress:'progressSection',admin:'adminSection'};
   $(map[name]).classList.remove('hidden');
   if(name==='admin') $('dataEditor').value=JSON.stringify(data,null,2);
 }
 $('studyMenu').onclick=()=>showSection('study');$('calendarMenu').onclick=()=>{showSection('calendar');renderCalendar()};
-$('progressMenu').onclick=()=>{showSection('progress');renderProgress()};$('kanjiMenu').onclick=()=>showSection('kanji');
+$('progressMenu').onclick=()=>{showSection('progress');renderProgress()};$('kanjiMenu').onclick=()=>{showSection('study');setStudyMode('kanji')};
 $('adminMenu').onclick=()=>showSection('admin');$('mobileHome').onclick=()=>showSection('study');$('mobileMenu').onclick=()=>$('sidebar').classList.toggle('open');
 
 function renderProgress(){$('knownStat').textContent=progress.known;$('scoreStat').textContent=progress.score;$('streakStat').textContent=progress.streak}
@@ -569,13 +800,12 @@ function renderCalendar(){
 $('saveDataBtn').onclick=()=>{try{const d=JSON.parse($('dataEditor').value);data=d;saveData();buildLevels();idx=0;renderCard();$('adminMsg').textContent='Đã lưu dữ liệu mới.';toast('Lưu dữ liệu thành công')}catch(e){$('adminMsg').textContent='JSON chưa đúng định dạng.'}};
 $('resetDataBtn').onclick=()=>{data=clone(BASE_DATA);saveData();buildLevels();idx=0;renderCard();$('dataEditor').value=JSON.stringify(data,null,2);toast('Đã khôi phục dữ liệu gốc')};
 
-// v4.2 enhancements
+// v4.4 enhancements
 let ginouMode='list', ginouWordTimer=null;
 function isGinou(){return level==='GINOU2'}
 function importanceText(x){return '★'.repeat(x.importance||1)+'☆'.repeat(Math.max(0,3-(x.importance||1)))}
 function memoryKey(x){return KEYS.progress+':memory:'+currentUser?.username+':'+level+':'+x.jp}
 function setMemory(state){localStorage.setItem(memoryKey(current()),state);toast(state==='known'?'Đã đánh dấu: Đã nhớ ✓':'Đã đánh dấu: Chưa thuộc ✕');renderGinouList()}
-$('knownBtn').onclick=()=>setMemory('known');$('unknownBtn').onclick=()=>setMemory('unknown');
 function renderGinouList(){
   if(!isGinou())return; const a=data.GINOU2||[]; let s=Math.max(1,parseInt($('rangeStart').value||1)), e=Math.min(a.length,parseInt($('rangeEnd').value||a.length));
   $('rangeStart').max=a.length;$('rangeEnd').max=a.length;
@@ -583,28 +813,52 @@ function renderGinouList(){
   a.slice(s-1,e).forEach((x,i)=>{const n=s+i,m=localStorage.getItem(KEYS.progress+':memory:'+currentUser?.username+':GINOU2:'+x.jp)||'unknown';html+=`<div class="vocab-row"><div>${n}</div><div><b>${x.jp}</b></div><div>${x.reading}</div><div class="vi-col">${x.vi}</div><div class="action-col"><span class="imp">${importanceText(x)}</span><br><button onclick="idx=${n-1};renderCard();speakCurrentGinou()">🔊 Nghe</button> ${m==='known'?'✓ Đã nhớ':'✕ Chưa thuộc'}</div></div>`});
   $('ginouList').innerHTML=html;
 }
-function updateGinouUI(){const g=isGinou();$('ginouControls').classList.toggle('hidden',!g);$('memoryActions').classList.toggle('hidden',!g||ginouMode!=='card');$('cardStudyWrap').classList.toggle('hidden',g&&ginouMode==='list');if(g)renderGinouList()}
+function updateGinouUI(){
+  const g=isGinou();
+  if($('ginouControls'))$('ginouControls').classList.toggle('hidden',!g);
+  if(g)renderGinouList();
+}
 function speakSafe(text,lang){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang;const voices=speechSynthesis.getVoices();const pref=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith(lang.slice(0,2).toLowerCase()));if(pref)u.voice=pref;u.rate=.9;u.volume=1;speechSynthesis.speak(u)}catch(e){toast('Thiết bị chưa cho phép phát âm')}}
 function speakCurrentGinou(){const x=current(),m=$('voiceMode')?.value||'both';if(m==='off')return;if(m==='jp'||m==='both'){speakSafe(x.jp,'ja-JP');if(m==='both')setTimeout(()=>speakSafe(x.vi,'vi-VN'),1100)}else speakSafe(x.vi,'vi-VN')}
-$('ginouListTab').onclick=()=>{ginouMode='list';$('ginouListTab').classList.add('active');$('ginouCardTab').classList.remove('active');updateGinouUI()};
-$('ginouCardTab').onclick=()=>{ginouMode='card';$('ginouCardTab').classList.add('active');$('ginouListTab').classList.remove('active');updateGinouUI();renderCard();speakCurrentGinou()};
 ['rangeStart','rangeEnd'].forEach(id=>$(id).addEventListener('change',renderGinouList));
 function startGinouAuto(){clearInterval(ginouWordTimer);if(!isGinou()||ginouMode!=='card')return;const sec=parseInt($('wordSeconds').value||5);ginouWordTimer=setInterval(()=>{next();speakCurrentGinou()},sec*1000)}
 $('wordSeconds').onchange=startGinouAuto;
 document.querySelectorAll('#topMenu button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#topMenu button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const p=b.dataset.page;if(p==='settings')$('settingsPopup').classList.toggle('hidden');else showSection(p)});
 
-// Kanji canvas
-const c=$('kanjiCanvas'),ctx=c.getContext('2d');ctx.lineWidth=12;ctx.lineCap='round';ctx.strokeStyle='#0f766e';
-let drawing=false;
-function pos(e){const r=c.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return {x:(p.clientX-r.left)*c.width/r.width,y:(p.clientY-r.top)*c.height/r.height}}
-function start(e){drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault()}
-function move(e){if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();e.preventDefault()}
+// Kanji canvas v4.4
+const c=$('kanjiCanvas'),ctx=c.getContext('2d');
+ctx.lineWidth=12;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#0f766e';
+let drawing=false,snapEnabled=true,strokeGuideVisible=true;
+function pos(e){
+  const r=c.getBoundingClientRect(),p=e.touches?e.touches[0]:e;
+  return {x:(p.clientX-r.left)*c.width/r.width,y:(p.clientY-r.top)*c.height/r.height}
+}
+function snapPoint(p){
+  if(!snapEnabled)return p;
+  const cx=c.width/2,cy=c.height/2;
+  const strength=.14;
+  return {x:p.x+(cx-p.x)*strength,y:p.y+(cy-p.y)*strength}
+}
+function start(e){drawing=true;let p=snapPoint(pos(e));ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault()}
+function move(e){if(!drawing)return;let p=snapPoint(pos(e));ctx.lineTo(p.x,p.y);ctx.stroke();e.preventDefault()}
 function end(){drawing=false}
-['mousedown','touchstart'].forEach(ev=>c.addEventListener(ev,start,{passive:false}));['mousemove','touchmove'].forEach(ev=>c.addEventListener(ev,move,{passive:false}));['mouseup','mouseleave','touchend'].forEach(ev=>c.addEventListener(ev,end));
+['mousedown','touchstart'].forEach(ev=>c.addEventListener(ev,start,{passive:false}));
+['mousemove','touchmove'].forEach(ev=>c.addEventListener(ev,move,{passive:false}));
+['mouseup','mouseleave','touchend'].forEach(ev=>c.addEventListener(ev,end));
 $('clearCanvas').onclick=()=>ctx.clearRect(0,0,c.width,c.height);
-$('snapCanvas').onclick=()=>{toast('Chế độ hút nét đã bật');ctx.globalAlpha=.35;ctx.font='340px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#0f766e';ctx.fillText(current().kanji||'人',c.width/2,c.height/2);ctx.globalAlpha=1};
+$('snapCanvas').onclick=()=>{snapEnabled=!snapEnabled;$('snapCanvas').textContent=snapEnabled?'🧲 Hút nét: Bật':'🧲 Hút nét: Tắt';toast(snapEnabled?'Đã bật hút nét':'Đã tắt hút nét')};
+$('toggleStrokeGuide').onclick=()=>{strokeGuideVisible=!strokeGuideVisible;$('strokeNumbers').classList.toggle('hidden',!strokeGuideVisible)};
+function updateStrokeNumbers(){
+  if(!$('strokeNumbers'))return;
+  const k=(current().kanji||current().jp||'人').charAt(0);
+  const counts={'人':2,'家':10,'食':9,'飲':12,'行':6,'必':5,'準':13,'経':11,'説':14,'連':10,'確':15,'改':7,'状':7,'対':7,'判':7,'衛':16,'徹':15,'異':11,'防':7,'責':11,'遵':15,'遂':12,'懸':20,'把':7,'是':9,'温':12,'作':7,'品':9};
+  const n=counts[k]||Math.max(2,Math.min(12,k.length*4));
+  const pts=[[33,26],[50,19],[66,29],[25,43],[47,39],[70,45],[34,59],[56,58],[74,64],[41,75],[61,78],[27,80],[78,34],[18,60],[84,72],[52,88],[66,88],[38,88],[85,52],[15,40]];
+  $('strokeNumbers').innerHTML=Array.from({length:n},(_,i)=>`<span style="left:${pts[i][0]}%;top:${pts[i][1]}%">${i+1}</span>`).join('');
+}
 
 try{
+  const savedKana=localStorage.getItem('TG2_SHOW_KANA'); if(savedKana!==null)showKana=savedKana==='1';
   const remembered=JSON.parse(localStorage.getItem(KEYS.remember)||'null');
   const sess=JSON.parse(sessionStorage.getItem(KEYS.session)||'null');
   if(sess||remembered){currentUser=sess||remembered;enterApp(false)}
