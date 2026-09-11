@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0f766e">
 <link rel="manifest" href="manifest.webmanifest">
-<title>日本語 JLPT & GINOU v4.2</title>
+<title>日本語 JLPT & GINOU v4.3</title>
 <style>
 :root{
   --green:#0f766e; --green2:#0b5d55; --mint:#dff7f2; --ink:#10343b; --line:#b9e4db;
@@ -163,6 +163,29 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
   .mobilebar{display:grid;grid-template-columns:1fr 1fr 1fr;position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);z-index:25;padding:8px max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom))}
   .mobilebar button{border:0;background:#fff;padding:10px;font-weight:800;color:var(--ink)}
 }
+
+/* v4.3 updates */
+.study-mode-switch{display:flex;gap:8px;justify-content:center;margin:12px 0 4px}
+.study-mode-switch button{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 16px;border-radius:14px;font-weight:900}
+.study-mode-switch button.active{background:var(--green);color:#fff}
+.flash-status{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:10px;z-index:3;width:min(88%,440px)}
+.flash-status button{flex:1;border:0;border-radius:16px;padding:12px 10px;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,.10)}
+.flash-status .known{background:#dcfce7;color:#166534}
+.flash-status .unknown{background:#fee2e2;color:#991b1b}
+.flash-status button.active{outline:3px solid rgba(15,118,110,.22);transform:translateY(-1px)}
+.kana-toggle{position:absolute;left:26px;bottom:86px;border:1px solid var(--line);background:#fff;border-radius:14px;padding:9px 12px;font-weight:800;color:var(--ink);z-index:3}
+.list-panel{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px;overflow:auto}
+.vocab-table{width:100%;border-collapse:collapse;min-width:680px}
+.vocab-table th,.vocab-table td{padding:12px 10px;border-bottom:1px solid #e5efec;text-align:left}
+.vocab-table th{background:#effaf7;color:#0b5d55;position:sticky;top:0}
+.vocab-table tr.current{background:#f0fdfa}
+.vocab-row-btn{border:0;background:transparent;color:var(--green);font-weight:900;cursor:pointer}
+.jp-voice-note{font-size:12px;color:#55777b;margin-top:8px}
+@media(max-width:900px){
+  .flash-status{bottom:18px}
+  .kana-toggle{bottom:78px}
+}
+
 </style>
 </head>
 <body>
@@ -230,6 +253,10 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
     </div>
 
     <section id="studySection">
+      <div class="study-mode-switch">
+        <button id="cardModeBtn" class="active" type="button">🃏 Học bằng thẻ</button>
+        <button id="listModeBtn" type="button">📋 Danh sách từ vựng</button>
+      </div>
       <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin:12px 2px 4px;color:#55777b;font-size:13px">
         <span id="lessonHint">Chạm vào thẻ để lật • Mặt sau tự đọc nghĩa tiếng Việt</span>
         <span id="syncHint">☁ Lưu tiến độ trên thiết bị</span>
@@ -258,7 +285,13 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
                 <div id="illustration" class="illustration">🚶</div>
                 <div id="jp" class="jp">人</div>
                 <div id="reading" class="reading">ひと</div>
+                <button id="kanaToggleBtn" class="kana-toggle" type="button">あ Hiragana: Bật</button>
+                <div class="jp-voice-note">🔊 Chạm loa để nghe phát âm tiếng Nhật</div>
                 <button id="speakJp" class="speak" type="button">🔊</button>
+                <div class="flash-status">
+                  <button id="unknownBtnFront" class="unknown" type="button">✖ Chưa thuộc</button>
+                  <button id="knownBtnFront" class="known" type="button">✓ Đã nhớ</button>
+                </div>
               </div>
               <div class="face back">
                 <div class="cherry">🌸</div>
@@ -267,13 +300,17 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
                 <div id="meaning" class="meaning">Người</div>
                 <div id="example" class="example">あの人は先生です。</div>
                 <button id="speakVi" class="speak" type="button">🔊</button>
+                <div class="flash-status">
+                  <button id="unknownBtnBack" class="unknown" type="button">✖ Chưa thuộc</button>
+                  <button id="knownBtnBack" class="known" type="button">✓ Đã nhớ</button>
+                </div>
               </div>
             </div>
           </div>
           <div id="meaningCard" class="meaning-card">Người</div>
           <div class="bottom-actions">
             <button id="shuffleBtn">🔀 Trộn thẻ</button>
-            <button id="markBtn">☆ Đánh dấu</button>
+            
             <button id="autoBtn" class="auto">▶ Tự động lật</button>
           </div>
           <div style="display:flex;justify-content:center;margin-top:12px">
@@ -291,6 +328,13 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
         <button id="knownBtn" class="known-btn">✓ Đã nhớ</button>
         <button id="unknownBtn" class="unknown-btn">✕ Chưa thuộc</button>
       </div>
+      </div>
+
+      <div id="listSection" class="list-panel hidden">
+        <table class="vocab-table">
+          <thead><tr><th>#</th><th>Kanji</th><th>Hiragana</th><th>Nghĩa</th><th>Phát âm</th></tr></thead>
+          <tbody id="vocabListBody"></tbody>
+        </table>
       </div>
     </section>
 
@@ -356,14 +400,14 @@ const DEFAULT_USERS={
   admin:{password:'123456',role:'admin',name:'Quản trị viên'}
 };
 const $=id=>document.getElementById(id);
-let roleChoice='student', currentUser=null, level='N5', idx=0, flipped=false, autoTimer=null, autoFlip=false, flipSeconds=4;
+let roleChoice='student', currentUser=null, level='N5', idx=0, flipped=false, autoTimer=null, autoFlip=false, flipSeconds=4, studyMode='card', showKana=true;
 let data=loadData(), progress=loadProgress();
 
 function clone(x){return JSON.parse(JSON.stringify(x))}
 function loadData(){try{return JSON.parse(localStorage.getItem(KEYS.data))||clone(BASE_DATA)}catch(e){return clone(BASE_DATA)}}
 function saveData(){localStorage.setItem(KEYS.data,JSON.stringify(data))}
 function loadUsers(){try{return Object.assign({},DEFAULT_USERS,JSON.parse(localStorage.getItem(KEYS.users)||'{}'))}catch(e){return clone(DEFAULT_USERS)}}
-function loadProgress(){try{return JSON.parse(localStorage.getItem(KEYS.progress))||{known:0,score:0,streak:1,studied:{}}}catch(e){return {known:0,score:0,streak:1,studied:{}}}}
+function loadProgress(){try{return JSON.parse(localStorage.getItem(KEYS.progress))||{known:0,score:0,streak:1,studied:{},memory:{}}}catch(e){return {known:0,score:0,streak:1,studied:{},memory:{}}}}
 function saveProgress(){localStorage.setItem(KEYS.progress,JSON.stringify(progress))}
 function toast(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2200)}
 function setRole(r){roleChoice=r==='admin'?'admin':'student';$('studentRole').classList.toggle('active',roleChoice==='student');$('adminRole').classList.toggle('active',roleChoice==='admin');$('loginErr').textContent=''}
@@ -387,7 +431,7 @@ function enterApp(showWelcome=false){
   $('adminMenu').classList.toggle('hidden',currentUser.role!=='admin');
   const av=localStorage.getItem(KEYS.avatar+':'+currentUser.username);
   $('avatar').innerHTML=av?'<img src="'+av+'">':(currentUser.role==='admin'?'🛠':'👤');
-  buildLevels(); renderCard(); renderProgress(); renderCalendar();
+  buildLevels(); renderCard(); renderProgress(); renderCalendar(); setStudyMode('card');
   if(showWelcome) toast('Chào mừng '+currentUser.name+' trở lại 🌸');
 }
 function logout(){sessionStorage.removeItem(KEYS.session);localStorage.removeItem(KEYS.remember);location.reload()}
@@ -402,6 +446,58 @@ function buildLevels(){
   });
 }
 function current(){const arr=data[level]||[]; return arr[idx]||{jp:'—',reading:'',vi:'',example:'',kanji:'—'}}
+
+function cardKey(){const x=current();return level+':'+(x.jp||idx)}
+function ensureMemory(){if(!progress.memory)progress.memory={}}
+function setMemory(status){
+  ensureMemory();progress.memory[cardKey()]=status;saveProgress();updateMemoryButtons();
+  toast(status==='known'?'Đã ghi nhớ từ này ✓':'Đã đánh dấu chưa thuộc');
+}
+function updateMemoryButtons(){
+  ensureMemory();const s=progress.memory[cardKey()]||'';
+  ['knownBtnFront','knownBtnBack'].forEach(id=>{if($(id))$(id).classList.toggle('active',s==='known')});
+  ['unknownBtnFront','unknownBtnBack'].forEach(id=>{if($(id))$(id).classList.toggle('active',s==='unknown')});
+}
+function applyKana(){
+  if($('reading')) $('reading').classList.toggle('hidden',!showKana);
+  if($('kanaToggleBtn')) $('kanaToggleBtn').textContent='あ Hiragana: '+(showKana?'Bật':'Tắt');
+}
+function speakJapanese(){
+  const x=current();
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(x.reading||x.jp);
+  u.lang='ja-JP';u.rate=.88;u.pitch=1;
+  const voices=speechSynthesis.getVoices();
+  const jp=voices.find(v=>/^ja(-|_)/i.test(v.lang))||voices.find(v=>/Japanese|Kyoko|Otoya/i.test(v.name));
+  if(jp)u.voice=jp;
+  speechSynthesis.speak(u);
+}
+function renderList(){
+  const body=$('vocabListBody'); if(!body)return; body.innerHTML='';
+  (data[level]||[]).forEach((x,i)=>{
+    const tr=document.createElement('tr'); if(i===idx)tr.className='current';
+    tr.innerHTML=`<td>${i+1}</td><td><button class="vocab-row-btn" data-i="${i}">${x.jp||''}</button></td><td>${x.reading||''}</td><td>${x.vi||''}</td><td><button class="vocab-row-btn speak-row" data-i="${i}">🔊 Nhật</button></td>`;
+    body.appendChild(tr);
+  });
+  body.querySelectorAll('button[data-i]:not(.speak-row)').forEach(b=>b.onclick=()=>{idx=+b.dataset.i;setStudyMode('card');renderCard()});
+  body.querySelectorAll('.speak-row').forEach(b=>b.onclick=()=>{idx=+b.dataset.i;renderCard();speakJapanese()});
+}
+function setStudyMode(mode){
+  studyMode=mode==='list'?'list':'card';
+  $('cardModeBtn').classList.toggle('active',studyMode==='card');
+  $('listModeBtn').classList.toggle('active',studyMode==='list');
+  const cardArea=document.querySelector('#studySection .study-grid');
+  const hint=$('meaningCard');
+  const actions=document.querySelector('#studySection .bottom-actions');
+  const quick=$('quickKanjiBtn')?.parentElement;
+  if(cardArea)cardArea.classList.toggle('hidden',studyMode==='list');
+  if(hint)hint.classList.toggle('hidden',studyMode==='list');
+  if(actions)actions.classList.toggle('hidden',studyMode==='list');
+  if(quick)quick.classList.toggle('hidden',studyMode==='list');
+  $('listSection').classList.toggle('hidden',studyMode!=='list');
+  if(studyMode==='list')renderList();
+}
+
 function renderCard(){
   const arr=data[level]||[], x=current();
   $('counter').textContent=arr.length?(idx+1)+' / '+arr.length:'0 / 0';
@@ -412,7 +508,7 @@ function renderCard(){
   $('kanjiBig').textContent=x.kanji||x.jp[0]||'—';
   const emojiMap={'人':'🚶','家族':'👨‍👩‍👧‍👦','食べる':'🍚','飲む':'🥤','行く':'🚶','食品衛生管理':'🧼','温度管理':'🌡️','異物混入':'⚠️','作業手順':'📋','品質管理':'✅'};
   $('illustration').textContent=emojiMap[x.jp]||'🌸';
-  flipped=false;$('flash').classList.remove('flipped'); updateGinouUI();
+  flipped=false;$('flash').classList.remove('flipped');applyKana();updateMemoryButtons();renderList(); updateGinouUI();
   progress.known=Math.max(progress.known,idx+1);progress.score=progress.known*10;progress.studied[new Date().toISOString().slice(0,10)]=true;saveProgress();renderProgress();
 }
 function next(){const a=data[level]||[];if(!a.length)return;idx=(idx+1)%a.length;renderCard()}
@@ -420,7 +516,6 @@ function prev(){const a=data[level]||[];if(!a.length)return;idx=(idx-1+a.length)
 $('nextBtn').onclick=next;$('prevBtn').onclick=prev;$('mobileBack').onclick=prev;
 $('flash').onclick=()=>{flipped=!flipped;$('flash').classList.toggle('flipped',flipped); if(flipped) speak(current().vi,'vi-VN')};
 $('shuffleBtn').onclick=()=>{const a=data[level]||[];if(a.length){idx=Math.floor(Math.random()*a.length);renderCard()}};
-$('markBtn').onclick=()=>{toast('Đã đánh dấu thẻ ⭐');progress.score+=5;saveProgress();renderProgress()};
 function speak(text,lang){speakSafe(text,lang)}
 $('speakJp').onclick=e=>{e.stopPropagation();speakSafe((current().jp+' '+current().reading).trim(),'ja-JP')}; $('speakVi').onclick=e=>{e.stopPropagation();speak(current().vi,'vi-VN')};
 function toggleAuto(){
