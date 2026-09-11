@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0f766e">
 <link rel="manifest" href="manifest.webmanifest">
-<title>日本語 JLPT & GINOU v4.1</title>
+<title>日本語 JLPT & GINOU v4.2</title>
 <style>
 :root{
   --green:#0f766e; --green2:#0b5d55; --mint:#dff7f2; --ink:#10343b; --line:#b9e4db;
@@ -127,6 +127,18 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
 .focus-mode .main{max-width:1100px;margin:0 auto;width:100%}
 .focus-mode .mobilebar{display:none!important}
 
+
+/* v4.2 Tokutei Ginou 2 */
+.top-menu{display:flex;gap:8px;overflow:auto;margin:12px 0 0;padding-bottom:2px}
+.top-menu button{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:10px 14px;font-weight:800}
+.top-menu button.active{background:var(--green);color:#fff}
+.ginou-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.ginou-tools label{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;font-size:13px;font-weight:800}
+.ginou-tools input,.ginou-tools select{width:100%;margin-top:6px;border:1px solid #cfe3df;border-radius:10px;padding:8px;background:#fff}
+.vocab-list{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:12px}
+.vocab-row{display:grid;grid-template-columns:60px 1.2fr 1.1fr 1.4fr 120px;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid #edf4f2}
+.vocab-row:last-child{border-bottom:0}.vocab-row.head{font-weight:900;background:#e8f7f3;color:#0b5d55}.vocab-row button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px;font-weight:800}.imp{letter-spacing:1px;color:#d39a00}.memory-actions{display:flex;gap:10px;justify-content:center;margin-top:14px}.memory-actions button{min-width:160px;padding:14px 18px;border:0;border-radius:16px;font-weight:900;box-shadow:0 8px 0 #cfded9,0 14px 24px rgba(0,0,0,.08);transform:translateY(0)}.memory-actions button:active{transform:translateY(5px);box-shadow:0 3px 0 #cfded9}.known-btn{background:#d1fae5;color:#065f46}.unknown-btn{background:#fee2e2;color:#991b1b}.importance-badge{position:absolute;left:50%;transform:translateX(-50%);top:24px;font-size:20px}.flash{perspective:1200px;transform-origin:center bottom}.flash-stack:before{content:"";position:absolute;width:min(650px,90%);height:40px;border-radius:50%;background:rgba(0,0,0,.08);filter:blur(18px);transform:translateY(255px);z-index:-1}.flash-stack{position:relative}
+@media(max-width:900px){.ginou-tools{grid-template-columns:1fr 1fr}.vocab-row{grid-template-columns:45px 1fr 1fr}.vocab-row .vi-col,.vocab-row .action-col{grid-column:2/-1}.top-menu{margin-top:8px}}
 @media(max-width:900px){
   .app{grid-template-columns:1fr}
   .sidebar{position:fixed;left:-290px;z-index:30;transition:.25s;width:280px}
@@ -199,6 +211,13 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
       <div id="counter" class="counter">1 / 5</div>
       <button id="settingsBtn" class="icon-btn" type="button">⚙️</button>
     </div>
+    <div class="top-menu" id="topMenu">
+      <button data-page="study" class="active">📚 Học từ vựng</button>
+      <button data-page="calendar">📅 Lịch</button>
+      <button data-page="progress">📊 Tiến độ</button>
+      <button data-page="kanji">✍️ Kanji</button>
+      <button data-page="settings">⚙️ Cài đặt</button>
+    </div>
 
     <div id="settingsPopup" class="settings hidden">
       <div style="font-weight:900;padding:8px 10px 6px;color:#0b5d55">⚙️ Cài đặt học tập</div>
@@ -215,13 +234,27 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
         <span id="lessonHint">Chạm vào thẻ để lật • Mặt sau tự đọc nghĩa tiếng Việt</span>
         <span id="syncHint">☁ Lưu tiến độ trên thiết bị</span>
       </div>
+      <div id="ginouControls" class="hidden">
+        <div class="top-menu" style="margin-top:8px">
+          <button id="ginouListTab" class="active">1. Danh sách từ vựng</button>
+          <button id="ginouCardTab">2. Học dạng thẻ 3D</button>
+        </div>
+        <div class="ginou-tools">
+          <label>Từ số<input id="rangeStart" type="number" min="1" value="1"></label>
+          <label>Đến số<input id="rangeEnd" type="number" min="1" value="5"></label>
+          <label>Chuyển từ sau<select id="wordSeconds"><option value="3">3 giây</option><option value="5" selected>5 giây</option><option value="8">8 giây</option></select></label>
+          <label>Phát âm<select id="voiceMode"><option value="both">Nhật + Việt</option><option value="jp">Chỉ Nhật</option><option value="vi">Chỉ Việt</option><option value="off">Tắt</option></select></label>
+        </div>
+        <div id="ginouList" class="vocab-list"></div>
+      </div>
+      <div id="cardStudyWrap">
       <div class="study-grid">
         <div>
           <div class="flash-stack">
             <div id="flash" class="flash">
               <div class="face front">
                 <div class="cherry">🌸</div>
-                <div id="levelBadge" class="badge">N5</div>
+                <div id="levelBadge" class="badge">N5</div><div id="importanceBadge" class="importance-badge">★★★</div>
                 <div id="illustration" class="illustration">🚶</div>
                 <div id="jp" class="jp">人</div>
                 <div id="reading" class="reading">ひと</div>
@@ -229,7 +262,7 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
               </div>
               <div class="face back">
                 <div class="cherry">🌸</div>
-                <div id="levelBadge2" class="badge">N5</div>
+                <div id="levelBadge2" class="badge">N5</div><div id="importanceBadge2" class="importance-badge">★★★</div>
                 <div id="jpBack" class="jp">人</div>
                 <div id="meaning" class="meaning">Người</div>
                 <div id="example" class="example">あの人は先生です。</div>
@@ -253,6 +286,11 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
           <button id="prevBtn">〈<br>Thẻ trước</button>
           <button id="nextBtn">〉<br>Thẻ tiếp</button>
         </div>
+      </div>
+      <div class="memory-actions" id="memoryActions">
+        <button id="knownBtn" class="known-btn">✓ Đã nhớ</button>
+        <button id="unknownBtn" class="unknown-btn">✕ Chưa thuộc</button>
+      </div>
       </div>
     </section>
 
@@ -308,7 +346,7 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
 <input id="avatarInput" type="file" accept="image/*" class="hidden">
 
 <script>
-const BASE_DATA = {"N5": [{"jp": "人", "reading": "ひと", "vi": "người", "example": "あの人は先生です。", "kanji": "人"}, {"jp": "家族", "reading": "かぞく", "vi": "gia đình", "example": "家族は五人です。", "kanji": "家"}, {"jp": "食べる", "reading": "たべる", "vi": "ăn", "example": "毎日ご飯を食べます。", "kanji": "食"}, {"jp": "飲む", "reading": "のむ", "vi": "uống", "example": "水を飲みます。", "kanji": "飲"}, {"jp": "行く", "reading": "いく", "vi": "đi", "example": "会社へ行きます。", "kanji": "行"}], "N4": [{"jp": "必要", "reading": "ひつよう", "vi": "cần thiết", "example": "これは仕事に必要です。", "kanji": "必"}, {"jp": "準備", "reading": "じゅんび", "vi": "chuẩn bị", "example": "試験の準備をします。", "kanji": "準"}, {"jp": "経験", "reading": "けいけん", "vi": "kinh nghiệm", "example": "日本で働いた経験があります。", "kanji": "経"}, {"jp": "説明", "reading": "せつめい", "vi": "giải thích", "example": "使い方を説明します。", "kanji": "説"}, {"jp": "連絡", "reading": "れんらく", "vi": "liên lạc", "example": "あとで連絡します。", "kanji": "連"}], "N3": [{"jp": "確認", "reading": "かくにん", "vi": "xác nhận / kiểm tra", "example": "内容を確認してください。", "kanji": "確"}, {"jp": "改善", "reading": "かいぜん", "vi": "cải thiện", "example": "作業方法を改善します。", "kanji": "改"}, {"jp": "状況", "reading": "じょうきょう", "vi": "tình trạng", "example": "今の状況を教えてください。", "kanji": "状"}, {"jp": "対応", "reading": "たいおう", "vi": "xử lý / ứng phó", "example": "すぐに対応します。", "kanji": "対"}, {"jp": "判断", "reading": "はんだん", "vi": "phán đoán", "example": "自分で判断しないでください。", "kanji": "判"}], "N2": [{"jp": "衛生", "reading": "えいせい", "vi": "vệ sinh", "example": "衛生管理を徹底します。", "kanji": "衛"}, {"jp": "徹底", "reading": "てってい", "vi": "triệt để", "example": "安全確認を徹底します。", "kanji": "徹"}, {"jp": "異常", "reading": "いじょう", "vi": "bất thường", "example": "異常があれば報告してください。", "kanji": "異"}, {"jp": "防止", "reading": "ぼうし", "vi": "phòng ngừa", "example": "事故を防止します。", "kanji": "防"}, {"jp": "責任", "reading": "せきにん", "vi": "trách nhiệm", "example": "責任を持って作業します。", "kanji": "責"}], "N1": [{"jp": "遵守", "reading": "じゅんしゅ", "vi": "tuân thủ", "example": "規則を遵守してください。", "kanji": "遵"}, {"jp": "遂行", "reading": "すいこう", "vi": "thực hiện / hoàn thành", "example": "業務を確実に遂行します。", "kanji": "遂"}, {"jp": "懸念", "reading": "けねん", "vi": "lo ngại", "example": "安全面で懸念があります。", "kanji": "懸"}, {"jp": "把握", "reading": "はあく", "vi": "nắm bắt", "example": "全体の状況を把握します。", "kanji": "把"}, {"jp": "是正", "reading": "ぜせい", "vi": "chấn chỉnh / khắc phục", "example": "問題点を是正します。", "kanji": "是"}], "GINOU2": [{"jp": "食品衛生管理", "reading": "しょくひんえいせいかんり", "vi": "quản lý vệ sinh thực phẩm", "example": "食品衛生管理を正しく行います。", "kanji": "衛"}, {"jp": "温度管理", "reading": "おんどかんり", "vi": "quản lý nhiệt độ", "example": "製品の温度管理を徹底します。", "kanji": "温"}, {"jp": "異物混入", "reading": "いぶつこんにゅう", "vi": "lẫn dị vật", "example": "異物混入を防止します。", "kanji": "異"}, {"jp": "作業手順", "reading": "さぎょうてじゅん", "vi": "quy trình thao tác", "example": "作業手順を守ってください。", "kanji": "作"}, {"jp": "品質管理", "reading": "ひんしつかんり", "vi": "quản lý chất lượng", "example": "品質管理は重要です。", "kanji": "品"}]};
+const BASE_DATA = {"N5": [{"jp": "人", "reading": "ひと", "vi": "người", "example": "あの人は先生です。", "kanji": "人"}, {"jp": "家族", "reading": "かぞく", "vi": "gia đình", "example": "家族は五人です。", "kanji": "家"}, {"jp": "食べる", "reading": "たべる", "vi": "ăn", "example": "毎日ご飯を食べます。", "kanji": "食"}, {"jp": "飲む", "reading": "のむ", "vi": "uống", "example": "水を飲みます。", "kanji": "飲"}, {"jp": "行く", "reading": "いく", "vi": "đi", "example": "会社へ行きます。", "kanji": "行"}], "N4": [{"jp": "必要", "reading": "ひつよう", "vi": "cần thiết", "example": "これは仕事に必要です。", "kanji": "必"}, {"jp": "準備", "reading": "じゅんび", "vi": "chuẩn bị", "example": "試験の準備をします。", "kanji": "準"}, {"jp": "経験", "reading": "けいけん", "vi": "kinh nghiệm", "example": "日本で働いた経験があります。", "kanji": "経"}, {"jp": "説明", "reading": "せつめい", "vi": "giải thích", "example": "使い方を説明します。", "kanji": "説"}, {"jp": "連絡", "reading": "れんらく", "vi": "liên lạc", "example": "あとで連絡します。", "kanji": "連"}], "N3": [{"jp": "確認", "reading": "かくにん", "vi": "xác nhận / kiểm tra", "example": "内容を確認してください。", "kanji": "確"}, {"jp": "改善", "reading": "かいぜん", "vi": "cải thiện", "example": "作業方法を改善します。", "kanji": "改"}, {"jp": "状況", "reading": "じょうきょう", "vi": "tình trạng", "example": "今の状況を教えてください。", "kanji": "状"}, {"jp": "対応", "reading": "たいおう", "vi": "xử lý / ứng phó", "example": "すぐに対応します。", "kanji": "対"}, {"jp": "判断", "reading": "はんだん", "vi": "phán đoán", "example": "自分で判断しないでください。", "kanji": "判"}], "N2": [{"jp": "衛生", "reading": "えいせい", "vi": "vệ sinh", "example": "衛生管理を徹底します。", "kanji": "衛"}, {"jp": "徹底", "reading": "てってい", "vi": "triệt để", "example": "安全確認を徹底します。", "kanji": "徹"}, {"jp": "異常", "reading": "いじょう", "vi": "bất thường", "example": "異常があれば報告してください。", "kanji": "異"}, {"jp": "防止", "reading": "ぼうし", "vi": "phòng ngừa", "example": "事故を防止します。", "kanji": "防"}, {"jp": "責任", "reading": "せきにん", "vi": "trách nhiệm", "example": "責任を持って作業します。", "kanji": "責"}], "N1": [{"jp": "遵守", "reading": "じゅんしゅ", "vi": "tuân thủ", "example": "規則を遵守してください。", "kanji": "遵"}, {"jp": "遂行", "reading": "すいこう", "vi": "thực hiện / hoàn thành", "example": "業務を確実に遂行します。", "kanji": "遂"}, {"jp": "懸念", "reading": "けねん", "vi": "lo ngại", "example": "安全面で懸念があります。", "kanji": "懸"}, {"jp": "把握", "reading": "はあく", "vi": "nắm bắt", "example": "全体の状況を把握します。", "kanji": "把"}, {"jp": "是正", "reading": "ぜせい", "vi": "chấn chỉnh / khắc phục", "example": "問題点を是正します。", "kanji": "是"}], "GINOU2": [{"jp": "食品衛生管理", "reading": "しょくひんえいせいかんり", "vi": "quản lý vệ sinh thực phẩm", "example": "食品衛生管理を正しく行います。", "kanji": "衛", "importance":3}, {"jp": "温度管理", "reading": "おんどかんり", "vi": "quản lý nhiệt độ", "example": "製品の温度管理を徹底します。", "kanji": "温", "importance":3}, {"jp": "異物混入", "reading": "いぶつこんにゅう", "vi": "lẫn dị vật", "example": "異物混入を防止します。", "kanji": "異", "importance":3}, {"jp": "作業手順", "reading": "さぎょうてじゅん", "vi": "quy trình thao tác", "example": "作業手順を守ってください。", "kanji": "作", "importance":2}, {"jp": "品質管理", "reading": "ひんしつかんり", "vi": "quản lý chất lượng", "example": "品質管理は重要です。", "kanji": "品", "importance":3}]};
 const KEYS={
   data:'TG2_V4_DATA', users:'TG2_V4_USERS', session:'TG2_V4_SESSION',
   remember:'TG2_V4_REMEMBER', progress:'TG2_V4_PROGRESS', avatar:'TG2_V4_AVATAR'
@@ -359,7 +397,7 @@ function buildLevels(){
   const box=$('levelButtons'); box.innerHTML='';
   Object.keys(data).forEach(l=>{
     const b=document.createElement('button'); b.textContent=l==='GINOU2'?'📁 Ginou 2 - Thực phẩm':('📄 '+l);
-    b.className=l===level?'active':''; b.onclick=()=>{level=l;idx=0;showSection('study');buildLevels();renderCard()};
+    b.className=l===level?'active':''; b.onclick=()=>{level=l;idx=0;showSection('study');buildLevels();renderCard();clearInterval(ginouWordTimer)};
     box.appendChild(b);
   });
 }
@@ -368,13 +406,13 @@ function renderCard(){
   const arr=data[level]||[], x=current();
   $('counter').textContent=arr.length?(idx+1)+' / '+arr.length:'0 / 0';
   $('topTitle').textContent=(level==='GINOU2'?'Ginou 2':level)+' › '+(x.jp||'');
-  $('levelBadge').textContent=level; $('levelBadge2').textContent=level;
+  $('levelBadge').textContent=level; $('levelBadge2').textContent=level; $('importanceBadge').textContent=importanceText(x); $('importanceBadge2').textContent=importanceText(x);
   $('jp').textContent=x.jp; $('reading').textContent=x.reading; $('jpBack').textContent=x.jp;
   $('meaning').textContent=x.vi; $('meaningCard').textContent=x.vi; $('example').textContent=x.example;
   $('kanjiBig').textContent=x.kanji||x.jp[0]||'—';
   const emojiMap={'人':'🚶','家族':'👨‍👩‍👧‍👦','食べる':'🍚','飲む':'🥤','行く':'🚶','食品衛生管理':'🧼','温度管理':'🌡️','異物混入':'⚠️','作業手順':'📋','品質管理':'✅'};
   $('illustration').textContent=emojiMap[x.jp]||'🌸';
-  flipped=false;$('flash').classList.remove('flipped');
+  flipped=false;$('flash').classList.remove('flipped'); updateGinouUI();
   progress.known=Math.max(progress.known,idx+1);progress.score=progress.known*10;progress.studied[new Date().toISOString().slice(0,10)]=true;saveProgress();renderProgress();
 }
 function next(){const a=data[level]||[];if(!a.length)return;idx=(idx+1)%a.length;renderCard()}
@@ -383,8 +421,8 @@ $('nextBtn').onclick=next;$('prevBtn').onclick=prev;$('mobileBack').onclick=prev
 $('flash').onclick=()=>{flipped=!flipped;$('flash').classList.toggle('flipped',flipped); if(flipped) speak(current().vi,'vi-VN')};
 $('shuffleBtn').onclick=()=>{const a=data[level]||[];if(a.length){idx=Math.floor(Math.random()*a.length);renderCard()}};
 $('markBtn').onclick=()=>{toast('Đã đánh dấu thẻ ⭐');progress.score+=5;saveProgress();renderProgress()};
-function speak(text,lang){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang;speechSynthesis.speak(u)}
-$('speakJp').onclick=e=>{e.stopPropagation();speak(current().jp,'ja-JP')}; $('speakVi').onclick=e=>{e.stopPropagation();speak(current().vi,'vi-VN')};
+function speak(text,lang){speakSafe(text,lang)}
+$('speakJp').onclick=e=>{e.stopPropagation();speakSafe((current().jp+' '+current().reading).trim(),'ja-JP')}; $('speakVi').onclick=e=>{e.stopPropagation();speak(current().vi,'vi-VN')};
 function toggleAuto(){
   autoFlip=!autoFlip;$('autoBtn').textContent=autoFlip?'⏸ Dừng tự động':'▶ Tự động lật';$('autoFlipSetting').textContent='⏱ Tự động lật thẻ: '+(autoFlip?'Bật':'Tắt');
   clearInterval(autoTimer); if(autoFlip) autoTimer=setInterval(()=>{flipped=!flipped;$('flash').classList.toggle('flipped',flipped);if(flipped)speak(current().vi,'vi-VN');else next()},flipSeconds*1000)
@@ -435,6 +473,30 @@ function renderCalendar(){
 
 $('saveDataBtn').onclick=()=>{try{const d=JSON.parse($('dataEditor').value);data=d;saveData();buildLevels();idx=0;renderCard();$('adminMsg').textContent='Đã lưu dữ liệu mới.';toast('Lưu dữ liệu thành công')}catch(e){$('adminMsg').textContent='JSON chưa đúng định dạng.'}};
 $('resetDataBtn').onclick=()=>{data=clone(BASE_DATA);saveData();buildLevels();idx=0;renderCard();$('dataEditor').value=JSON.stringify(data,null,2);toast('Đã khôi phục dữ liệu gốc')};
+
+// v4.2 enhancements
+let ginouMode='list', ginouWordTimer=null;
+function isGinou(){return level==='GINOU2'}
+function importanceText(x){return '★'.repeat(x.importance||1)+'☆'.repeat(Math.max(0,3-(x.importance||1)))}
+function memoryKey(x){return KEYS.progress+':memory:'+currentUser?.username+':'+level+':'+x.jp}
+function setMemory(state){localStorage.setItem(memoryKey(current()),state);toast(state==='known'?'Đã đánh dấu: Đã nhớ ✓':'Đã đánh dấu: Chưa thuộc ✕');renderGinouList()}
+$('knownBtn').onclick=()=>setMemory('known');$('unknownBtn').onclick=()=>setMemory('unknown');
+function renderGinouList(){
+  if(!isGinou())return; const a=data.GINOU2||[]; let s=Math.max(1,parseInt($('rangeStart').value||1)), e=Math.min(a.length,parseInt($('rangeEnd').value||a.length));
+  $('rangeStart').max=a.length;$('rangeEnd').max=a.length;
+  let html='<div class="vocab-row head"><div>STT</div><div>Kanji / Nhật</div><div>Cách đọc</div><div class="vi-col">Nghĩa</div><div class="action-col">Mức độ</div></div>';
+  a.slice(s-1,e).forEach((x,i)=>{const n=s+i,m=localStorage.getItem(KEYS.progress+':memory:'+currentUser?.username+':GINOU2:'+x.jp)||'unknown';html+=`<div class="vocab-row"><div>${n}</div><div><b>${x.jp}</b></div><div>${x.reading}</div><div class="vi-col">${x.vi}</div><div class="action-col"><span class="imp">${importanceText(x)}</span><br><button onclick="idx=${n-1};renderCard();speakCurrentGinou()">🔊 Nghe</button> ${m==='known'?'✓ Đã nhớ':'✕ Chưa thuộc'}</div></div>`});
+  $('ginouList').innerHTML=html;
+}
+function updateGinouUI(){const g=isGinou();$('ginouControls').classList.toggle('hidden',!g);$('memoryActions').classList.toggle('hidden',!g||ginouMode!=='card');$('cardStudyWrap').classList.toggle('hidden',g&&ginouMode==='list');if(g)renderGinouList()}
+function speakSafe(text,lang){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang;const voices=speechSynthesis.getVoices();const pref=voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith(lang.slice(0,2).toLowerCase()));if(pref)u.voice=pref;u.rate=.9;u.volume=1;speechSynthesis.speak(u)}catch(e){toast('Thiết bị chưa cho phép phát âm')}}
+function speakCurrentGinou(){const x=current(),m=$('voiceMode')?.value||'both';if(m==='off')return;if(m==='jp'||m==='both'){speakSafe(x.jp,'ja-JP');if(m==='both')setTimeout(()=>speakSafe(x.vi,'vi-VN'),1100)}else speakSafe(x.vi,'vi-VN')}
+$('ginouListTab').onclick=()=>{ginouMode='list';$('ginouListTab').classList.add('active');$('ginouCardTab').classList.remove('active');updateGinouUI()};
+$('ginouCardTab').onclick=()=>{ginouMode='card';$('ginouCardTab').classList.add('active');$('ginouListTab').classList.remove('active');updateGinouUI();renderCard();speakCurrentGinou()};
+['rangeStart','rangeEnd'].forEach(id=>$(id).addEventListener('change',renderGinouList));
+function startGinouAuto(){clearInterval(ginouWordTimer);if(!isGinou()||ginouMode!=='card')return;const sec=parseInt($('wordSeconds').value||5);ginouWordTimer=setInterval(()=>{next();speakCurrentGinou()},sec*1000)}
+$('wordSeconds').onchange=startGinouAuto;
+document.querySelectorAll('#topMenu button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#topMenu button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const p=b.dataset.page;if(p==='settings')$('settingsPopup').classList.toggle('hidden');else showSection(p)});
 
 // Kanji canvas
 const c=$('kanjiCanvas'),ctx=c.getContext('2d');ctx.lineWidth=12;ctx.lineCap='round';ctx.strokeStyle='#0f766e';
