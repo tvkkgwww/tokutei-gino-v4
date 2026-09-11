@@ -727,7 +727,7 @@ $('nextBtn').onclick=next;$('prevBtn').onclick=prev;$('mobileBack').onclick=prev
 $('flash').onclick=()=>{flipped=!flipped;$('flash').classList.toggle('flipped',flipped); if(flipped) speak(current().vi,'vi-VN')};
 $('shuffleBtn').onclick=()=>{const a=data[level]||[];if(a.length){idx=Math.floor(Math.random()*a.length);renderCard()}};
 function speak(text,lang){speakSafe(text,lang)}
-$('speakJp').onclick=e=>{e.stopPropagation();speakJapanese()}; $('speakVi').onclick=e=>{e.stopPropagation();speak(current().vi,'vi-VN')};speak(current().vi,'vi-VN')};
+$('speakJp').onclick=e=>{e.stopPropagation();speakJapanese()}; $('speakVi').onclick=e=>{e.stopPropagation();speak(current().vi,'vi-VN')};
 function scheduleAutoStep(){
   clearTimeout(autoTimer);
   if(!autoFlip||studyMode!=='card')return;
