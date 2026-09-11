@@ -1,0 +1,637 @@
+{
+  "version": "4.6",
+  "GINOU2": [
+    {
+      "jp": "食品衛生管理",
+      "reading": "しょくひんえいせいかんり",
+      "vi": "quản lý vệ sinh thực phẩm",
+      "example": "",
+      "kanji": "衛",
+      "importance": 3
+    },
+    {
+      "jp": "温度管理",
+      "reading": "おんどかんり",
+      "vi": "quản lý nhiệt độ",
+      "example": "",
+      "kanji": "温",
+      "importance": 3
+    },
+    {
+      "jp": "異物混入",
+      "reading": "いぶつこんにゅう",
+      "vi": "lẫn dị vật",
+      "example": "",
+      "kanji": "異",
+      "importance": 3
+    },
+    {
+      "jp": "作業手順",
+      "reading": "さぎょうてじゅん",
+      "vi": "quy trình thao tác",
+      "example": "",
+      "kanji": "作",
+      "importance": 3
+    },
+    {
+      "jp": "品質管理",
+      "reading": "ひんしつかんり",
+      "vi": "quản lý chất lượng",
+      "example": "",
+      "kanji": "品",
+      "importance": 3
+    },
+    {
+      "jp": "衛生管理",
+      "reading": "えいせいかんり",
+      "vi": "quản lý vệ sinh",
+      "example": "",
+      "kanji": "衛",
+      "importance": 3
+    },
+    {
+      "jp": "手洗い",
+      "reading": "てあらい",
+      "vi": "rửa tay",
+      "example": "",
+      "kanji": "手",
+      "importance": 3
+    },
+    {
+      "jp": "消毒",
+      "reading": "しょうどく",
+      "vi": "khử trùng",
+      "example": "",
+      "kanji": "消",
+      "importance": 3
+    },
+    {
+      "jp": "洗浄",
+      "reading": "せんじょう",
+      "vi": "làm sạch / rửa",
+      "example": "",
+      "kanji": "洗",
+      "importance": 3
+    },
+    {
+      "jp": "殺菌",
+      "reading": "さっきん",
+      "vi": "diệt khuẩn",
+      "example": "",
+      "kanji": "殺",
+      "importance": 3
+    },
+    {
+      "jp": "清掃",
+      "reading": "せいそう",
+      "vi": "vệ sinh / quét dọn",
+      "example": "",
+      "kanji": "清",
+      "importance": 2
+    },
+    {
+      "jp": "整理整頓",
+      "reading": "せいりせいとん",
+      "vi": "sắp xếp ngăn nắp",
+      "example": "",
+      "kanji": "整",
+      "importance": 2
+    },
+    {
+      "jp": "作業着",
+      "reading": "さぎょうぎ",
+      "vi": "quần áo làm việc",
+      "example": "",
+      "kanji": "作",
+      "importance": 2
+    },
+    {
+      "jp": "手袋",
+      "reading": "てぶくろ",
+      "vi": "găng tay",
+      "example": "",
+      "kanji": "手",
+      "importance": 2
+    },
+    {
+      "jp": "マスク",
+      "reading": "ますく",
+      "vi": "khẩu trang",
+      "example": "",
+      "kanji": "マ",
+      "importance": 2
+    },
+    {
+      "jp": "毛髪",
+      "reading": "もうはつ",
+      "vi": "tóc",
+      "example": "",
+      "kanji": "毛",
+      "importance": 3
+    },
+    {
+      "jp": "交差汚染",
+      "reading": "こうさおせん",
+      "vi": "nhiễm chéo",
+      "example": "",
+      "kanji": "交",
+      "importance": 3
+    },
+    {
+      "jp": "二次汚染",
+      "reading": "にじおせん",
+      "vi": "ô nhiễm thứ cấp",
+      "example": "",
+      "kanji": "二",
+      "importance": 3
+    },
+    {
+      "jp": "食中毒",
+      "reading": "しょくちゅうどく",
+      "vi": "ngộ độc thực phẩm",
+      "example": "",
+      "kanji": "食",
+      "importance": 3
+    },
+    {
+      "jp": "微生物",
+      "reading": "びせいぶつ",
+      "vi": "vi sinh vật",
+      "example": "",
+      "kanji": "微",
+      "importance": 3
+    },
+    {
+      "jp": "細菌",
+      "reading": "さいきん",
+      "vi": "vi khuẩn",
+      "example": "",
+      "kanji": "細",
+      "importance": 3
+    },
+    {
+      "jp": "ウイルス",
+      "reading": "ういるす",
+      "vi": "vi-rút",
+      "example": "",
+      "kanji": "ウ",
+      "importance": 3
+    },
+    {
+      "jp": "アレルギー",
+      "reading": "あれるぎー",
+      "vi": "dị ứng",
+      "example": "",
+      "kanji": "ア",
+      "importance": 3
+    },
+    {
+      "jp": "アレルゲン",
+      "reading": "あれるげん",
+      "vi": "chất gây dị ứng",
+      "example": "",
+      "kanji": "ア",
+      "importance": 3
+    },
+    {
+      "jp": "原材料",
+      "reading": "げんざいりょう",
+      "vi": "nguyên vật liệu",
+      "example": "",
+      "kanji": "原",
+      "importance": 2
+    },
+    {
+      "jp": "賞味期限",
+      "reading": "しょうみきげん",
+      "vi": "hạn dùng ngon nhất",
+      "example": "",
+      "kanji": "賞",
+      "importance": 3
+    },
+    {
+      "jp": "消費期限",
+      "reading": "しょうひきげん",
+      "vi": "hạn sử dụng",
+      "example": "",
+      "kanji": "消",
+      "importance": 3
+    },
+    {
+      "jp": "先入れ先出し",
+      "reading": "さきいれさきだし",
+      "vi": "nhập trước xuất trước (FIFO)",
+      "example": "",
+      "kanji": "先",
+      "importance": 3
+    },
+    {
+      "jp": "冷蔵",
+      "reading": "れいぞう",
+      "vi": "bảo quản lạnh",
+      "example": "",
+      "kanji": "冷",
+      "importance": 3
+    },
+    {
+      "jp": "冷凍",
+      "reading": "れいとう",
+      "vi": "đông lạnh",
+      "example": "",
+      "kanji": "冷",
+      "importance": 3
+    },
+    {
+      "jp": "解凍",
+      "reading": "かいとう",
+      "vi": "rã đông",
+      "example": "",
+      "kanji": "解",
+      "importance": 3
+    },
+    {
+      "jp": "加熱",
+      "reading": "かねつ",
+      "vi": "gia nhiệt",
+      "example": "",
+      "kanji": "加",
+      "importance": 3
+    },
+    {
+      "jp": "中心温度",
+      "reading": "ちゅうしんおんど",
+      "vi": "nhiệt độ tâm sản phẩm",
+      "example": "",
+      "kanji": "中",
+      "importance": 3
+    },
+    {
+      "jp": "冷却",
+      "reading": "れいきゃく",
+      "vi": "làm nguội / làm lạnh",
+      "example": "",
+      "kanji": "冷",
+      "importance": 3
+    },
+    {
+      "jp": "保管",
+      "reading": "ほかん",
+      "vi": "bảo quản",
+      "example": "",
+      "kanji": "保",
+      "importance": 2
+    },
+    {
+      "jp": "包装",
+      "reading": "ほうそう",
+      "vi": "đóng gói",
+      "example": "",
+      "kanji": "包",
+      "importance": 2
+    },
+    {
+      "jp": "密封",
+      "reading": "みっぷう",
+      "vi": "niêm kín",
+      "example": "",
+      "kanji": "密",
+      "importance": 2
+    },
+    {
+      "jp": "ラベル",
+      "reading": "らべる",
+      "vi": "nhãn",
+      "example": "",
+      "kanji": "ラ",
+      "importance": 2
+    },
+    {
+      "jp": "表示",
+      "reading": "ひょうじ",
+      "vi": "hiển thị / ghi nhãn",
+      "example": "",
+      "kanji": "表",
+      "importance": 2
+    },
+    {
+      "jp": "製造日",
+      "reading": "せいぞうび",
+      "vi": "ngày sản xuất",
+      "example": "",
+      "kanji": "製",
+      "importance": 2
+    },
+    {
+      "jp": "ロット番号",
+      "reading": "ろっとばんごう",
+      "vi": "số lô",
+      "example": "",
+      "kanji": "ロ",
+      "importance": 2
+    },
+    {
+      "jp": "記録",
+      "reading": "きろく",
+      "vi": "ghi chép",
+      "example": "",
+      "kanji": "記",
+      "importance": 3
+    },
+    {
+      "jp": "点検",
+      "reading": "てんけん",
+      "vi": "kiểm tra định kỳ",
+      "example": "",
+      "kanji": "点",
+      "importance": 3
+    },
+    {
+      "jp": "確認",
+      "reading": "かくにん",
+      "vi": "xác nhận / kiểm tra",
+      "example": "",
+      "kanji": "確",
+      "importance": 3
+    },
+    {
+      "jp": "報告",
+      "reading": "ほうこく",
+      "vi": "báo cáo",
+      "example": "",
+      "kanji": "報",
+      "importance": 3
+    },
+    {
+      "jp": "改善",
+      "reading": "かいぜん",
+      "vi": "cải thiện",
+      "example": "",
+      "kanji": "改",
+      "importance": 3
+    },
+    {
+      "jp": "異常",
+      "reading": "いじょう",
+      "vi": "bất thường",
+      "example": "",
+      "kanji": "異",
+      "importance": 3
+    },
+    {
+      "jp": "不良品",
+      "reading": "ふりょうひん",
+      "vi": "sản phẩm lỗi",
+      "example": "",
+      "kanji": "不",
+      "importance": 3
+    },
+    {
+      "jp": "廃棄",
+      "reading": "はいき",
+      "vi": "loại bỏ / tiêu hủy",
+      "example": "",
+      "kanji": "廃",
+      "importance": 2
+    },
+    {
+      "jp": "返品",
+      "reading": "へんぴん",
+      "vi": "trả hàng",
+      "example": "",
+      "kanji": "返",
+      "importance": 2
+    },
+    {
+      "jp": "回収",
+      "reading": "かいしゅう",
+      "vi": "thu hồi",
+      "example": "",
+      "kanji": "回",
+      "importance": 3
+    },
+    {
+      "jp": "混入防止",
+      "reading": "こんにゅうぼうし",
+      "vi": "phòng ngừa lẫn dị vật",
+      "example": "",
+      "kanji": "混",
+      "importance": 3
+    },
+    {
+      "jp": "破損",
+      "reading": "はそん",
+      "vi": "hư hỏng / vỡ",
+      "example": "",
+      "kanji": "破",
+      "importance": 2
+    },
+    {
+      "jp": "金属探知機",
+      "reading": "きんぞくたんちき",
+      "vi": "máy dò kim loại",
+      "example": "",
+      "kanji": "金",
+      "importance": 3
+    },
+    {
+      "jp": "検品",
+      "reading": "けんぴん",
+      "vi": "kiểm hàng",
+      "example": "",
+      "kanji": "検",
+      "importance": 3
+    },
+    {
+      "jp": "計量",
+      "reading": "けいりょう",
+      "vi": "cân đo",
+      "example": "",
+      "kanji": "計",
+      "importance": 2
+    },
+    {
+      "jp": "秤",
+      "reading": "はかり",
+      "vi": "cân",
+      "example": "",
+      "kanji": "秤",
+      "importance": 2
+    },
+    {
+      "jp": "原料受入",
+      "reading": "げんりょううけいれ",
+      "vi": "tiếp nhận nguyên liệu",
+      "example": "",
+      "kanji": "原",
+      "importance": 3
+    },
+    {
+      "jp": "入庫",
+      "reading": "にゅうこ",
+      "vi": "nhập kho",
+      "example": "",
+      "kanji": "入",
+      "importance": 2
+    },
+    {
+      "jp": "出庫",
+      "reading": "しゅっこ",
+      "vi": "xuất kho",
+      "example": "",
+      "kanji": "出",
+      "importance": 2
+    },
+    {
+      "jp": "在庫管理",
+      "reading": "ざいこかんり",
+      "vi": "quản lý tồn kho",
+      "example": "",
+      "kanji": "在",
+      "importance": 2
+    },
+    {
+      "jp": "工程管理",
+      "reading": "こうていかんり",
+      "vi": "quản lý công đoạn",
+      "example": "",
+      "kanji": "工",
+      "importance": 3
+    },
+    {
+      "jp": "製造工程",
+      "reading": "せいぞうこうてい",
+      "vi": "quy trình sản xuất",
+      "example": "",
+      "kanji": "製",
+      "importance": 3
+    },
+    {
+      "jp": "作業区域",
+      "reading": "さぎょうくいき",
+      "vi": "khu vực làm việc",
+      "example": "",
+      "kanji": "作",
+      "importance": 2
+    },
+    {
+      "jp": "清潔区域",
+      "reading": "せいけつくいき",
+      "vi": "khu vực sạch",
+      "example": "",
+      "kanji": "清",
+      "importance": 3
+    },
+    {
+      "jp": "汚染区域",
+      "reading": "おせんくいき",
+      "vi": "khu vực ô nhiễm",
+      "example": "",
+      "kanji": "汚",
+      "importance": 3
+    },
+    {
+      "jp": "HACCP",
+      "reading": "はさっぷ",
+      "vi": "HACCP - phân tích mối nguy và điểm kiểm soát tới hạn",
+      "example": "",
+      "kanji": "H",
+      "importance": 3
+    },
+    {
+      "jp": "危害要因",
+      "reading": "きがいよういん",
+      "vi": "yếu tố mối nguy",
+      "example": "",
+      "kanji": "危",
+      "importance": 3
+    },
+    {
+      "jp": "重要管理点",
+      "reading": "じゅうようかんりてん",
+      "vi": "điểm kiểm soát quan trọng",
+      "example": "",
+      "kanji": "重",
+      "importance": 3
+    },
+    {
+      "jp": "是正措置",
+      "reading": "ぜせいそち",
+      "vi": "biện pháp khắc phục",
+      "example": "",
+      "kanji": "是",
+      "importance": 3
+    },
+    {
+      "jp": "記録管理",
+      "reading": "きろくかんり",
+      "vi": "quản lý hồ sơ ghi chép",
+      "example": "",
+      "kanji": "記",
+      "importance": 3
+    },
+    {
+      "jp": "安全管理",
+      "reading": "あんぜんかんり",
+      "vi": "quản lý an toàn",
+      "example": "",
+      "kanji": "安",
+      "importance": 3
+    },
+    {
+      "jp": "労働災害",
+      "reading": "ろうどうさいがい",
+      "vi": "tai nạn lao động",
+      "example": "",
+      "kanji": "労",
+      "importance": 3
+    },
+    {
+      "jp": "転倒",
+      "reading": "てんとう",
+      "vi": "trượt/ngã",
+      "example": "",
+      "kanji": "転",
+      "importance": 2
+    },
+    {
+      "jp": "切創",
+      "reading": "せっそう",
+      "vi": "vết cắt",
+      "example": "",
+      "kanji": "切",
+      "importance": 2
+    },
+    {
+      "jp": "やけど",
+      "reading": "やけど",
+      "vi": "bỏng",
+      "example": "",
+      "kanji": "や",
+      "importance": 2
+    },
+    {
+      "jp": "機械",
+      "reading": "きかい",
+      "vi": "máy móc",
+      "example": "",
+      "kanji": "機",
+      "importance": 2
+    },
+    {
+      "jp": "緊急停止",
+      "reading": "きんきゅうていし",
+      "vi": "dừng khẩn cấp",
+      "example": "",
+      "kanji": "緊",
+      "importance": 3
+    },
+    {
+      "jp": "保護具",
+      "reading": "ほごぐ",
+      "vi": "đồ bảo hộ",
+      "example": "",
+      "kanji": "保",
+      "importance": 3
+    }
+  ]
+}
