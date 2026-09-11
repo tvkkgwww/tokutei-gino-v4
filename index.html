@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="manifest.webmanifest">
+<title>日本語 JLPT & GINOU</title>
+<style>
+:root{
+  --green:#0f766e; --green2:#0b5d55; --mint:#dff7f2; --ink:#10343b; --line:#b9e4db;
+  --card:#fffdf8; --shadow:0 18px 45px rgba(13,93,85,.18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;color:var(--ink);background:linear-gradient(135deg,#eefcf8,#f8ffff 55%,#e8f8f5)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.safe{padding-top:max(12px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom))}
+.login{min-height:100vh;display:grid;place-items:center;padding:22px}
+.login-card{width:min(460px,94vw);background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:26px}
+.brand{display:flex;gap:12px;align-items:center;font-weight:900;font-size:26px;color:var(--green)}
+.brand .book{font-size:36px}
+.login-sub{color:#55777b;margin:8px 0 18px}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.roles button{border:1px solid var(--line);background:#f4fbf9;padding:12px;border-radius:14px;font-weight:800;color:var(--ink)}
+.roles button.active{background:var(--green);color:#fff}
+.login input{width:100%;padding:13px 14px;border:1px solid #cfe3df;border-radius:13px;margin-top:10px;background:#fff}
+.remember{display:flex;gap:8px;align-items:center;margin:12px 2px;color:#5d7376}
+.primary{border:0;background:var(--green);color:#fff;padding:13px 16px;border-radius:14px;font-weight:900}
+.full{width:100%}
+.err{min-height:20px;color:#b42318;font-size:13px;margin-top:8px}
+.demo{font-size:12px;color:#6b7f82;line-height:1.6;margin-top:10px}
+
+.app{min-height:100vh;display:grid;grid-template-columns:280px 1fr}
+.sidebar{background:linear-gradient(180deg,#f1fffb,#e6f7f3);border-right:1px solid var(--line);padding:18px;position:sticky;top:0;height:100vh;overflow:auto}
+.logo{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:900;color:#0b5d55;margin-bottom:16px}
+.profile{background:linear-gradient(135deg,#0d8a74,#0b6a5e);color:#fff;border-radius:18px;padding:13px;display:flex;align-items:center;gap:12px}
+.avatar{width:48px;height:48px;border-radius:50%;background:#fff;color:var(--green);display:grid;place-items:center;font-size:26px;font-weight:900;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.profile .name{font-weight:900}.profile .tag{font-size:12px;opacity:.85}
+.menu{display:grid;gap:7px;margin-top:14px}
+.menu button{border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:12px;color:var(--ink);font-weight:700}
+.menu button.active,.menu button:hover{background:#fff;box-shadow:0 5px 15px rgba(0,0,0,.05)}
+.levels{display:grid;gap:5px;margin-top:8px}
+.levels button{border:0;background:transparent;text-align:left;padding:10px;border-radius:11px;color:var(--ink)}
+.levels button.active{background:#fff;font-weight:900;color:var(--green)}
+.quote{margin-top:18px;padding:14px;border-top:1px solid var(--line);text-align:center;color:#335f62}
+.main{padding:20px 24px 90px;min-width:0}
+.topbar{background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px;padding:12px 16px;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;position:sticky;top:10px;z-index:8}
+.top-title{font-weight:900}.counter{font-weight:800}
+.icon-btn{width:48px;height:48px;border:0;border-radius:14px;background:var(--green);color:#fff;font-size:23px}
+.settings{position:fixed;right:24px;top:80px;width:min(290px,88vw);background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:10px;z-index:20}
+.settings button{width:100%;border:0;background:#fff;padding:12px;border-radius:10px;text-align:left}
+.settings button:hover{background:#effaf7}
+.study-grid{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:22px;margin-top:22px;align-items:start}
+.flash-stack{display:grid;place-items:center;min-height:620px}
+.flash{width:min(620px,94%);min-height:520px;background:var(--card);border:1px solid #eadfd3;border-radius:34px;box-shadow:0 26px 48px rgba(21,78,69,.22);padding:24px 28px;position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.75,.2,1)}
+.flash:before,.flash:after{content:"";position:absolute;inset:12px 10px -12px -14px;border-radius:34px;background:#f7f0e8;border:1px solid #e5d8ca;z-index:-1;box-shadow:0 8px 12px rgba(0,0,0,.06)}
+.flash:after{inset:22px 20px -20px -24px;background:#f2ece6;z-index:-2}
+.flash.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;padding:26px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.back{transform:rotateY(180deg)}
+.cherry{position:absolute;left:24px;top:18px;font-size:34px}
+.badge{position:absolute;right:26px;top:24px;background:#d8f3ea;border:1px solid #a7d8ca;border-radius:14px;padding:8px 10px;font-weight:900}
+.jp{font-size:86px;font-weight:900;line-height:1.05;margin:20px 0 10px}
+.reading{font-size:26px;font-weight:800}
+.illustration{width:150px;height:150px;border-radius:26px;background:linear-gradient(135deg,#fff2d6,#dff7f2);display:grid;place-items:center;font-size:72px;margin-bottom:18px;border:1px solid #e8dfd1}
+.meaning{font-size:36px;font-weight:900;color:var(--green);margin:12px}
+.example{font-size:18px;background:#f5faf9;border-radius:16px;padding:14px 18px;max-width:88%}
+.speak{margin-top:18px;width:64px;height:64px;border:0;border-radius:50%;background:#d9f4ea;color:#0b6a5e;font-size:28px}
+.side-nav{display:grid;gap:18px;margin-top:100px}
+.side-nav button{border:1px solid var(--line);background:#fff;border-radius:18px;padding:20px 10px;font-size:16px;font-weight:800;color:var(--ink)}
+.meaning-card{margin:12px auto 0;max-width:560px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center;font-size:27px;font-weight:900}
+.bottom-actions{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:12px;margin:18px auto 0;max-width:800px}
+.bottom-actions button{padding:15px;border-radius:17px;border:1px solid var(--line);background:#fff;font-weight:800}
+.bottom-actions .auto{background:var(--green);color:#fff}
+.calendar{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;margin-top:18px}
+.calendar.compact{max-width:520px}
+.calendar-head{display:flex;justify-content:space-between;align-items:center}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:8px;font-size:12px}
+.day{aspect-ratio:1;border-radius:9px;background:#f3faf8;display:grid;place-items:center}
+.day.study{background:#d1fae5;color:#065f46;font-weight:900}
+.progress{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center}
+.stat b{display:block;font-size:26px;color:var(--green)}
+.admin-panel,.kanji-panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:18px}
+.admin-panel textarea{width:100%;min-height:260px;border:1px solid #cfe3df;border-radius:14px;padding:12px;font-family:ui-monospace,monospace}
+.kanji-stage{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.kanji-big{font-size:130px;font-weight:900;text-align:center;border:1px dashed #b7d7d0;border-radius:18px;padding:20px;min-height:240px}
+canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch-action:none;background:
+ linear-gradient(#0000 49%,#d8e7e4 50%,#0000 51%),
+ linear-gradient(90deg,#0000 49%,#d8e7e4 50%,#0000 51%)}
+.toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);background:#0b5d55;color:#fff;padding:12px 18px;border-radius:999px;box-shadow:var(--shadow);z-index:40;font-weight:800}
+.mobilebar{display:none}
+@media(max-width:900px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:fixed;left:-290px;z-index:30;transition:.25s;width:280px}
+  .sidebar.open{left:0}
+  .main{padding:12px 12px 86px}
+  .topbar{top:6px;grid-template-columns:1fr auto auto}
+  .study-grid{grid-template-columns:1fr}
+  .side-nav{grid-template-columns:1fr 1fr;margin-top:0}
+  .flash-stack{min-height:520px}
+  .flash{min-height:470px;width:96%}
+  .jp{font-size:70px}
+  .bottom-actions{grid-template-columns:1fr 1fr}
+  .bottom-actions .auto{grid-column:1/-1}
+  .progress{grid-template-columns:1fr}
+  .kanji-stage{grid-template-columns:1fr}
+  .mobilebar{display:grid;grid-template-columns:1fr 1fr 1fr;position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);z-index:25;padding:8px max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom))}
+  .mobilebar button{border:0;background:#fff;padding:10px;font-weight:800;color:var(--ink)}
+}
+</style>
+</head>
+<body>
+<div id="toast" class="toast hidden"></div>
+
+<section id="loginView" class="login safe">
+  <div class="login-card">
+    <div class="brand"><span class="book">📖</span><span>日本語 JLPT & GINOU</span></div>
+    <div class="login-sub">Ứng dụng mới hoàn toàn • JLPT N5–N1 • Tokutei Ginou 2</div>
+    <div class="roles">
+      <button id="studentRole" class="active" type="button">👨‍🎓 Học viên</button>
+      <button id="adminRole" type="button">🛠 Quản trị</button>
+    </div>
+    <input id="username" placeholder="Tên đăng nhập" autocomplete="username">
+    <input id="password" type="password" placeholder="Mật khẩu" autocomplete="current-password">
+    <label class="remember"><input id="rememberLogin" type="checkbox"> Ghi nhớ đăng nhập cho lần học sau</label>
+    <button id="loginBtn" class="primary full" type="button">Đăng nhập</button>
+    <div id="loginErr" class="err"></div>
+    <div class="demo">Học viên: <b>hocvien / 123456</b><br>Quản trị: <b>admin / 123456</b></div>
+  </div>
+</section>
+
+<section id="appView" class="app hidden">
+  <aside id="sidebar" class="sidebar safe">
+    <div class="logo">📖 日本語</div>
+    <div class="profile">
+      <div id="avatar" class="avatar">👤</div>
+      <div><div id="profileName" class="name"></div><div id="profileTag" class="tag"></div></div>
+    </div>
+    <div class="menu">
+      <button id="studyMenu" class="active">📖 Học từ vựng</button>
+      <div id="levelButtons" class="levels"></div>
+      <button id="calendarMenu">📅 Lịch học tập</button>
+      <button id="progressMenu">📊 Tiến độ học</button>
+      <button id="kanjiMenu">✍️ Luyện Kanji</button>
+      <button id="adminMenu" class="hidden">🛠 Quản trị dữ liệu</button>
+      <button id="settingsMenu">⚙️ Cài đặt</button>
+      <button id="logoutBtn">↪ Đăng xuất</button>
+    </div>
+    <div class="quote">🌸 継続は力なり<br><small>Kiên trì là sức mạnh</small></div>
+  </aside>
+
+  <main class="main safe">
+    <div class="topbar">
+      <div id="topTitle" class="top-title">N5 › 第3課：人と家族</div>
+      <div id="counter" class="counter">1 / 5</div>
+      <button id="settingsBtn" class="icon-btn" type="button">⚙️</button>
+    </div>
+
+    <div id="settingsPopup" class="settings hidden">
+      <button id="voiceSetting">🔊 Giọng đọc: Nhật</button>
+      <button id="autoFlipSetting">⏱ Tự động lật thẻ: Tắt</button>
+      <button id="flipTimeSetting">🕒 Thời gian lật: 4 giây</button>
+      <button id="themeSetting">🎨 Giao diện: Xanh Nhật</button>
+      <button id="avatarSetting">🖼 Ảnh đại diện</button>
+    </div>
+
+    <section id="studySection">
+      <div class="study-grid">
+        <div>
+          <div class="flash-stack">
+            <div id="flash" class="flash">
+              <div class="face front">
+                <div class="cherry">🌸</div>
+                <div id="levelBadge" class="badge">N5</div>
+                <div id="illustration" class="illustration">🚶</div>
+                <div id="jp" class="jp">人</div>
+                <div id="reading" class="reading">ひと</div>
+                <button id="speakJp" class="speak" type="button">🔊</button>
+              </div>
+              <div class="face back">
+                <div class="cherry">🌸</div>
+                <div id="levelBadge2" class="badge">N5</div>
+                <div id="jpBack" class="jp">人</div>
+                <div id="meaning" class="meaning">Người</div>
+                <div id="example" class="example">あの人は先生です。</div>
+                <button id="speakVi" class="speak" type="button">🔊</button>
+              </div>
+            </div>
+          </div>
+          <div id="meaningCard" class="meaning-card">Người</div>
+          <div class="bottom-actions">
+            <button id="shuffleBtn">🔀 Trộn thẻ</button>
+            <button id="markBtn">☆ Đánh dấu</button>
+            <button id="autoBtn" class="auto">▶ Tự động lật</button>
+          </div>
+        </div>
+        <div class="side-nav">
+          <button id="prevBtn">〈<br>Thẻ trước</button>
+          <button id="nextBtn">〉<br>Thẻ tiếp</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="calendarSection" class="calendar compact hidden">
+      <div class="calendar-head"><b>📅 Lịch học tập</b><span id="monthText"></span></div>
+      <div id="calendarGrid" class="calendar-grid"></div>
+    </section>
+
+    <section id="progressSection" class="hidden">
+      <div class="progress">
+        <div class="stat"><b id="streakStat">1</b>Chuỗi ngày học</div>
+        <div class="stat"><b id="knownStat">0</b>Từ đã học</div>
+        <div class="stat"><b id="scoreStat">0</b>Tổng điểm</div>
+      </div>
+    </section>
+
+    <section id="kanjiSection" class="kanji-panel hidden">
+      <h3>✍️ Luyện Kanji</h3>
+      <div class="kanji-stage">
+        <div>
+          <div id="kanjiBig" class="kanji-big">人</div>
+          <p>Trang 1: xem Kanji • Trang 2: đọc/nghĩa • Trang 3: luyện viết.</p>
+        </div>
+        <div>
+          <canvas id="kanjiCanvas" width="700" height="500"></canvas>
+          <div class="bottom-actions">
+            <button id="clearCanvas">Xóa nét</button>
+            <button id="snapCanvas">Hút nét về giữa</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="adminSection" class="admin-panel hidden">
+      <h3>🛠 Quản trị dữ liệu</h3>
+      <p>Dữ liệu bản mới dùng vùng lưu trữ riêng, không liên quan app cũ.</p>
+      <textarea id="dataEditor"></textarea>
+      <div class="bottom-actions">
+        <button id="saveDataBtn">💾 Lưu dữ liệu</button>
+        <button id="resetDataBtn">↩ Khôi phục dữ liệu gốc</button>
+      </div>
+      <div id="adminMsg"></div>
+    </section>
+  </main>
+
+  <div class="mobilebar">
+    <button id="mobileBack">← Trở về</button>
+    <button id="mobileHome">⌂ Trang chủ</button>
+    <button id="mobileMenu">☰ Menu</button>
+  </div>
+</section>
+
+<input id="avatarInput" type="file" accept="image/*" class="hidden">
+
+<script>
+const BASE_DATA = {"N5": [{"jp": "人", "reading": "ひと", "vi": "người", "example": "あの人は先生です。", "kanji": "人"}, {"jp": "家族", "reading": "かぞく", "vi": "gia đình", "example": "家族は五人です。", "kanji": "家"}, {"jp": "食べる", "reading": "たべる", "vi": "ăn", "example": "毎日ご飯を食べます。", "kanji": "食"}, {"jp": "飲む", "reading": "のむ", "vi": "uống", "example": "水を飲みます。", "kanji": "飲"}, {"jp": "行く", "reading": "いく", "vi": "đi", "example": "会社へ行きます。", "kanji": "行"}], "N4": [{"jp": "必要", "reading": "ひつよう", "vi": "cần thiết", "example": "これは仕事に必要です。", "kanji": "必"}, {"jp": "準備", "reading": "じゅんび", "vi": "chuẩn bị", "example": "試験の準備をします。", "kanji": "準"}, {"jp": "経験", "reading": "けいけん", "vi": "kinh nghiệm", "example": "日本で働いた経験があります。", "kanji": "経"}, {"jp": "説明", "reading": "せつめい", "vi": "giải thích", "example": "使い方を説明します。", "kanji": "説"}, {"jp": "連絡", "reading": "れんらく", "vi": "liên lạc", "example": "あとで連絡します。", "kanji": "連"}], "N3": [{"jp": "確認", "reading": "かくにん", "vi": "xác nhận / kiểm tra", "example": "内容を確認してください。", "kanji": "確"}, {"jp": "改善", "reading": "かいぜん", "vi": "cải thiện", "example": "作業方法を改善します。", "kanji": "改"}, {"jp": "状況", "reading": "じょうきょう", "vi": "tình trạng", "example": "今の状況を教えてください。", "kanji": "状"}, {"jp": "対応", "reading": "たいおう", "vi": "xử lý / ứng phó", "example": "すぐに対応します。", "kanji": "対"}, {"jp": "判断", "reading": "はんだん", "vi": "phán đoán", "example": "自分で判断しないでください。", "kanji": "判"}], "N2": [{"jp": "衛生", "reading": "えいせい", "vi": "vệ sinh", "example": "衛生管理を徹底します。", "kanji": "衛"}, {"jp": "徹底", "reading": "てってい", "vi": "triệt để", "example": "安全確認を徹底します。", "kanji": "徹"}, {"jp": "異常", "reading": "いじょう", "vi": "bất thường", "example": "異常があれば報告してください。", "kanji": "異"}, {"jp": "防止", "reading": "ぼうし", "vi": "phòng ngừa", "example": "事故を防止します。", "kanji": "防"}, {"jp": "責任", "reading": "せきにん", "vi": "trách nhiệm", "example": "責任を持って作業します。", "kanji": "責"}], "N1": [{"jp": "遵守", "reading": "じゅんしゅ", "vi": "tuân thủ", "example": "規則を遵守してください。", "kanji": "遵"}, {"jp": "遂行", "reading": "すいこう", "vi": "thực hiện / hoàn thành", "example": "業務を確実に遂行します。", "kanji": "遂"}, {"jp": "懸念", "reading": "けねん", "vi": "lo ngại", "example": "安全面で懸念があります。", "kanji": "懸"}, {"jp": "把握", "reading": "はあく", "vi": "nắm bắt", "example": "全体の状況を把握します。", "kanji": "把"}, {"jp": "是正", "reading": "ぜせい", "vi": "chấn chỉnh / khắc phục", "example": "問題点を是正します。", "kanji": "是"}], "GINOU2": [{"jp": "食品衛生管理", "reading": "しょくひんえいせいかんり", "vi": "quản lý vệ sinh thực phẩm", "example": "食品衛生管理を正しく行います。", "kanji": "衛"}, {"jp": "温度管理", "reading": "おんどかんり", "vi": "quản lý nhiệt độ", "example": "製品の温度管理を徹底します。", "kanji": "温"}, {"jp": "異物混入", "reading": "いぶつこんにゅう", "vi": "lẫn dị vật", "example": "異物混入を防止します。", "kanji": "異"}, {"jp": "作業手順", "reading": "さぎょうてじゅん", "vi": "quy trình thao tác", "example": "作業手順を守ってください。", "kanji": "作"}, {"jp": "品質管理", "reading": "ひんしつかんり", "vi": "quản lý chất lượng", "example": "品質管理は重要です。", "kanji": "品"}]};
+const KEYS={
+  data:'TG2_V4_DATA', users:'TG2_V4_USERS', session:'TG2_V4_SESSION',
+  remember:'TG2_V4_REMEMBER', progress:'TG2_V4_PROGRESS', avatar:'TG2_V4_AVATAR'
+};
+const DEFAULT_USERS={
+  hocvien:{password:'123456',role:'student',name:'Trần Văn Khá'},
+  admin:{password:'123456',role:'admin',name:'Quản trị viên'}
+};
+const $=id=>document.getElementById(id);
+let roleChoice='student', currentUser=null, level='N5', idx=0, flipped=false, autoTimer=null, autoFlip=false, flipSeconds=4;
+let data=loadData(), progress=loadProgress();
+
+function clone(x){return JSON.parse(JSON.stringify(x))}
+function loadData(){try{return JSON.parse(localStorage.getItem(KEYS.data))||clone(BASE_DATA)}catch(e){return clone(BASE_DATA)}}
+function saveData(){localStorage.setItem(KEYS.data,JSON.stringify(data))}
+function loadUsers(){try{return Object.assign({},DEFAULT_USERS,JSON.parse(localStorage.getItem(KEYS.users)||'{}'))}catch(e){return clone(DEFAULT_USERS)}}
+function loadProgress(){try{return JSON.parse(localStorage.getItem(KEYS.progress))||{known:0,score:0,streak:1,studied:{}}}catch(e){return {known:0,score:0,streak:1,studied:{}}}}
+function saveProgress(){localStorage.setItem(KEYS.progress,JSON.stringify(progress))}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2200)}
+function setRole(r){roleChoice=r==='admin'?'admin':'student';$('studentRole').classList.toggle('active',roleChoice==='student');$('adminRole').classList.toggle('active',roleChoice==='admin');$('loginErr').textContent=''}
+$('studentRole').onclick=()=>setRole('student'); $('adminRole').onclick=()=>setRole('admin');
+
+function login(){
+  const u=$('username').value.trim().toLowerCase(), p=$('password').value, users=loadUsers(), rec=users[u];
+  if(!rec || rec.password!==p){$('loginErr').textContent='Tên đăng nhập hoặc mật khẩu chưa đúng.';return}
+  if(rec.role!==roleChoice){$('loginErr').textContent='Tài khoản không đúng loại đã chọn.';return}
+  currentUser={username:u,...rec};
+  if($('rememberLogin').checked) localStorage.setItem(KEYS.remember,JSON.stringify(currentUser));
+  sessionStorage.setItem(KEYS.session,JSON.stringify(currentUser));
+  enterApp(true);
+}
+$('loginBtn').onclick=login;
+$('password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
+
+function enterApp(showWelcome=false){
+  $('loginView').classList.add('hidden'); $('appView').classList.remove('hidden');
+  $('profileName').textContent=currentUser.name; $('profileTag').textContent=currentUser.role==='admin'?'Quản trị viên':'Học mỗi ngày để tốt hơn';
+  $('adminMenu').classList.toggle('hidden',currentUser.role!=='admin');
+  const av=localStorage.getItem(KEYS.avatar+':'+currentUser.username);
+  $('avatar').innerHTML=av?'<img src="'+av+'">':(currentUser.role==='admin'?'🛠':'👤');
+  buildLevels(); renderCard(); renderProgress(); renderCalendar();
+  if(showWelcome) toast('Chào mừng '+currentUser.name+' trở lại 🌸');
+}
+function logout(){sessionStorage.removeItem(KEYS.session);localStorage.removeItem(KEYS.remember);location.reload()}
+$('logoutBtn').onclick=logout;
+
+function buildLevels(){
+  const box=$('levelButtons'); box.innerHTML='';
+  Object.keys(data).forEach(l=>{
+    const b=document.createElement('button'); b.textContent=l==='GINOU2'?'📁 Ginou 2 - Thực phẩm':('📄 '+l);
+    b.className=l===level?'active':''; b.onclick=()=>{level=l;idx=0;showSection('study');buildLevels();renderCard()};
+    box.appendChild(b);
+  });
+}
+function current(){const arr=data[level]||[]; return arr[idx]||{jp:'—',reading:'',vi:'',example:'',kanji:'—'}}
+function renderCard(){
+  const arr=data[level]||[], x=current();
+  $('counter').textContent=arr.length?(idx+1)+' / '+arr.length:'0 / 0';
+  $('topTitle').textContent=(level==='GINOU2'?'Ginou 2':level)+' › '+(x.jp||'');
+  $('levelBadge').textContent=level; $('levelBadge2').textContent=level;
+  $('jp').textContent=x.jp; $('reading').textContent=x.reading; $('jpBack').textContent=x.jp;
+  $('meaning').textContent=x.vi; $('meaningCard').textContent=x.vi; $('example').textContent=x.example;
+  $('kanjiBig').textContent=x.kanji||x.jp[0]||'—';
+  const emojiMap={'人':'🚶','家族':'👨‍👩‍👧‍👦','食べる':'🍚','飲む':'🥤','行く':'🚶','食品衛生管理':'🧼','温度管理':'🌡️','異物混入':'⚠️','作業手順':'📋','品質管理':'✅'};
+  $('illustration').textContent=emojiMap[x.jp]||'🌸';
+  flipped=false;$('flash').classList.remove('flipped');
+  progress.known=Math.max(progress.known,idx+1);progress.score=progress.known*10;progress.studied[new Date().toISOString().slice(0,10)]=true;saveProgress();renderProgress();
+}
+function next(){const a=data[level]||[];if(!a.length)return;idx=(idx+1)%a.length;renderCard()}
+function prev(){const a=data[level]||[];if(!a.length)return;idx=(idx-1+a.length)%a.length;renderCard()}
+$('nextBtn').onclick=next;$('prevBtn').onclick=prev;$('mobileBack').onclick=prev;
+$('flash').onclick=()=>{flipped=!flipped;$('flash').classList.toggle('flipped',flipped); if(flipped) speak(current().vi,'vi-VN')};
+$('shuffleBtn').onclick=()=>{const a=data[level]||[];if(a.length){idx=Math.floor(Math.random()*a.length);renderCard()}};
+$('markBtn').onclick=()=>{toast('Đã đánh dấu thẻ ⭐');progress.score+=5;saveProgress();renderProgress()};
+function speak(text,lang){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang=lang;speechSynthesis.speak(u)}
+$('speakJp').onclick=e=>{e.stopPropagation();speak(current().jp,'ja-JP')}; $('speakVi').onclick=e=>{e.stopPropagation();speak(current().vi,'vi-VN')};
+function toggleAuto(){
+  autoFlip=!autoFlip;$('autoBtn').textContent=autoFlip?'⏸ Dừng tự động':'▶ Tự động lật';$('autoFlipSetting').textContent='⏱ Tự động lật thẻ: '+(autoFlip?'Bật':'Tắt');
+  clearInterval(autoTimer); if(autoFlip) autoTimer=setInterval(()=>{flipped=!flipped;$('flash').classList.toggle('flipped',flipped);if(flipped)speak(current().vi,'vi-VN');else next()},flipSeconds*1000)
+}
+$('autoBtn').onclick=toggleAuto;$('autoFlipSetting').onclick=toggleAuto;
+
+$('settingsBtn').onclick=()=> $('settingsPopup').classList.toggle('hidden');
+$('settingsMenu').onclick=()=> $('settingsPopup').classList.toggle('hidden');
+$('flipTimeSetting').onclick=()=>{flipSeconds=flipSeconds===4?6:4;$('flipTimeSetting').textContent='🕒 Thời gian lật: '+flipSeconds+' giây';if(autoFlip){toggleAuto();toggleAuto()}};
+$('voiceSetting').onclick=()=>toast('Giọng đọc Nhật + Việt đã bật');
+$('themeSetting').onclick=()=>toast('Đang dùng giao diện Xanh Nhật');
+$('avatarSetting').onclick=()=>$('avatarInput').click();
+$('avatarInput').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{localStorage.setItem(KEYS.avatar+':'+currentUser.username,r.result);$('avatar').innerHTML='<img src="'+r.result+'">';toast('Đã đổi ảnh đại diện')};r.readAsDataURL(f)};
+
+function showSection(name){
+  ['studySection','calendarSection','progressSection','kanjiSection','adminSection'].forEach(id=>$(id).classList.add('hidden'));
+  const map={study:'studySection',calendar:'calendarSection',progress:'progressSection',kanji:'kanjiSection',admin:'adminSection'};
+  $(map[name]).classList.remove('hidden');
+  if(name==='admin') $('dataEditor').value=JSON.stringify(data,null,2);
+}
+$('studyMenu').onclick=()=>showSection('study');$('calendarMenu').onclick=()=>{showSection('calendar');renderCalendar()};
+$('progressMenu').onclick=()=>{showSection('progress');renderProgress()};$('kanjiMenu').onclick=()=>showSection('kanji');
+$('adminMenu').onclick=()=>showSection('admin');$('mobileHome').onclick=()=>showSection('study');$('mobileMenu').onclick=()=>$('sidebar').classList.toggle('open');
+
+function renderProgress(){$('knownStat').textContent=progress.known;$('scoreStat').textContent=progress.score;$('streakStat').textContent=progress.streak}
+function renderCalendar(){
+  const now=new Date(), y=now.getFullYear(),m=now.getMonth();$('monthText').textContent=(m+1)+'/'+y;
+  const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate(),g=$('calendarGrid');g.innerHTML='';
+  ['CN','T2','T3','T4','T5','T6','T7'].forEach(x=>{const d=document.createElement('div');d.textContent=x;d.style.fontWeight='900';g.appendChild(d)});
+  for(let i=0;i<first;i++){g.appendChild(document.createElement('div'))}
+  for(let d=1;d<=days;d++){const el=document.createElement('div');el.className='day';el.textContent=d;const key=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;if(progress.studied[key])el.classList.add('study');g.appendChild(el)}
+}
+
+$('saveDataBtn').onclick=()=>{try{const d=JSON.parse($('dataEditor').value);data=d;saveData();buildLevels();idx=0;renderCard();$('adminMsg').textContent='Đã lưu dữ liệu mới.';toast('Lưu dữ liệu thành công')}catch(e){$('adminMsg').textContent='JSON chưa đúng định dạng.'}};
+$('resetDataBtn').onclick=()=>{data=clone(BASE_DATA);saveData();buildLevels();idx=0;renderCard();$('dataEditor').value=JSON.stringify(data,null,2);toast('Đã khôi phục dữ liệu gốc')};
+
+// Kanji canvas
+const c=$('kanjiCanvas'),ctx=c.getContext('2d');ctx.lineWidth=12;ctx.lineCap='round';ctx.strokeStyle='#0f766e';
+let drawing=false;
+function pos(e){const r=c.getBoundingClientRect(),p=e.touches?e.touches[0]:e;return {x:(p.clientX-r.left)*c.width/r.width,y:(p.clientY-r.top)*c.height/r.height}}
+function start(e){drawing=true;const p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault()}
+function move(e){if(!drawing)return;const p=pos(e);ctx.lineTo(p.x,p.y);ctx.stroke();e.preventDefault()}
+function end(){drawing=false}
+['mousedown','touchstart'].forEach(ev=>c.addEventListener(ev,start,{passive:false}));['mousemove','touchmove'].forEach(ev=>c.addEventListener(ev,move,{passive:false}));['mouseup','mouseleave','touchend'].forEach(ev=>c.addEventListener(ev,end));
+$('clearCanvas').onclick=()=>ctx.clearRect(0,0,c.width,c.height);
+$('snapCanvas').onclick=()=>{toast('Chế độ hút nét đã bật');ctx.globalAlpha=.35;ctx.font='340px sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#0f766e';ctx.fillText(current().kanji||'人',c.width/2,c.height/2);ctx.globalAlpha=1};
+
+try{
+  const remembered=JSON.parse(localStorage.getItem(KEYS.remember)||'null');
+  const sess=JSON.parse(sessionStorage.getItem(KEYS.session)||'null');
+  if(sess||remembered){currentUser=sess||remembered;enterApp(false)}
+}catch(e){}
+
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>
