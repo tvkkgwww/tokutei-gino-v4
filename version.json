@@ -1,5 +1,13 @@
 {
-  "version": "4.0.0",
-  "build": "fresh-clean",
-  "date": "2026-09-11"
+  "version": "4.1.0",
+  "build": "ui-features-1",
+  "date": "2026-09-11",
+  "notes": [
+    "Fix login layout",
+    "Improved 3D flashcard UI",
+    "Compact settings",
+    "Quick Kanji panel",
+    "Focus window mode",
+    "Mobile polish"
+  ]
 }

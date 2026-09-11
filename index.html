@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0f766e">
 <link rel="manifest" href="manifest.webmanifest">
-<title>日本語 JLPT & GINOU</title>
+<title>日本語 JLPT & GINOU v4.1</title>
 <style>
 :root{
   --green:#0f766e; --green2:#0b5d55; --mint:#dff7f2; --ink:#10343b; --line:#b9e4db;
@@ -26,7 +26,16 @@ button{cursor:pointer}
 .roles button{border:1px solid var(--line);background:#f4fbf9;padding:12px;border-radius:14px;font-weight:800;color:var(--ink)}
 .roles button.active{background:var(--green);color:#fff}
 .login input{width:100%;padding:13px 14px;border:1px solid #cfe3df;border-radius:13px;margin-top:10px;background:#fff}
-.remember{display:flex;gap:8px;align-items:center;margin:12px 2px;color:#5d7376}
+.remember{
+  display:flex;gap:10px;align-items:center;margin:14px 2px;color:#5d7376;
+  white-space:normal;line-height:1.35;font-size:14px
+}
+.remember input{width:18px;height:18px;margin:0;flex:0 0 auto}
+.login-card{overflow:hidden}
+.login-card:before{
+  content:"";display:block;height:6px;margin:-26px -26px 20px;
+  background:linear-gradient(90deg,#0f766e,#34d399,#99f6e4)
+}
 .primary{border:0;background:var(--green);color:#fff;padding:13px 16px;border-radius:14px;font-weight:900}
 .full{width:100%}
 .err{min-height:20px;color:#b42318;font-size:13px;margin-top:8px}
@@ -46,7 +55,12 @@ button{cursor:pointer}
 .levels button{border:0;background:transparent;text-align:left;padding:10px;border-radius:11px;color:var(--ink)}
 .levels button.active{background:#fff;font-weight:900;color:var(--green)}
 .quote{margin-top:18px;padding:14px;border-top:1px solid var(--line);text-align:center;color:#335f62}
-.main{padding:20px 24px 90px;min-width:0}
+.main{
+  padding:18px 22px 90px;min-width:0;
+  background:
+    radial-gradient(circle at 80% 10%,rgba(52,211,153,.12),transparent 28%),
+    radial-gradient(circle at 35% 45%,rgba(14,165,233,.08),transparent 26%)
+}
 .topbar{background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px;padding:12px 16px;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;position:sticky;top:10px;z-index:8}
 .top-title{font-weight:900}.counter{font-weight:800}
 .icon-btn{width:48px;height:48px;border:0;border-radius:14px;background:var(--green);color:#fff;font-size:23px}
@@ -56,7 +70,15 @@ button{cursor:pointer}
 .study-grid{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:22px;margin-top:22px;align-items:start}
 .flash-stack{display:grid;place-items:center;min-height:620px}
 .flash{width:min(620px,94%);min-height:520px;background:var(--card);border:1px solid #eadfd3;border-radius:34px;box-shadow:0 26px 48px rgba(21,78,69,.22);padding:24px 28px;position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.75,.2,1)}
-.flash:before,.flash:after{content:"";position:absolute;inset:12px 10px -12px -14px;border-radius:34px;background:#f7f0e8;border:1px solid #e5d8ca;z-index:-1;box-shadow:0 8px 12px rgba(0,0,0,.06)}
+.flash:before,.flash:after{
+  content:"";position:absolute;inset:12px 10px -12px -14px;border-radius:34px;
+  background:#f7f0e8;border:1px solid #e5d8ca;z-index:-1;box-shadow:0 8px 12px rgba(0,0,0,.06)
+}
+.flash .face:before{
+  content:"";position:absolute;left:26px;top:26px;width:34px;height:34px;border-radius:50%;
+  background:radial-gradient(circle,#d8d4cf 0 35%,#9a948c 36% 42%,#f7f0e8 43%);
+  box-shadow:inset 0 2px 4px #0003
+}
 .flash:after{inset:22px 20px -20px -24px;background:#f2ece6;z-index:-2}
 .flash.flipped{transform:rotateY(180deg)}
 .face{position:absolute;inset:0;padding:26px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
@@ -65,7 +87,14 @@ button{cursor:pointer}
 .badge{position:absolute;right:26px;top:24px;background:#d8f3ea;border:1px solid #a7d8ca;border-radius:14px;padding:8px 10px;font-weight:900}
 .jp{font-size:86px;font-weight:900;line-height:1.05;margin:20px 0 10px}
 .reading{font-size:26px;font-weight:800}
-.illustration{width:150px;height:150px;border-radius:26px;background:linear-gradient(135deg,#fff2d6,#dff7f2);display:grid;place-items:center;font-size:72px;margin-bottom:18px;border:1px solid #e8dfd1}
+.illustration{
+  width:180px;height:150px;border-radius:28px;
+  background:
+    radial-gradient(circle at 30% 25%,#fff 0 18%,transparent 19%),
+    linear-gradient(135deg,#fff3dc,#dff7f2);
+  display:grid;place-items:center;font-size:82px;margin-bottom:16px;
+  border:1px solid #e8dfd1;box-shadow:inset 0 8px 22px rgba(255,255,255,.8),0 10px 20px rgba(15,118,110,.08)
+}
 .meaning{font-size:36px;font-weight:900;color:var(--green);margin:12px}
 .example{font-size:18px;background:#f5faf9;border-radius:16px;padding:14px 18px;max-width:88%}
 .speak{margin-top:18px;width:64px;height:64px;border:0;border-radius:50%;background:#d9f4ea;color:#0b6a5e;font-size:28px}
@@ -93,6 +122,11 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
  linear-gradient(90deg,#0000 49%,#d8e7e4 50%,#0000 51%)}
 .toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);background:#0b5d55;color:#fff;padding:12px 18px;border-radius:999px;box-shadow:var(--shadow);z-index:40;font-weight:800}
 .mobilebar{display:none}
+.focus-mode .sidebar{display:none}
+.focus-mode .app{grid-template-columns:1fr}
+.focus-mode .main{max-width:1100px;margin:0 auto;width:100%}
+.focus-mode .mobilebar{display:none!important}
+
 @media(max-width:900px){
   .app{grid-template-columns:1fr}
   .sidebar{position:fixed;left:-290px;z-index:30;transition:.25s;width:280px}
@@ -102,7 +136,13 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
   .study-grid{grid-template-columns:1fr}
   .side-nav{grid-template-columns:1fr 1fr;margin-top:0}
   .flash-stack{min-height:520px}
-  .flash{min-height:470px;width:96%}
+  .flash{min-height:440px;width:96%}
+  .face{padding:22px}
+  .illustration{width:145px;height:125px;font-size:66px}
+  .jp{font-size:58px}
+  .reading{font-size:22px}
+  .meaning{font-size:30px}
+  .remember{font-size:13px}
   .jp{font-size:70px}
   .bottom-actions{grid-template-columns:1fr 1fr}
   .bottom-actions .auto{grid-column:1/-1}
@@ -161,14 +201,20 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
     </div>
 
     <div id="settingsPopup" class="settings hidden">
-      <button id="voiceSetting">🔊 Giọng đọc: Nhật</button>
+      <div style="font-weight:900;padding:8px 10px 6px;color:#0b5d55">⚙️ Cài đặt học tập</div>
+      <button id="voiceSetting">🔊 Giọng đọc: Nhật + Việt</button>
       <button id="autoFlipSetting">⏱ Tự động lật thẻ: Tắt</button>
       <button id="flipTimeSetting">🕒 Thời gian lật: 4 giây</button>
       <button id="themeSetting">🎨 Giao diện: Xanh Nhật</button>
+      <button id="focusSetting">🪟 Chế độ cửa sổ tập trung</button>
       <button id="avatarSetting">🖼 Ảnh đại diện</button>
     </div>
 
     <section id="studySection">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;margin:12px 2px 4px;color:#55777b;font-size:13px">
+        <span id="lessonHint">Chạm vào thẻ để lật • Mặt sau tự đọc nghĩa tiếng Việt</span>
+        <span id="syncHint">☁ Lưu tiến độ trên thiết bị</span>
+      </div>
       <div class="study-grid">
         <div>
           <div class="flash-stack">
@@ -196,6 +242,11 @@ canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch
             <button id="shuffleBtn">🔀 Trộn thẻ</button>
             <button id="markBtn">☆ Đánh dấu</button>
             <button id="autoBtn" class="auto">▶ Tự động lật</button>
+          </div>
+          <div style="display:flex;justify-content:center;margin-top:12px">
+            <button id="quickKanjiBtn" style="border:1px solid var(--line);background:#fff;border-radius:14px;padding:11px 16px;font-weight:800;color:var(--ink)">
+              ✍️ Mở luyện Kanji
+            </button>
           </div>
         </div>
         <div class="side-nav">
@@ -341,11 +392,26 @@ function toggleAuto(){
 $('autoBtn').onclick=toggleAuto;$('autoFlipSetting').onclick=toggleAuto;
 
 $('settingsBtn').onclick=()=> $('settingsPopup').classList.toggle('hidden');
+
+$('quickKanjiBtn').onclick=()=>showSection('kanji');
+
+let focusMode=false;
+$('focusSetting').onclick=()=>{
+  focusMode=!focusMode;
+  document.body.classList.toggle('focus-mode',focusMode);
+  toast(focusMode?'Đã bật chế độ cửa sổ tập trung':'Đã tắt chế độ cửa sổ tập trung');
+};
+
 $('settingsMenu').onclick=()=> $('settingsPopup').classList.toggle('hidden');
 $('flipTimeSetting').onclick=()=>{flipSeconds=flipSeconds===4?6:4;$('flipTimeSetting').textContent='🕒 Thời gian lật: '+flipSeconds+' giây';if(autoFlip){toggleAuto();toggleAuto()}};
 $('voiceSetting').onclick=()=>toast('Giọng đọc Nhật + Việt đã bật');
 $('themeSetting').onclick=()=>toast('Đang dùng giao diện Xanh Nhật');
 $('avatarSetting').onclick=()=>$('avatarInput').click();
+document.addEventListener('click',e=>{
+  if(!$('settingsPopup').classList.contains('hidden') && !e.target.closest('#settingsPopup') && !e.target.closest('#settingsBtn') && !e.target.closest('#settingsMenu')){
+    $('settingsPopup').classList.add('hidden');
+  }
+});
 $('avatarInput').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{localStorage.setItem(KEYS.avatar+':'+currentUser.username,r.result);$('avatar').innerHTML='<img src="'+r.result+'">';toast('Đã đổi ảnh đại diện')};r.readAsDataURL(f)};
 
 function showSection(name){
