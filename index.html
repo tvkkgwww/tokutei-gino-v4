@@ -211,4 +211,90 @@ setTimeout(()=>{document.querySelectorAll('.course').forEach(b=>b.onclick=()=>op
   #chapterView .futureItem small{font-size:10px!important}
 }
 </style>
+
+<style id="jlptStructureStyle">
+#jlptLessonsView,#jlptLessonView{padding-bottom:92px}
+.jlptHero{display:flex;align-items:center;gap:12px;margin:12px auto 10px;max-width:980px;padding:14px 16px;border-radius:20px;background:linear-gradient(135deg,#eaf7ff,#fff7fb);border:1px solid #d5e8f4;box-shadow:0 8px 24px #174b7014}.jlptHero .book{font-size:42px}.jlptHero h2{margin:0;color:#0c6fae}.jlptHero p{margin:3px 0 0;color:#668094;font-size:13px}
+.lessonGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:10px auto;max-width:980px}.lessonBtn{border:1px solid #cfe5f2;background:linear-gradient(180deg,#fff,#f4fbff);border-radius:16px;padding:12px;text-align:left;box-shadow:0 5px 0 #dceef7;color:#174f73;min-height:78px}.lessonBtn .top{display:flex;justify-content:space-between;align-items:center;gap:8px}.lessonBtn .icon{font-size:25px}.lessonBtn b{font-size:15px}.lessonBtn .pct{font-size:12px;color:#0b83cf;font-weight:900}.lessonBtn small{display:block;margin-top:6px;color:#698499}.lessonBtn .bar{height:6px;background:#e0eef5;border-radius:99px;overflow:hidden;margin-top:7px}.lessonBtn .bar i{display:block;height:100%;background:linear-gradient(90deg,#29adff,#0879c9)}
+.lessonModules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px auto;max-width:980px}.moduleBtn{border:1px solid #d2e6f1;background:#fff;border-radius:18px;padding:14px 11px;text-align:center;box-shadow:0 6px 18px #0a4b7312;color:#174f73;font-weight:900;min-height:92px}.moduleBtn .mi{display:block;font-size:28px;margin-bottom:6px}.moduleBtn small{display:block;font-size:11px;color:#748b9a;margin-top:4px;font-weight:700}.moduleBtn.vocab{background:linear-gradient(180deg,#edf9ff,#fff)}
+.jlptBackRow{display:flex;gap:8px;max-width:980px;margin:10px auto}.jlptBackRow button{flex:1;border:0;border-radius:12px;padding:10px;font-weight:900;background:#eaf5fb;color:#145e89}
+@media(min-width:700px){.lessonGrid{grid-template-columns:repeat(4,1fr)}.lessonModules{grid-template-columns:repeat(4,1fr)}}
+</style>
+<main id="jlptLessonsView" class="page hidden">
+  <div class="jlptHero"><div class="book">📘</div><div><h2 id="jlptLevelTitle">JLPT N5</h2><p id="jlptLevelSub">Chọn bài học</p></div></div>
+  <div id="jlptLessonGrid" class="lessonGrid"></div>
+</main>
+<main id="jlptLessonView" class="page hidden">
+  <div class="jlptHero"><div class="book">📖</div><div><h2 id="jlptLessonTitle">N5 • Bài 1</h2><p>Học theo bài • 5 mục chính + luyện tập</p></div></div>
+  <div id="jlptModules" class="lessonModules"></div>
+  <div class="jlptBackRow"><button id="jlptBackLessons">← Danh sách bài</button><button id="jlptHomeBtn">⌂ Trang chủ</button></div>
+</main>
+<script id="jlptStructureScript">
+(function(){
+'use strict';
+const JLPT_COUNTS={N5:20,N4:24,N3:30,N2:36,N1:40};
+const JLPT_MODULES=[
+  ['vocab','📚','Từ vựng','Danh sách • thẻ học • trắc nghiệm • nối từ'],
+  ['kanji','漢','Kanji','Học chữ • cách đọc • luyện viết'],
+  ['grammar','文','Ngữ pháp','Cấu trúc • cách dùng • ví dụ'],
+  ['reading','📖','Đọc hiểu','Đoạn đọc theo trình độ'],
+  ['listening','🎧','Nghe hiểu','Hội thoại • câu hỏi nghe'],
+  ['vocabQuiz','📝','Bài tập từ vựng','Trắc nghiệm • nối nghĩa • chọn cách đọc'],
+  ['review','🔁','Ôn tập','Ưu tiên phần sai và chưa thuộc'],
+  ['exam','🎯','Bài tập luyện thi','Bài tổng hợp theo dạng JLPT']
+];
+let jlptLevel='N5',jlptLesson=1;
+if(typeof views!=='undefined'){
+  if(!views.includes('jlptLessonsView')) views.push('jlptLessonsView');
+  if(!views.includes('jlptLessonView')) views.push('jlptLessonView');
+}
+function progressKey(l,n){return `tg_jlpt_${l}_lesson_${n}_progress`}
+function getPct(l,n){return Math.max(0,Math.min(100,Number(localStorage.getItem(progressKey(l,n))||0)))}
+function renderLessons(l){
+  jlptLevel=l;
+  const count=JLPT_COUNTS[l]||20;
+  const title=document.getElementById('jlptLevelTitle');
+  const sub=document.getElementById('jlptLevelSub');
+  const grid=document.getElementById('jlptLessonGrid');
+  if(title) title.textContent=`JLPT ${l}`;
+  if(sub) sub.textContent=`${count} bài • mỗi bài gồm 8 mục học và luyện tập`;
+  if(grid) grid.innerHTML=Array.from({length:count},(_,i)=>{const n=i+1,p=getPct(l,n);return `<button class="lessonBtn" data-jlesson="${n}"><div class="top"><span><span class="icon">📘</span> <b>Bài ${n}</b></span><span class="pct">${p}%</span></div><small>5 mục chính + Bài tập • Ôn tập • Luyện thi</small><div class="bar"><i style="width:${p}%"></i></div></button>`}).join('');
+  grid?.querySelectorAll('[data-jlesson]').forEach(b=>b.onclick=()=>openLesson(Number(b.dataset.jlesson)));
+  if(typeof show==='function') show('jlptLessonsView',`JLPT ${l}`);
+}
+function openLesson(n){
+  jlptLesson=n;
+  document.getElementById('jlptLessonTitle').textContent=`${jlptLevel} • Bài ${n}`;
+  const box=document.getElementById('jlptModules');
+  box.innerHTML=JLPT_MODULES.map(m=>`<button class="moduleBtn ${m[0]==='vocab'?'vocab':''}" data-jmodule="${m[0]}"><span class="mi">${m[1]}</span>${m[2]}<small>${m[3]}</small></button>`).join('');
+  box.querySelectorAll('[data-jmodule]').forEach(b=>b.onclick=()=>openModule(b.dataset.jmodule));
+  if(typeof show==='function') show('jlptLessonView',`${jlptLevel} • Bài ${n}`);
+}
+function openModule(mod){
+  if(mod==='vocab'){
+    level=jlptLevel; idx=0;
+    if(typeof openCourse==='function') openCourse(jlptLevel);
+    const cn=document.getElementById('courseName'); if(cn) cn.textContent=`${jlptLevel} • Bài ${jlptLesson} • Từ vựng`;
+    const ttl=document.getElementById('title'); if(ttl) ttl.textContent=`Từ vựng • ${jlptLevel} • Bài ${jlptLesson}`;
+    return;
+  }
+  if(mod==='vocabQuiz' && typeof startQuiz==='function'){
+    level=jlptLevel; idx=0; startQuiz(); return;
+  }
+  const names={kanji:'Kanji',grammar:'Ngữ pháp',reading:'Đọc hiểu',listening:'Nghe hiểu',vocabQuiz:'Bài tập từ vựng',review:'Ôn tập',exam:'Bài tập luyện thi'};
+  if(typeof toast==='function') toast(`${names[mod]||mod} • ${jlptLevel} Bài ${jlptLesson}: đang chờ nhập nội dung`);
+}
+// Capture home-course clicks before the legacy handler. Gino 2 remains unchanged.
+document.addEventListener('click',function(e){
+  const b=e.target.closest?.('.course[data-level]'); if(!b) return;
+  const l=b.dataset.level; if(!JLPT_COUNTS[l]) return;
+  e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+  if(typeof stopEverything==='function') stopEverything();
+  renderLessons(l);
+},true);
+document.getElementById('jlptBackLessons').onclick=()=>renderLessons(jlptLevel);
+document.getElementById('jlptHomeBtn').onclick=()=>{if(typeof show==='function') show('homeView','Chào mừng đến với khóa học')};
+window.openJlptLessons=renderLessons;
+})();
+</script>
 </body></html>
