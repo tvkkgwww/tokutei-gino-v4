@@ -1,0 +1,17 @@
+TOKUTEI GINOU 2 v3.1.4 — AUTO CLEAN
+
+Upload 4 file này lên ROOT của repo GitHub Pages và ghi đè file cũ:
+- index.html
+- sw.js
+- version.json
+- manifest.webmanifest
+
+Bản v3.1.4 sẽ tự động:
+1) gỡ Service Worker cũ,
+2) xóa Cache Storage cũ,
+3) xóa gói HTML cập nhật cục bộ cũ có thể ghi đè giao diện,
+4) tải lại trang với version 3.1.4,
+5) đăng ký Service Worker mới.
+
+KHÔNG xóa localStorage học tập/tiến độ/tài khoản.
+Sau lần mở đầu tiên, URL có thể có ?appv=3.1.4&_fresh=...; đây là bình thường.

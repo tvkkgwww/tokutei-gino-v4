@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="vi">
-<head>
+<head>\n<!-- v3.1.4 AUTO-CLEAN BOOTSTRAP: clears stale app caches/SW without deleting study data -->\n<script id="tg314-autoclean">\n(function(){\n  const V='3.1.4';\n  const FLAG='tg2_autoclean_done_'+V;\n  try{\n    // Prevent an old locally-imported HTML package from replacing this fresh GitHub build.\n    localStorage.removeItem('tg2_local_update_html');\n    localStorage.removeItem('tg2_local_update_id');\n    sessionStorage.removeItem('tg2_local_update_applied');\n  }catch(e){}\n  if(location.protocol==='file:') return;\n  if(sessionStorage.getItem(FLAG)==='1') return;\n  sessionStorage.setItem(FLAG,'1');\n  Promise.resolve().then(async()=>{\n    try{\n      if('serviceWorker' in navigator){\n        const regs=await navigator.serviceWorker.getRegistrations();\n        await Promise.all(regs.map(r=>r.unregister().catch(()=>false)));\n      }\n      if('caches' in window){\n        const names=await caches.keys();\n        await Promise.all(names.map(n=>caches.delete(n)));\n      }\n    }catch(e){}\n    try{\n      const u=new URL(location.href);\n      if(u.searchParams.get('appv')!==V){\n        u.searchParams.set('appv',V);\n        u.searchParams.set('_fresh',Date.now().toString());\n        location.replace(u.toString());\n      }\n    }catch(e){ location.reload(); }\n  });\n})();\n</script>\n
 
 <!-- v2.7 local updater bootstrap -->
 <script>
@@ -29,7 +29,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <meta name="theme-color" content="#0f172a"/>
-<title>Tokutei Ginou 2 • Sakura Kanji N5–N1 v3.1.2</title>
+<title>Tokutei Ginou 2 • Sakura Kanji N5–N1 v3.1.4</title>
 
 <style>
 :root{
@@ -5595,7 +5595,7 @@ body.v2-logged-in #tg31BottomNav{display:grid}body.v2-logged-in.tg31-home #tg31H
 </style>
 <script id="tg313-script">
 (function(){
- const VERSION='3.1.3';
+ const VERSION='3.1.4';
  const branchMini=`<svg viewBox="0 0 150 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="tg313wood" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6f4637"/><stop offset="1" stop-color="#4f3028"/></linearGradient><radialGradient id="tg313petal"><stop stop-color="#fff6fa"/><stop offset=".58" stop-color="#f8bfd1"/><stop offset="1" stop-color="#ee8fb0"/></radialGradient></defs><path d="M-5 55 C35 48 70 38 115 14 C127 8 138 3 155 -2" fill="none" stroke="url(#tg313wood)" stroke-width="6" stroke-linecap="round"/><path d="M60 40 C76 22 86 8 95 -3 M88 30 C101 35 113 43 126 56" fill="none" stroke="url(#tg313wood)" stroke-width="3.6" stroke-linecap="round"/>${[[38,48],[55,38],[72,28],[89,17],[96,33],[110,39],[122,49]].map(([x,y],i)=>`<g transform="translate(${x} ${y}) rotate(${(i*19)%42-20})"><ellipse rx="8" ry="4" cy="-6" fill="url(#tg313petal)"/><ellipse rx="8" ry="4" cy="-6" transform="rotate(72)" fill="url(#tg313petal)"/><ellipse rx="8" ry="4" cy="-6" transform="rotate(144)" fill="url(#tg313petal)"/><ellipse rx="8" ry="4" cy="-6" transform="rotate(216)" fill="url(#tg313petal)"/><ellipse rx="8" ry="4" cy="-6" transform="rotate(288)" fill="url(#tg313petal)"/><circle r="2.3" fill="#e8ab30"/></g>`).join('')}</svg>`;
  const landscape = `<svg viewBox="0 0 1200 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="1200" height="220" fill="transparent"/><g class="torii" transform="translate(70 28)"><path d="M40 170h210" stroke="#ea7c53" stroke-width="14" stroke-linecap="round"/><path d="M72 60v110M218 60v110" stroke="#ea7c53" stroke-width="16" stroke-linecap="round"/><path d="M25 60h245M56 35h184" stroke="#ea7c53" stroke-width="14" stroke-linecap="round"/></g><g class="fuji" transform="translate(770 10)"><path d="M0 180L170 24l165 156z" fill="#b7d2e6"/><path d="M170 24l-46 50 48-14 48 15z" fill="#fff"/><path d="M0 180h335" stroke="#dbeaf3" stroke-width="6"/></g></svg>`;
  function setVersion(){document.body.dataset.appVersion=VERSION;document.querySelectorAll('#appVersionNow').forEach(x=>x.textContent=VERSION);document.querySelectorAll('#dataVersionLabel').forEach(x=>x.textContent='v'+VERSION)}
@@ -5646,5 +5646,6 @@ body.v2-logged-in #tg31BottomNav{display:grid}body.v2-logged-in.tg31-home #tg31H
 </script>
 <!-- ===== /v3.1.3 RESPONSIVE BACKGROUND + FULL FLASHCARD FIX ===== -->
 
+\n<script id="tg314-sw-register">\n(function(){\n  if(!('serviceWorker' in navigator) || location.protocol==='file:') return;\n  window.addEventListener('load',()=>{\n    setTimeout(async()=>{\n      try{\n        const reg=await navigator.serviceWorker.register('./sw.js?v=3.1.4',{updateViaCache:'none'});\n        try{await reg.update()}catch(e){}\n      }catch(e){console.warn('SW register',e)}\n    },300);\n  });\n})();\n</script>\n
 </body>
 </html>
