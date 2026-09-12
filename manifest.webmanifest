@@ -1,8 +1,9 @@
 {
-  "name": "Tokutei Ginou 2 - Sakura Kanji N5-N1",
-  "short_name": "Tokutei Gino 2",
-  "start_url": "./index.html",
+  "name": "日本語 JLPT & GINOU",
+  "short_name": "JLPT GINOU",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#f7fbff",
-  "theme_color": "#087ee8"
+  "background_color": "#eef7ff",
+  "theme_color": "#0b5ea8",
+  "lang": "vi"
 }

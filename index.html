@@ -1,16 +1,1001 @@
-<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#eff9ff"><link rel="manifest" href="manifest.webmanifest?v=316"><title>Tokutei Ginou 2 • Sakura Kanji N5–N1 v3.1.6</title><style>
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans",sans-serif;color:#15384f;background:#f4fbff}button,input{font:inherit}.hidden{display:none!important}button{cursor:pointer}
-#auth{min-height:100svh;display:grid;place-items:center;padding:24px;position:relative;overflow:hidden;background:linear-gradient(180deg,#f9fdff,#eef8fc)}.branch{position:absolute;width:min(360px,34vw);z-index:1;pointer-events:none;opacity:.95}.branch.tl{left:-28px;top:-18px}.branch.tr{right:-35px;top:-18px;transform:scaleX(-1)}.landscape{position:absolute;left:0;right:0;bottom:0;height:clamp(120px,18vw,200px);pointer-events:none;z-index:1}.landscape svg{width:100%;height:100%}.login{width:min(470px,100%);position:relative;z-index:4;background:rgba(255,253,250,.95);border:1px solid #d8e8ef;border-radius:30px;padding:28px;box-shadow:0 20px 42px rgba(25,74,105,.14)}.brand{text-align:center;font-size:28px;font-weight:950;color:#0d6fc2}.brand small{display:block;font-size:14px;color:#df6f97;margin-top:5px;font-style:italic}.role{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 10px}.role button{min-height:50px;border:1px solid #cfe0ec;background:#fff;border-radius:16px;font-weight:900;color:#23455c}.role button.active{background:linear-gradient(#1696ef,#0877d8);color:#fff;border-color:transparent}.login input{width:100%;min-height:52px;border:1px solid #cbdde8;background:#fff;border-radius:15px;margin:7px 0;padding:0 15px;font-size:16px}.remember{display:flex;gap:9px;align-items:center;font-weight:700;margin:9px 0}.remember input{width:21px;height:21px;min-height:auto;margin:0}.primary{width:100%;min-height:54px;border:0;border-radius:999px;background:linear-gradient(#1697ef,#0876d7);color:#fff;font-weight:950}.error{color:#c33;min-height:20px;margin-top:8px;font-size:13px}
-#app{min-height:100svh;padding-bottom:86px;background:linear-gradient(180deg,#f7fdff,#eef9ff)}.topbar{position:sticky;top:0;z-index:30;height:66px;background:rgba(255,255,255,.92);border-bottom:1px solid #dbeaf2;display:flex;align-items:center;gap:12px;padding:0 16px}.topbar b{font-size:20px}.spacer{flex:1}.iconbtn{border:1px solid #cfe3ee;background:#fff;border-radius:14px;min-width:46px;height:46px;font-weight:900}.home,.view{max-width:900px;margin:0 auto;padding:20px}.hero,.settingsbox{background:#fff;border:1px solid #d6e9f2;border-radius:24px;padding:18px 20px;box-shadow:0 10px 26px rgba(24,72,101,.08)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}.course{min-height:125px;border:1px solid #dbeaf2;background:linear-gradient(160deg,#fff,#f8fcff);border-radius:24px;padding:18px;text-align:left;font-weight:900;color:#154965}.course span{font-size:34px;display:block}.course small{display:block;color:#6e8492;margin-top:6px}.studyhead{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #d7e9ef;border-radius:22px;padding:14px 16px;margin-bottom:16px}.count{margin-left:auto;font-weight:900}
-.flashwrap{padding-bottom:30px}.card{position:relative;background:linear-gradient(180deg,#fff8f3,#f8eee7);border:1px solid #eadfd7;border-radius:34px;padding:26px 22px 24px;min-height:620px;display:flex;flex-direction:column;align-items:center;box-shadow:0 18px 32px rgba(80,96,110,.14);z-index:2}.card:before,.card:after{content:"";position:absolute;left:18px;right:18px;top:16px;bottom:-13px;border-radius:34px;background:#f4eae3;border:1px solid #e7ddd5;z-index:-1}.card:after{left:36px;right:36px;bottom:-26px;background:#ede2db;z-index:-2}.cardbranch{position:absolute;left:18px;top:16px;width:95px;height:62px}.badge{position:absolute;right:20px;top:20px;background:#d9eee8;border:1px solid #bdded5;border-radius:16px;padding:9px 14px;font-weight:950}.stars{font-size:28px;letter-spacing:4px;color:#113d5d;font-weight:950}.kanji{margin-top:58px;font-size:clamp(62px,10vw,108px);font-weight:950;color:#0e456d;text-align:center;line-height:1.02}.reading{font-size:clamp(28px,4vw,48px);font-weight:900;color:#174f76;margin-top:16px;text-align:center}.meaning{font-size:clamp(28px,4vw,48px);font-weight:950;color:#123e5c;background:#f7dde2;border-radius:22px;padding:13px 24px;margin-top:18px;text-align:center;min-width:min(74%,520px)}.blankpic{height:110px;width:min(82%,520px);margin:18px auto 0}.speaker{width:78px;height:78px;border:0;border-radius:50%;background:linear-gradient(#35a7fa,#1680e8);color:#fff;font-size:32px;margin-top:12px}.actions{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:auto;padding-top:25px}.actions button{min-height:60px;border:0;border-radius:999px;color:#fff;font-weight:950;font-size:21px}.again{background:#ef4747}.known{background:#16a34a}.reveal{grid-column:1/-1;background:#0876d7}.controls{display:grid;gap:12px;margin-top:20px}.controls button{min-height:56px;border:1px solid #cfe4ef;border-radius:20px;background:#fff;color:#0e4c78;font-weight:900;font-size:18px}.controls .auto{background:#0c88eb;color:#fff;border:0}
-.bottom{position:fixed;left:0;right:0;bottom:0;height:72px;background:#fff;border-top:1px solid #d8e8f0;z-index:40;display:grid;grid-template-columns:repeat(3,1fr)}.bottom button{border:0;background:transparent;font-weight:900}.drawer{position:fixed;top:0;bottom:0;left:0;width:min(330px,86vw);background:#fff;z-index:60;transform:translateX(-105%);transition:.24s;padding:20px}.drawer.show{transform:translateX(0)}.drawer button{width:100%;text-align:left;border:0;background:#f5fbff;padding:14px;border-radius:14px;margin:5px 0;font-weight:850}.shade{position:fixed;inset:0;background:rgba(10,30,45,.25);z-index:50;display:none}.shade.show{display:block}.settingsbox button{margin:8px;padding:12px 14px;border-radius:14px;border:1px solid #cee0eb;background:#f7fbff;font-weight:800}@media(max-width:640px){#auth{padding:14px}.branch{width:62vw;opacity:.75}.landscape{height:105px;opacity:.65}.login{padding:21px 18px}.grid{gap:10px}.course{min-height:105px;padding:14px}.view{padding:14px}.card{min-height:520px;padding:22px 15px}.kanji{font-size:clamp(52px,15vw,78px)}.reading,.meaning{font-size:clamp(22px,7vw,34px)}.meaning{min-width:84%}.blankpic{height:80px}.actions button{min-height:52px;font-size:17px}}
-</style></head><body>
-<div id="auth"><div class="branch tl" id="b1"></div><div class="branch tr" id="b2"></div><div class="landscape" id="land"></div><div class="login"><div class="brand">TOKUTEI GINOU 2<small>Sakura Kanji N5 – N1</small></div><p style="text-align:center;color:#60788a;font-weight:700">Đăng nhập để tiếp tục học trên iPhone, iPad, MacBook hoặc máy tính.</p><div class="role"><button id="studentRole" class="active">👨‍🎓 Học viên</button><button id="adminRole">🛠 Quản trị</button></div><input id="user" placeholder="Tên đăng nhập"><input id="pass" placeholder="Mật khẩu" type="password"><label class="remember"><input id="remember" type="checkbox"> Ghi nhớ đăng nhập cho lần học sau</label><button id="loginBtn" class="primary">Đăng nhập</button><div id="loginError" class="error"></div></div></div>
-<div id="app" class="hidden"><header class="topbar"><button id="menuBtn" class="iconbtn">☰</button><b id="title">Trang chủ</b><div class="spacer"></div><button id="gearBtn" class="iconbtn">⚙️</button></header><main><section id="homeView" class="home"><div class="hero"><h2>Xin chào 👋</h2><p>Học mỗi ngày, tiến xa hơn.</p></div><div class="grid"><button class="course" data-view="ginou"><span>🦺</span>Tokutei Ginou 2<small>Flashcard 3D</small></button><button class="course" data-view="jlpt"><span>🈶</span>Học Kanji<small>N5 – N1</small></button><button class="course" data-view="jlpt"><span>📖</span>Từ vựng<small>N5 – N1</small></button><button class="course" data-view="jlpt"><span>📘</span>Ngữ pháp<small>N5 – N1</small></button><button class="course" data-view="jlpt"><span>🎧</span>Luyện nghe<small>N5 – N1</small></button><button class="course" data-view="settings"><span>⚙️</span>Cài đặt<small>v3.1.6 Clean</small></button></div></section><section id="ginouView" class="view hidden"><div class="studyhead"><button id="backHome" class="iconbtn">←</button><b id="chapterLabel">Ginou 2</b><span id="counter" class="count"></span><button id="smallGear" class="iconbtn">⚙️</button></div><div class="flashwrap"><div class="card"><div class="cardbranch" id="cardBranch"></div><div class="badge">GINOU2</div><div class="stars" id="stars"></div><div class="kanji" id="kanji"></div><div id="reading" class="reading hidden"></div><div id="meaning" class="meaning hidden"></div><div class="blankpic"></div><button id="speak" class="speaker">🔊</button><div class="actions"><button id="reveal" class="reveal">Hiện đáp án</button><button id="again" class="again hidden">✕ Chưa thuộc</button><button id="known" class="known hidden">✓ Đã nhớ</button></div></div></div><div class="controls"><button id="shuffle">🔀 Trộn thẻ</button><button id="auto" class="auto">▶️ Bật tự động</button></div></section><section id="jlptView" class="view hidden"><div class="settingsbox"><h2>JLPT N5 – N1</h2><p>Khung chương trình được giữ trong Clean Build.</p><div class="grid"><button class="course"><span>N5</span>N5<small>Từ vựng • Kanji • Ngữ pháp • Nghe • Đọc</small></button><button class="course"><span>N4</span>N4<small>Từ vựng • Kanji • Ngữ pháp • Nghe • Đọc</small></button><button class="course"><span>N3</span>N3<small>Từ vựng • Kanji • Ngữ pháp • Nghe • Đọc</small></button><button class="course"><span>N2</span>N2<small>Từ vựng • Kanji • Ngữ pháp • Nghe • Đọc</small></button><button class="course"><span>N1</span>N1<small>Từ vựng • Kanji • Ngữ pháp • Nghe • Đọc</small></button></div></div></section><section id="settingsView" class="view hidden"><div class="settingsbox"><h2>Cài đặt</h2><p><b>Phiên bản:</b> v3.1.6 Clean Build</p><p>Một bộ code duy nhất, cache mới hoàn toàn.</p><button id="clearCache">Dọn cache cũ an toàn</button><button id="logout">Đăng xuất</button><p id="status"></p></div></section></main><nav class="bottom"><button data-nav="home">← Trở về</button><button data-nav="home">⌂ Trang chủ</button><button id="bottomMenu">☰ Menu</button></nav></div><div id="shade" class="shade"></div><aside id="drawer" class="drawer"><h3 style="margin-top:55px">Menu</h3><button data-view="home">🏠 Trang chủ</button><button data-view="ginou">🦺 Tokutei Ginou 2</button><button data-view="jlpt">🈶 JLPT N5 – N1</button><button data-view="settings">⚙️ Cài đặt</button></aside>
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0f766e">
+<link rel="manifest" href="manifest.webmanifest">
+<title>日本語 JLPT & GINOU v4.5.2</title>
+<style>
+:root{
+  --green:#0f766e; --green2:#0b5d55; --mint:#dff7f2; --ink:#10343b; --line:#b9e4db;
+  --card:#fffdf8; --shadow:0 18px 45px rgba(13,93,85,.18);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif;color:var(--ink);background:linear-gradient(135deg,#eefcf8,#f8ffff 55%,#e8f8f5)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+.safe{padding-top:max(12px,env(safe-area-inset-top));padding-bottom:max(12px,env(safe-area-inset-bottom))}
+.login{min-height:100vh;display:grid;place-items:center;padding:22px}
+.login-card{width:min(460px,94vw);background:#fff;border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);padding:26px}
+.brand{display:flex;gap:12px;align-items:center;font-weight:900;font-size:26px;color:var(--green)}
+.brand .book{font-size:36px}
+.login-sub{color:#55777b;margin:8px 0 18px}
+.roles{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.roles button{border:1px solid var(--line);background:#f4fbf9;padding:12px;border-radius:14px;font-weight:800;color:var(--ink)}
+.roles button.active{background:var(--green);color:#fff}
+.login input{width:100%;padding:13px 14px;border:1px solid #cfe3df;border-radius:13px;margin-top:10px;background:#fff}
+.remember{
+  display:flex;gap:10px;align-items:center;margin:14px 2px;color:#5d7376;
+  white-space:normal;line-height:1.35;font-size:14px
+}
+.remember input{width:18px;height:18px;margin:0;flex:0 0 auto}
+.login-card{overflow:hidden}
+.login-card:before{
+  content:"";display:block;height:6px;margin:-26px -26px 20px;
+  background:linear-gradient(90deg,#0f766e,#34d399,#99f6e4)
+}
+.primary{border:0;background:var(--green);color:#fff;padding:13px 16px;border-radius:14px;font-weight:900}
+.full{width:100%}
+.err{min-height:20px;color:#b42318;font-size:13px;margin-top:8px}
+.demo{font-size:12px;color:#6b7f82;line-height:1.6;margin-top:10px}
+
+.app{min-height:100vh;display:grid;grid-template-columns:280px 1fr}
+.sidebar{background:linear-gradient(180deg,#f1fffb,#e6f7f3);border-right:1px solid var(--line);padding:18px;position:sticky;top:0;height:100vh;overflow:auto}
+.logo{display:flex;align-items:center;gap:10px;font-size:25px;font-weight:900;color:#0b5d55;margin-bottom:16px}
+.profile{background:linear-gradient(135deg,#0d8a74,#0b6a5e);color:#fff;border-radius:18px;padding:13px;display:flex;align-items:center;gap:12px}
+.avatar{width:48px;height:48px;border-radius:50%;background:#fff;color:var(--green);display:grid;place-items:center;font-size:26px;font-weight:900;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.profile .name{font-weight:900}.profile .tag{font-size:12px;opacity:.85}
+.menu{display:grid;gap:7px;margin-top:14px}
+.menu button{border:0;background:transparent;text-align:left;padding:11px 12px;border-radius:12px;color:var(--ink);font-weight:700}
+.menu button.active,.menu button:hover{background:#fff;box-shadow:0 5px 15px rgba(0,0,0,.05)}
+.levels{display:grid;gap:5px;margin-top:8px}
+.levels button{border:0;background:transparent;text-align:left;padding:10px;border-radius:11px;color:var(--ink)}
+.levels button.active{background:#fff;font-weight:900;color:var(--green)}
+.quote{margin-top:18px;padding:14px;border-top:1px solid var(--line);text-align:center;color:#335f62}
+.main{
+  padding:18px 22px 90px;min-width:0;
+  background:
+    radial-gradient(circle at 80% 10%,rgba(52,211,153,.12),transparent 28%),
+    radial-gradient(circle at 35% 45%,rgba(14,165,233,.08),transparent 26%)
+}
+.topbar{background:rgba(255,255,255,.85);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:18px;padding:12px 16px;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:10px;position:sticky;top:10px;z-index:8}
+.top-title{font-weight:900}.counter{font-weight:800}
+.icon-btn{width:48px;height:48px;border:0;border-radius:14px;background:var(--green);color:#fff;font-size:23px}
+.settings{position:fixed;right:24px;top:80px;width:min(290px,88vw);background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:10px;z-index:20}
+.settings button{width:100%;border:0;background:#fff;padding:12px;border-radius:10px;text-align:left}
+.settings button:hover{background:#effaf7}
+.study-grid{display:grid;grid-template-columns:minmax(0,1fr) 160px;gap:22px;margin-top:22px;align-items:start}
+.flash-stack{display:grid;place-items:center;min-height:620px}
+.flash{width:min(620px,94%);min-height:520px;background:var(--card);border:1px solid #eadfd3;border-radius:34px;box-shadow:0 26px 48px rgba(21,78,69,.22);padding:24px 28px;position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.2,.75,.2,1)}
+.flash:before,.flash:after{
+  content:"";position:absolute;inset:12px 10px -12px -14px;border-radius:34px;
+  background:#f7f0e8;border:1px solid #e5d8ca;z-index:-1;box-shadow:0 8px 12px rgba(0,0,0,.06)
+}
+.flash .face:before{
+  content:"";position:absolute;left:26px;top:26px;width:34px;height:34px;border-radius:50%;
+  background:radial-gradient(circle,#d8d4cf 0 35%,#9a948c 36% 42%,#f7f0e8 43%);
+  box-shadow:inset 0 2px 4px #0003
+}
+.flash:after{inset:22px 20px -20px -24px;background:#f2ece6;z-index:-2}
+.flash.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;padding:26px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.back{transform:rotateY(180deg)}
+.cherry{position:absolute;left:24px;top:18px;font-size:34px}
+.badge{position:absolute;right:26px;top:24px;background:#d8f3ea;border:1px solid #a7d8ca;border-radius:14px;padding:8px 10px;font-weight:900}
+.jp{font-size:86px;font-weight:900;line-height:1.05;margin:20px 0 10px}
+.reading{font-size:26px;font-weight:800}
+.illustration{
+  width:180px;height:150px;border-radius:28px;
+  background:
+    radial-gradient(circle at 30% 25%,#fff 0 18%,transparent 19%),
+    linear-gradient(135deg,#fff3dc,#dff7f2);
+  display:grid;place-items:center;font-size:82px;margin-bottom:16px;
+  border:1px solid #e8dfd1;box-shadow:inset 0 8px 22px rgba(255,255,255,.8),0 10px 20px rgba(15,118,110,.08)
+}
+.meaning{font-size:36px;font-weight:900;color:var(--green);margin:12px}
+.example{font-size:18px;background:#f5faf9;border-radius:16px;padding:14px 18px;max-width:88%}
+.speak{margin-top:18px;width:64px;height:64px;border:0;border-radius:50%;background:#d9f4ea;color:#0b6a5e;font-size:28px}
+.side-nav{display:grid;gap:18px;margin-top:100px}
+.side-nav button{border:1px solid var(--line);background:#fff;border-radius:18px;padding:20px 10px;font-size:16px;font-weight:800;color:var(--ink)}
+.meaning-card{margin:12px auto 0;max-width:560px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;text-align:center;font-size:27px;font-weight:900}
+.bottom-actions{display:grid;grid-template-columns:1fr 1fr 1.5fr;gap:12px;margin:18px auto 0;max-width:800px}
+.bottom-actions button{padding:15px;border-radius:17px;border:1px solid var(--line);background:#fff;font-weight:800}
+.bottom-actions .auto{background:var(--green);color:#fff}
+.calendar{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;margin-top:18px}
+.calendar.compact{max-width:520px}
+.calendar-head{display:flex;justify-content:space-between;align-items:center}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:8px;font-size:12px}
+.day{aspect-ratio:1;border-radius:9px;background:#f3faf8;display:grid;place-items:center}
+.day.study{background:#d1fae5;color:#065f46;font-weight:900}
+.progress{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center}
+.stat b{display:block;font-size:26px;color:var(--green)}
+.admin-panel,.kanji-panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:18px;margin-top:18px}
+.admin-panel textarea{width:100%;min-height:260px;border:1px solid #cfe3df;border-radius:14px;padding:12px;font-family:ui-monospace,monospace}
+.kanji-stage{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.kanji-big{font-size:130px;font-weight:900;text-align:center;border:1px dashed #b7d7d0;border-radius:18px;padding:20px;min-height:240px}
+canvas{width:100%;height:300px;border:1px solid #b7d7d0;border-radius:18px;touch-action:none;background:
+ linear-gradient(#0000 49%,#d8e7e4 50%,#0000 51%),
+ linear-gradient(90deg,#0000 49%,#d8e7e4 50%,#0000 51%)}
+.toast{position:fixed;left:50%;top:18px;transform:translateX(-50%);background:#0b5d55;color:#fff;padding:12px 18px;border-radius:999px;box-shadow:var(--shadow);z-index:40;font-weight:800}
+.mobilebar{display:none}
+.focus-mode .sidebar{display:none}
+.focus-mode .app{grid-template-columns:1fr}
+.focus-mode .main{max-width:1100px;margin:0 auto;width:100%}
+.focus-mode .mobilebar{display:none!important}
+
+
+/* v4.5 Tokutei Ginou 2 */
+.top-menu{display:flex;gap:8px;overflow:auto;margin:12px 0 0;padding-bottom:2px}
+.top-menu button{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:10px 14px;font-weight:800}
+.top-menu button.active{background:var(--green);color:#fff}
+.ginou-tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0}
+.ginou-tools label{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px;font-size:13px;font-weight:800}
+.ginou-tools input,.ginou-tools select{width:100%;margin-top:6px;border:1px solid #cfe3df;border-radius:10px;padding:8px;background:#fff}
+.vocab-list{background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:12px}
+.vocab-row{display:grid;grid-template-columns:60px 1.2fr 1.1fr 1.4fr 120px;gap:10px;align-items:center;padding:12px 14px;border-bottom:1px solid #edf4f2}
+.vocab-row:last-child{border-bottom:0}.vocab-row.head{font-weight:900;background:#e8f7f3;color:#0b5d55}.vocab-row button{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px;font-weight:800}.imp{letter-spacing:1px;color:#d39a00}.memory-actions{display:flex;gap:10px;justify-content:center;margin-top:14px}.memory-actions button{min-width:160px;padding:14px 18px;border:0;border-radius:16px;font-weight:900;box-shadow:0 8px 0 #cfded9,0 14px 24px rgba(0,0,0,.08);transform:translateY(0)}.memory-actions button:active{transform:translateY(5px);box-shadow:0 3px 0 #cfded9}.known-btn{background:#d1fae5;color:#065f46}.unknown-btn{background:#fee2e2;color:#991b1b}.importance-badge{position:absolute;left:50%;transform:translateX(-50%);top:24px;font-size:20px}.flash{perspective:1200px;transform-origin:center bottom}.flash-stack:before{content:"";position:absolute;width:min(650px,90%);height:40px;border-radius:50%;background:rgba(0,0,0,.08);filter:blur(18px);transform:translateY(255px);z-index:-1}.flash-stack{position:relative}
+@media(max-width:900px){.ginou-tools{grid-template-columns:1fr 1fr}.vocab-row{grid-template-columns:45px 1fr 1fr}.vocab-row .vi-col,.vocab-row .action-col{grid-column:2/-1}.top-menu{margin-top:8px}}
+@media(max-width:900px){
+  .app{grid-template-columns:1fr}
+  .sidebar{position:fixed;left:-290px;z-index:30;transition:.25s;width:280px}
+  .sidebar.open{left:0}
+  .main{padding:12px 12px 86px}
+  .topbar{top:6px;grid-template-columns:1fr auto auto}
+  .study-grid{grid-template-columns:1fr}
+  .side-nav{grid-template-columns:1fr 1fr;margin-top:0}
+  .flash-stack{min-height:520px}
+  .flash{min-height:440px;width:96%}
+  .face{padding:22px}
+  .illustration{width:145px;height:125px;font-size:66px}
+  .jp{font-size:58px}
+  .reading{font-size:22px}
+  .meaning{font-size:30px}
+  .remember{font-size:13px}
+  .jp{font-size:70px}
+  .bottom-actions{grid-template-columns:1fr 1fr}
+  .bottom-actions .auto{grid-column:1/-1}
+  .progress{grid-template-columns:1fr}
+  .kanji-stage{grid-template-columns:1fr}
+  .mobilebar{display:grid;grid-template-columns:1fr 1fr 1fr;position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);z-index:25;padding:8px max(8px,env(safe-area-inset-right)) max(8px,env(safe-area-inset-bottom))}
+  .mobilebar button{border:0;background:#fff;padding:10px;font-weight:800;color:var(--ink)}
+}
+
+/* v4.5 updates */
+.study-mode-switch{display:flex;gap:8px;justify-content:center;margin:12px 0 4px}
+.study-mode-switch button{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 16px;border-radius:14px;font-weight:900}
+.study-mode-switch button.active{background:var(--green);color:#fff}
+.flash-status{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;gap:10px;z-index:3;width:min(88%,440px)}
+.flash-status button{flex:1;border:0;border-radius:16px;padding:12px 10px;font-weight:900;box-shadow:0 8px 20px rgba(0,0,0,.10)}
+.flash-status .known{background:#dcfce7;color:#166534}
+.flash-status .unknown{background:#fee2e2;color:#991b1b}
+.flash-status button.active{outline:3px solid rgba(15,118,110,.22);transform:translateY(-1px)}
+.kana-toggle{position:absolute;left:26px;bottom:86px;border:1px solid var(--line);background:#fff;border-radius:14px;padding:9px 12px;font-weight:800;color:var(--ink);z-index:3}
+.list-panel{margin-top:18px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px;overflow:auto}
+.vocab-table{width:100%;border-collapse:collapse;min-width:680px}
+.vocab-table th,.vocab-table td{padding:12px 10px;border-bottom:1px solid #e5efec;text-align:left}
+.vocab-table th{background:#effaf7;color:#0b5d55;position:sticky;top:0}
+.vocab-table tr.current{background:#f0fdfa}
+.vocab-row-btn{border:0;background:transparent;color:var(--green);font-weight:900;cursor:pointer}
+.jp-voice-note{font-size:12px;color:#55777b;margin-top:8px}
+@media(max-width:900px){
+  .flash-status{bottom:18px}
+  .kana-toggle{bottom:78px}
+}
+
+
+/* ===== v4.5 visual + interaction overrides ===== */
+:root{
+  --blue:#0b5ea8;
+  --blue2:#084a86;
+  --blue3:#1597ff;
+  --cream:#fffaf2;
+  --paper:#fff9f2;
+}
+.study-mode-switch{
+  display:flex!important;
+  justify-content:center;
+  gap:10px;
+  margin:12px auto 8px;
+  flex-wrap:wrap;
+}
+.study-mode-switch button{
+  min-width:150px;
+  border:1px solid #b9cfe0!important;
+  background:linear-gradient(#fff,#eef6ff)!important;
+  color:#0a3760!important;
+  padding:9px 14px!important;
+  border-radius:14px!important;
+  font-weight:900!important;
+  box-shadow:0 5px 0 #c6d7e5,0 10px 18px rgba(21,73,116,.12)!important;
+  transform:translateY(0);
+  transition:.12s ease;
+}
+.study-mode-switch button:active{transform:translateY(3px);box-shadow:0 2px 0 #c6d7e5,0 4px 10px rgba(21,73,116,.12)!important}
+.study-mode-switch button.active{
+  background:linear-gradient(#27a8ff,#0877d1)!important;
+  color:#fff!important;
+  border-color:#68c7ff!important;
+  box-shadow:0 5px 0 #065f9d,0 12px 20px rgba(0,110,210,.25)!important;
+}
+#cardStudyWrap{display:block}
+#cardStudyWrap.hidden,#listSection.hidden,#kanjiSection.hidden{display:none!important}
+
+.flash-stack{min-height:590px}
+.flash{
+  width:min(700px,95%);
+  min-height:520px;
+  border-radius:34px;
+  background:
+    radial-gradient(circle at 18% 20%,rgba(255,255,255,.9),transparent 22%),
+    linear-gradient(135deg,#fffdf9,#fff6ef 72%,#f8efe6);
+  border:1px solid #eadbce;
+  box-shadow:
+    0 28px 40px rgba(40,52,61,.24),
+    0 10px 0 #e7ddd3,
+    0 18px 0 #ded3c8,
+    inset 0 1px 0 #fff;
+}
+.flash:before{
+  inset:14px 12px -16px -14px!important;
+  background:linear-gradient(145deg,#fff7f0,#f2e8df)!important;
+  box-shadow:0 10px 18px rgba(0,0,0,.08)!important;
+}
+.flash:after{
+  inset:28px 24px -29px -28px!important;
+  background:linear-gradient(145deg,#f8eee6,#e8ddd4)!important;
+  box-shadow:0 10px 18px rgba(0,0,0,.08)!important;
+}
+.face{
+  overflow:hidden;
+  border-radius:34px;
+  padding:28px 34px 92px!important;
+}
+.face::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.95;
+  background:
+    radial-gradient(circle at 14% 20%,#f8a3b7 0 3px,transparent 4px),
+    radial-gradient(circle at 18% 16%,#ef7897 0 2px,transparent 3px),
+    radial-gradient(circle at 82% 77%,#f8a3b7 0 3px,transparent 4px),
+    linear-gradient(145deg,transparent 0 82%,rgba(238,145,171,.08));
+  mix-blend-mode:multiply;
+}
+.cherry{font-size:38px;filter:drop-shadow(0 3px 1px rgba(122,44,68,.12))}
+.jp{font-size:82px;letter-spacing:.02em;color:#0b3554;text-shadow:0 2px 0 #fff}
+.reading{font-size:28px;color:#173d58;margin-top:5px}
+.meaning{
+  display:inline-block;
+  min-width:220px;
+  background:linear-gradient(180deg,#ffe9e4,#fbd8d2);
+  border:1px solid #f2c6be;
+  color:#243b4f!important;
+  border-radius:22px;
+  padding:12px 24px;
+  box-shadow:inset 0 1px 0 #fff,0 6px 14px rgba(134,74,67,.10);
+}
+.example{display:none!important}
+.speak{
+  width:54px!important;height:54px!important;
+  background:linear-gradient(#28a9ff,#0873cc)!important;
+  color:#fff!important;
+  border:1px solid #68c7ff!important;
+  box-shadow:0 5px 0 #075e9f,0 9px 15px rgba(0,103,190,.22)!important;
+}
+.flash-status{
+  left:50%!important;
+  bottom:24px!important;
+  width:min(72%,440px)!important;
+  gap:14px!important;
+}
+.flash-status button{
+  padding:10px 14px!important;
+  border-radius:18px!important;
+  font-size:15px;
+  border:1px solid rgba(255,255,255,.55)!important;
+  box-shadow:0 5px 0 rgba(0,0,0,.22),0 9px 14px rgba(0,0,0,.13),inset 0 1px 0 rgba(255,255,255,.5)!important;
+  transition:.12s ease;
+}
+.flash-status button:active{transform:translateY(3px)!important;box-shadow:0 2px 0 rgba(0,0,0,.22),0 4px 8px rgba(0,0,0,.12)!important}
+.flash-status .known{order:1;background:linear-gradient(#24c06f,#0a9952)!important;color:#fff!important}
+.flash-status .unknown{order:2;background:linear-gradient(#ff5555,#d72a2a)!important;color:#fff!important}
+.back .flash-status{display:none!important}
+.kana-toggle{display:none!important}
+.jp-voice-note{display:none!important}
+.meaning-card{display:none!important}
+#memoryActions{display:none!important}
+
+.side-nav{margin-top:170px!important;gap:26px!important}
+.side-nav button{
+  width:72px;
+  min-height:72px;
+  border-radius:50%!important;
+  font-size:14px!important;
+  padding:10px!important;
+  background:linear-gradient(#2aa8ff,#0872c9)!important;
+  color:#fff!important;
+  border:1px solid #68c7ff!important;
+  box-shadow:0 6px 0 #075b98,0 11px 16px rgba(0,75,140,.22)!important;
+}
+.bottom-actions button{
+  border-radius:16px!important;
+  padding:10px 16px!important;
+  box-shadow:0 4px 0 #c8d2db,0 8px 14px rgba(0,0,0,.08)!important;
+}
+.bottom-actions .auto{
+  background:linear-gradient(#2aa8ff,#0872c9)!important;
+  border-color:#68c7ff!important;
+  box-shadow:0 5px 0 #075b98,0 10px 16px rgba(0,86,162,.20)!important;
+}
+.icon-btn{
+  width:44px!important;height:44px!important;
+  background:linear-gradient(#1c92f4,#075fa8)!important;
+  border:1px solid #6cc8ff!important;
+  box-shadow:0 5px 0 #074f87,0 8px 14px rgba(0,72,133,.2)!important;
+}
+.settings button{border-bottom:1px solid #eef2f5!important}
+#hiraganaSetting{font-weight:800!important;color:#0b5d8f!important}
+
+#listSection{
+  margin-top:10px;
+}
+.vocab-table th{background:#eaf5ff!important;color:#0d548f!important}
+.vocab-row-btn{color:#0b6fac!important}
+
+#kanjiSection{
+  margin-top:14px!important;
+}
+.kanji-stage{align-items:start}
+.kanji-guide{
+  position:relative;
+  min-height:360px;
+  border:1px solid #c7dce9;
+  border-radius:20px;
+  background:
+    linear-gradient(#0000 49.6%,#dce9f1 50%,#0000 50.4%),
+    linear-gradient(90deg,#0000 49.6%,#dce9f1 50%,#0000 50.4%),
+    #fff;
+  display:grid;place-items:center;
+}
+#kanjiBig{
+  border:0!important;
+  min-height:0!important;
+  padding:0!important;
+  font-size:220px!important;
+  color:#153d56;
+  background:transparent!important;
+}
+.stroke-numbers{
+  position:absolute;inset:0;pointer-events:none;
+}
+.stroke-numbers span{
+  position:absolute;
+  width:26px;height:26px;border-radius:50%;
+  background:#0b76c5;color:#fff;
+  display:grid;place-items:center;
+  font-size:13px;font-weight:900;
+  box-shadow:0 3px 0 #075186;
+}
+.kanji-tools{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.kanji-tools button{
+  border:1px solid #c8dbe8;background:#fff;border-radius:14px;
+  padding:9px 13px;font-weight:800;color:#143f5b;
+}
+canvas{background:
+  linear-gradient(#0000 49%,#d8e7e4 50%,#0000 51%),
+  linear-gradient(90deg,#0000 49%,#d8e7e4 50%,#0000 51%),
+  #fff!important
+}
+@media(max-width:900px){
+  .flash{min-height:470px}
+  .jp{font-size:62px}
+  .flash-status{width:82%!important}
+  .study-mode-switch button{min-width:0;flex:1 1 30%}
+  .side-nav{grid-template-columns:1fr 1fr!important;margin-top:0!important}
+  .side-nav button{width:auto;border-radius:16px!important;min-height:54px}
+}
+
+
+/* ===== v4.5 dual-card study update ===== */
+.study-shell{margin-top:14px}
+.study-mode-switch{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:10px auto 14px}
+.study-mode-switch button{min-width:150px;border:1px solid #c8d8e5;background:linear-gradient(#fff,#eef7ff);color:#0d406d;padding:10px 16px;border-radius:16px;font-weight:900;box-shadow:0 4px 0 #cbd8e4,0 10px 18px rgba(13,64,109,.10)}
+.study-mode-switch button.active{background:linear-gradient(#1f9cff,#0674cd);color:#fff;border-color:#69c9ff;box-shadow:0 4px 0 #065a9c,0 12px 20px rgba(6,116,205,.24)}
+.study-top-note{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:4px 4px 10px;color:#55777b;font-size:13px;flex-wrap:wrap}
+.study-tools{background:#fff;border:1px solid var(--line);border-radius:18px;padding:12px 14px;display:flex;gap:12px;align-items:end;flex-wrap:wrap;margin-bottom:14px}
+.study-tools label{display:grid;gap:6px;font-size:13px;color:#335f62;font-weight:700}
+.study-tools input,.study-tools select{padding:10px 12px;border:1px solid #cddfe3;border-radius:12px;background:#fff;min-width:80px}
+.card-stage{display:grid;grid-template-columns:64px minmax(260px,1fr) 110px minmax(260px,1fr) 64px;gap:14px;align-items:center}
+.round-nav{width:62px;height:62px;border-radius:50%;border:1px solid #6ec9ff;background:linear-gradient(#2aa8ff,#0a77cf);color:#fff;font-size:34px;font-weight:900;box-shadow:0 5px 0 #085d9b,0 10px 16px rgba(0,85,150,.18)}
+.dual-flip-guide{text-align:center;color:#0c6a61;font-weight:900;display:grid;gap:8px;user-select:none}
+.dual-flip-guide .flip-arrow{font-size:52px;line-height:1}
+.dual-flip-guide .flip-hand{font-size:34px;line-height:1}
+.cards-dual{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.study-card{position:relative;min-height:540px;border-radius:34px;padding:24px 26px 82px;background:linear-gradient(145deg,#fffefb,#fff7ef 74%,#f4ece4);border:1px solid #eadcd0;box-shadow:0 25px 40px rgba(46,54,61,.15), 0 9px 0 #eadfd4, 0 18px 0 #ddd1c5;overflow:hidden;transition:transform .18s ease, box-shadow .18s ease, opacity .18s ease}
+.study-card.active{transform:translateY(-5px);box-shadow:0 30px 45px rgba(46,54,61,.20), 0 10px 0 #eadfd4, 0 22px 0 #ddd1c5, 0 0 0 3px rgba(15,118,110,.10)}
+.study-card.inactive{opacity:.92;transform:translateY(0)}
+.study-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 12% 14%, rgba(255,255,255,.78), transparent 24%), radial-gradient(circle at 85% 84%, rgba(255,255,255,.46), transparent 22%)}
+.study-card .sakura-a,.study-card .sakura-b{position:absolute;color:#eb96b0;font-size:42px;filter:drop-shadow(0 3px 2px rgba(111,36,62,.08))}
+.study-card .sakura-a{left:16px;top:12px}.study-card .sakura-b{right:18px;top:16px}
+.card-topline{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.badges-right{display:flex;gap:10px;align-items:center}
+.badge-chip{background:#dff3ea;border:1px solid #badfcf;border-radius:16px;padding:8px 12px;font-weight:900;color:#1b5f54}
+.importance-chip{font-weight:900;color:#173d58;font-size:28px;letter-spacing:2px}
+.card-level-left{font-size:15px;font-weight:900;color:#1b5f54;background:#eaf7f0;border:1px solid #d2eade;border-radius:14px;padding:8px 12px}
+.card-main{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:10px}
+.card-main .jp-big{font-size:76px;font-weight:900;line-height:1.05;color:#0b3554;text-shadow:0 1px 0 #fff;margin-top:6px}
+.card-main .reading-big{font-size:28px;font-weight:800;color:#123e5e}
+.card-main .meaning-pill{display:inline-block;min-width:200px;padding:12px 20px;border-radius:22px;background:linear-gradient(#ffeae6,#f8dad4);border:1px solid #efc6c0;font-size:26px;font-weight:900;color:#183d57;box-shadow:0 6px 14px rgba(134,74,67,.10)}
+.card-illustration{width:min(100%,280px);height:160px;border-radius:28px;display:grid;place-items:center;background:linear-gradient(180deg,#f7fbff,#f4f8ff 48%,#fff);border:1px solid #e3ecf2;box-shadow:inset 0 1px 0 #fff,0 8px 14px rgba(12,68,100,.05);padding:10px;margin-top:2px;overflow:hidden}
+.card-illustration .emoji-main{font-size:88px;line-height:1}
+.card-illustration .emoji-row{font-size:60px;line-height:1;display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.card-illustration .mini-note{font-size:16px;color:#41616a;font-weight:800;margin-top:6px}
+.audio-btn{margin-top:4px;width:58px;height:58px;border-radius:50%;border:1px solid #6dc8ff;background:linear-gradient(#2aa8ff,#0a77cf);color:#fff;font-size:28px;box-shadow:0 5px 0 #085d9b,0 10px 16px rgba(0,85,150,.18)}
+.side-note{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;background:#fff;border:1px solid #d6e7e4;border-radius:14px;padding:9px 16px;font-weight:800;color:#16556d;box-shadow:0 4px 10px rgba(0,0,0,.05);white-space:nowrap;max-width:90%;text-align:center}
+.front-actions{display:flex;gap:12px;justify-content:center;width:100%;margin-top:6px;flex-wrap:wrap}
+.memory-btn{min-width:154px;padding:10px 14px;border-radius:18px;border:1px solid rgba(255,255,255,.52);font-size:18px;font-weight:900;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.18),0 9px 14px rgba(0,0,0,.10)}
+.memory-btn.known{background:linear-gradient(#25c06f,#0c9953)}
+.memory-btn.unknown{background:linear-gradient(#ff5a59,#d92b2b)}
+.memory-btn.active{outline:3px solid rgba(15,118,110,.15)}
+.bottom-actions{display:grid;grid-template-columns:1fr 1.2fr;gap:14px;max-width:700px;margin:18px auto 0}
+.bottom-actions button{padding:13px 18px;border-radius:18px;border:1px solid #cbd8e4;background:linear-gradient(#fff,#f2f7fb);font-weight:900;color:#163c5b;box-shadow:0 4px 0 #c9d7e3,0 8px 14px rgba(0,0,0,.07)}
+.bottom-actions .auto{background:linear-gradient(#2aa8ff,#0872c9);color:#fff;border-color:#69c9ff;box-shadow:0 5px 0 #075b98,0 10px 16px rgba(0,86,162,.20)}
+.list-panel{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:14px;overflow:auto}
+.vocab-table{width:100%;border-collapse:collapse;min-width:660px}.vocab-table th,.vocab-table td{padding:12px 10px;border-bottom:1px solid #e5efec;text-align:left}.vocab-table th{background:#eaf6ff;color:#0f538f;position:sticky;top:0}.vocab-table tr.current{background:#f0fdfa}.vocab-row-btn{border:0;background:transparent;color:#0a70ae;font-weight:900;cursor:pointer}
+.hidden{display:none!important}
+@media(max-width:1100px){.card-stage{grid-template-columns:50px 1fr 76px 1fr 50px}.study-card{min-height:520px}}
+@media(max-width:900px){
+  .card-stage{grid-template-columns:1fr;gap:10px}
+  .cards-dual{grid-template-columns:1fr;gap:14px}
+  .round-nav{width:100%;height:auto;border-radius:16px;font-size:24px;padding:12px 0}
+  .dual-flip-guide{grid-template-columns:1fr 1fr;align-items:center;justify-items:center}
+  .dual-flip-guide .flip-arrow{font-size:36px}
+  .study-card{min-height:0;padding-bottom:72px}
+  .card-main .jp-big{font-size:60px}
+  .card-main .reading-big{font-size:24px}
+  .card-main .meaning-pill{font-size:24px}
+  .bottom-actions{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+<body>
+<div id="toast" class="toast hidden"></div>
+
+<section id="loginView" class="login safe">
+  <div class="login-card">
+    <div class="brand"><span class="book">📖</span><span>日本語 JLPT & GINOU</span></div>
+    <div class="login-sub">Ứng dụng mới hoàn toàn • JLPT N5–N1 • Tokutei Ginou 2</div>
+    <div class="roles">
+      <button id="studentRole" class="active" type="button">👨‍🎓 Học viên</button>
+      <button id="adminRole" type="button">🛠 Quản trị</button>
+    </div>
+    <input id="username" placeholder="Tên đăng nhập" autocomplete="username">
+    <input id="password" type="password" placeholder="Mật khẩu" autocomplete="current-password">
+    <label class="remember"><input id="rememberLogin" type="checkbox"> Ghi nhớ đăng nhập cho lần học sau</label>
+    <button id="loginBtn" class="primary full" type="button">Đăng nhập</button>
+    <div id="loginErr" class="err"></div>
+    <div class="demo">Học viên: <b>hocvien / 123456</b><br>Quản trị: <b>admin / 123456</b></div>
+  </div>
+</section>
+
+<section id="appView" class="app hidden">
+  <aside id="sidebar" class="sidebar safe">
+    <div class="logo">📖 日本語</div>
+    <div class="profile">
+      <div id="avatar" class="avatar">👤</div>
+      <div><div id="profileName" class="name"></div><div id="profileTag" class="tag"></div></div>
+    </div>
+    <div class="menu">
+      <button id="studyMenu" class="active">📖 Học từ vựng</button>
+      <div id="levelButtons" class="levels"></div>
+      <button id="calendarMenu">📅 Lịch học tập</button>
+      <button id="progressMenu">📊 Tiến độ học</button>
+      <button id="kanjiMenu">✍️ Luyện Kanji</button>
+      <button id="adminMenu" class="hidden">🛠 Quản trị dữ liệu</button>
+      <button id="settingsMenu">⚙️ Cài đặt</button>
+      <button id="logoutBtn">↪ Đăng xuất</button>
+    </div>
+    <div class="quote">🌸 継続は力なり<br><small>Kiên trì là sức mạnh</small></div>
+  </aside>
+
+  <main class="main safe">
+    <div class="topbar">
+      <div id="topTitle" class="top-title">N5 › 第3課：人と家族</div>
+      <div id="counter" class="counter">1 / 5</div>
+      <button id="settingsBtn" class="icon-btn" type="button">⚙️</button>
+    </div>
+    <div class="top-menu" id="topMenu">
+      <button data-page="study" class="active">📚 Học từ vựng</button>
+      <button data-page="calendar">📅 Lịch</button>
+      <button data-page="progress">📊 Tiến độ</button>
+      <button data-page="kanji">✍️ Kanji</button>
+      <button data-page="settings">⚙️ Cài đặt</button>
+    </div>
+
+    <div id="settingsPopup" class="settings hidden">
+      <div style="font-weight:900;padding:8px 10px 6px;color:#0b5d55">⚙️ Cài đặt học tập</div>
+      <button id="voiceSetting">🔊 Giọng đọc: Nhật + Việt</button>
+      <button id="hiraganaSetting">あ Hiragana mặt 1: Bật</button>
+      <button id="autoFlipSetting">⏱ Tự động lật thẻ: Tắt</button>
+      <button id="frontTimeSetting">🕒 Mặt 1 → Mặt 2: 3 giây</button>
+      <button id="backTimeSetting">🕒 Mặt 2 → Thẻ tiếp: 5 giây</button>
+      <button id="themeSetting">🎨 Giao diện: Xanh Nhật</button>
+      <button id="focusSetting">🪟 Chế độ cửa sổ tập trung</button>
+      <button id="avatarSetting">🖼 Ảnh đại diện</button>
+    </div>
+
+    <section id="studySection">
+      <div class="study-shell">
+        <div class="study-mode-switch">
+          <button id="listModeBtn" type="button">📋 Danh sách từ vựng</button>
+          <button id="cardModeBtn" class="active" type="button">🃏 Thẻ 3D</button>
+          <button id="kanjiModeBtn" type="button">✍️ Luyện Kanji</button>
+        </div>
+        <div class="study-top-note">
+          <span id="lessonHint">Học bằng 2 thẻ riêng biệt • Mặt trước Nhật, mặt sau nghĩa Việt</span>
+          <span id="syncHint">☁ Lưu tiến độ trên thiết bị</span>
+        </div>
+
+        <div id="studyTools" class="study-tools">
+          <label>Từ số
+            <input id="rangeStart" type="number" min="1" value="1">
+          </label>
+          <label>Đến số
+            <input id="rangeEnd" type="number" min="1" value="5">
+          </label>
+          <label>Phát âm
+            <select id="voiceMode">
+              <option value="both">Nhật + Việt</option>
+              <option value="jp">Chỉ Nhật</option>
+              <option value="vi">Chỉ Việt</option>
+              <option value="off">Tắt</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="cardStudyWrap">
+          <div class="card-stage">
+            <button id="prevBtn" class="round-nav" type="button">‹</button>
+
+            <div id="frontCard" class="study-card front-card active">
+              <div class="sakura-a">🌸</div>
+              <div class="sakura-b">🌸</div>
+              <div class="card-topline">
+                <div id="levelBadge" class="card-level-left">N5</div>
+                <div class="badges-right">
+                  <div id="importanceBadge" class="importance-chip">★★★</div>
+                  <div id="frontChip" class="badge-chip">Mặt 1</div>
+                </div>
+              </div>
+              <div class="card-main">
+                <div id="illustrationFront" class="card-illustration"><div class="emoji-main">🚶</div></div>
+                <div id="jp" class="jp-big">人</div>
+                <div id="reading" class="reading-big">ひと</div>
+                <button id="speakJp" class="audio-btn" type="button">🔊</button>
+                <div class="front-actions">
+                  <button id="knownBtnFront" class="memory-btn known" type="button">✓ Đã nhớ</button>
+                  <button id="unknownBtnFront" class="memory-btn unknown" type="button">✖ Chưa thuộc</button>
+                </div>
+              </div>
+              <div class="side-note">Mặt trước (Tự động phát âm tiếng Nhật)</div>
+            </div>
+
+            <div id="flipGuide" class="dual-flip-guide" role="button" tabindex="0">
+              <div>Lật thẻ</div>
+              <div class="flip-arrow">↔</div>
+              <div class="flip-hand">☝️</div>
+            </div>
+
+            <div id="backCard" class="study-card back-card inactive">
+              <div class="sakura-a">🌸</div>
+              <div class="sakura-b">🌸</div>
+              <div class="card-topline">
+                <div id="levelBadge2" class="card-level-left">N5</div>
+                <div class="badges-right">
+                  <div id="importanceBadge2" class="importance-chip">★★★</div>
+                  <div id="backChip" class="badge-chip">Mặt 2</div>
+                </div>
+              </div>
+              <div class="card-main">
+                <div id="jpBack" class="jp-big">人</div>
+                <div id="readingBack" class="reading-big">ひと</div>
+                <div id="meaning" class="meaning-pill">Người</div>
+                <div id="illustrationBack" class="card-illustration"><div class="emoji-main">🚶</div></div>
+                <button id="speakVi" class="audio-btn" type="button">🔊</button>
+              </div>
+              <div class="side-note">Mặt sau (Tự động phát âm nghĩa tiếng Việt)</div>
+            </div>
+
+            <button id="nextBtn" class="round-nav" type="button">›</button>
+          </div>
+
+          <div class="bottom-actions">
+            <button id="shuffleBtn" type="button">🔀 Trộn thẻ</button>
+            <button id="autoBtn" class="auto" type="button">▶ Tự động lật</button>
+          </div>
+        </div>
+
+        <div id="listSection" class="list-panel hidden">
+          <table class="vocab-table">
+            <thead><tr><th>#</th><th>Kanji</th><th>Hiragana</th><th>Nghĩa</th><th>Phát âm</th></tr></thead>
+            <tbody id="vocabListBody"></tbody>
+          </table>
+        </div>
+
+        <section id="kanjiSection" class="kanji-panel hidden">
+          <h3>✍️ Luyện Kanji</h3>
+          <div class="kanji-stage">
+            <div>
+              <div class="kanji-guide">
+                <div id="kanjiBig" class="kanji-big">人</div>
+                <div id="strokeNumbers" class="stroke-numbers"></div>
+              </div>
+              <div class="kanji-tools">
+                <button id="toggleStrokeGuide" type="button">① Hiện/ẩn số nét</button>
+                <button id="clearCanvas" type="button">↻ Viết lại</button>
+              </div>
+            </div>
+            <div>
+              <canvas id="kanjiCanvas" width="700" height="500"></canvas>
+              <div class="kanji-tools">
+                <button id="snapCanvas" type="button">🧲 Hút nét: Bật</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="calendarSection" class="calendar compact hidden">
+      <div class="calendar-head"><b>📅 Lịch học tập</b><span id="monthText"></span></div>
+      <div id="calendarGrid" class="calendar-grid"></div>
+    </section>
+
+    <section id="progressSection" class="hidden">
+      <div class="progress">
+        <div class="stat"><b id="streakStat">1</b>Chuỗi ngày học</div>
+        <div class="stat"><b id="knownStat">0</b>Từ đã học</div>
+        <div class="stat"><b id="scoreStat">0</b>Tổng điểm</div>
+      </div>
+    </section>
+
+    
+
+    <section id="adminSection" class="admin-panel hidden">
+      <h3>🛠 Quản trị dữ liệu</h3>
+      <p>Dữ liệu bản mới dùng vùng lưu trữ riêng, không liên quan app cũ.</p>
+      <textarea id="dataEditor"></textarea>
+      <div class="bottom-actions">
+        <button id="saveDataBtn">💾 Lưu dữ liệu</button>
+        <button id="resetDataBtn">↩ Khôi phục dữ liệu gốc</button>
+      </div>
+      <div id="adminMsg"></div>
+    </section>
+  </main>
+
+  <div class="mobilebar">
+    <button id="mobileBack">← Trở về</button>
+    <button id="mobileHome">⌂ Trang chủ</button>
+    <button id="mobileMenu">☰ Menu</button>
+  </div>
+</section>
+
+<input id="avatarInput" type="file" accept="image/*" class="hidden">
+
 <script>
-const VERSION='3.1.6';const VOCAB=[{"chapter":1,"kanji":"職長","reading":"しょくちょう","meaning":"Tổ trưởng / trưởng nhóm","stars":"★★★"},{"chapter":1,"kanji":"工程管理者","reading":"こうていかんりしゃ","meaning":"Người quản lý công đoạn","stars":"★★★"},{"chapter":1,"kanji":"作業員","reading":"さぎょういん","meaning":"Công nhân / người thao tác","stars":"★★★"},{"chapter":1,"kanji":"指導","reading":"しどう","meaning":"Hướng dẫn, chỉ đạo","stars":"★★★"},{"chapter":1,"kanji":"指示","reading":"しじ","meaning":"Chỉ thị, hướng dẫn công việc","stars":"★★★"},{"chapter":1,"kanji":"命令","reading":"めいれい","meaning":"Mệnh lệnh","stars":"★★"},{"chapter":1,"kanji":"役割","reading":"やくわり","meaning":"Vai trò","stars":"★★★"},{"chapter":1,"kanji":"責任","reading":"せきにん","meaning":"Trách nhiệm","stars":"★★★"},{"chapter":1,"kanji":"権限","reading":"けんげん","meaning":"Quyền hạn","stars":"★★"},{"chapter":1,"kanji":"作業手順","reading":"さぎょうてじゅん","meaning":"Trình tự thao tác","stars":"★★★"},{"chapter":1,"kanji":"手順書","reading":"てじゅんしょ","meaning":"Tài liệu hướng dẫn thao tác","stars":"★★★"},{"chapter":1,"kanji":"標準作業","reading":"ひょうじゅんさぎょう","meaning":"Công việc tiêu chuẩn","stars":"★★★"},{"chapter":1,"kanji":"作業計画","reading":"さぎょうけいかく","meaning":"Kế hoạch công việc","stars":"★★★"},{"chapter":1,"kanji":"進捗","reading":"しんちょく","meaning":"Tiến độ","stars":"★★★"},{"chapter":1,"kanji":"確認","reading":"かくにん","meaning":"Xác nhận, kiểm tra","stars":"★★★"},{"chapter":1,"kanji":"点検","reading":"てんけん","meaning":"Kiểm tra, kiểm điểm thiết bị","stars":"★★★"},{"chapter":1,"kanji":"記録","reading":"きろく","meaning":"Ghi chép","stars":"★★★"},{"chapter":1,"kanji":"報告","reading":"ほうこく","meaning":"Báo cáo","stars":"★★★"},{"chapter":1,"kanji":"連絡","reading":"れんらく","meaning":"Liên lạc","stars":"★★★"},{"chapter":1,"kanji":"相談","reading":"そうだん","meaning":"Trao đổi / tham khảo ý kiến","stars":"★★★"},{"chapter":1,"kanji":"報連相","reading":"ほうれんそう","meaning":"Báo cáo - liên lạc - trao đổi","stars":"★★★"},{"chapter":1,"kanji":"引継ぎ","reading":"ひきつぎ","meaning":"Bàn giao công việc","stars":"★★★"},{"chapter":1,"kanji":"教育","reading":"きょういく","meaning":"Đào tạo","stars":"★★★"},{"chapter":1,"kanji":"訓練","reading":"くんれん","meaning":"Huấn luyện","stars":"★★"},{"chapter":1,"kanji":"習熟","reading":"しゅうじゅく","meaning":"Thành thạo","stars":"★★"},{"chapter":1,"kanji":"能力","reading":"のうりょく","meaning":"Năng lực","stars":"★★"},{"chapter":1,"kanji":"経験","reading":"けいけん","meaning":"Kinh nghiệm","stars":"★★★"},{"chapter":1,"kanji":"配置","reading":"はいち","meaning":"Bố trí nhân sự","stars":"★★★"},{"chapter":1,"kanji":"人員","reading":"じんいん","meaning":"Nhân lực / số người","stars":"★★★"},{"chapter":1,"kanji":"交代","reading":"こうたい","meaning":"Thay ca / luân phiên","stars":"★★"},{"chapter":1,"kanji":"勤務","reading":"きんむ","meaning":"Làm việc / ca làm","stars":"★★"},{"chapter":1,"kanji":"欠勤","reading":"けっきん","meaning":"Nghỉ làm","stars":"★★"},{"chapter":1,"kanji":"遅刻","reading":"ちこく","meaning":"Đi muộn","stars":"★★"},{"chapter":1,"kanji":"早退","reading":"そうたい","meaning":"Về sớm","stars":"★"},{"chapter":1,"kanji":"協力","reading":"きょうりょく","meaning":"Hợp tác","stars":"★★★"},{"chapter":1,"kanji":"連携","reading":"れんけい","meaning":"Phối hợp","stars":"★★★"},{"chapter":1,"kanji":"コミュニケーション","reading":"こみゅにけーしょん","meaning":"Giao tiếp","stars":"★★★"},{"chapter":1,"kanji":"目標","reading":"もくひょう","meaning":"Mục tiêu","stars":"★★★"},{"chapter":1,"kanji":"達成","reading":"たっせい","meaning":"Đạt được","stars":"★★"},{"chapter":1,"kanji":"評価","reading":"ひょうか","meaning":"Đánh giá","stars":"★★★"},{"chapter":1,"kanji":"改善","reading":"かいぜん","meaning":"Cải tiến","stars":"★★★"},{"chapter":1,"kanji":"問題","reading":"もんだい","meaning":"Vấn đề","stars":"★★★"},{"chapter":1,"kanji":"課題","reading":"かだい","meaning":"Vấn đề / nhiệm vụ cần giải quyết","stars":"★★★"},{"chapter":1,"kanji":"原因","reading":"げんいん","meaning":"Nguyên nhân","stars":"★★★"},{"chapter":1,"kanji":"対策","reading":"たいさく","meaning":"Biện pháp đối phó","stars":"★★★"},{"chapter":1,"kanji":"再発防止","reading":"さいはつぼうし","meaning":"Phòng ngừa tái diễn","stars":"★★★"},{"chapter":1,"kanji":"異常","reading":"いじょう","meaning":"Bất thường","stars":"★★★"},{"chapter":1,"kanji":"判断","reading":"はんだん","meaning":"Phán đoán","stars":"★★★"},{"chapter":1,"kanji":"優先順位","reading":"ゆうせんじゅんい","meaning":"Thứ tự ưu tiên","stars":"★★"},{"chapter":1,"kanji":"職場","reading":"しょくば","meaning":"Nơi làm việc","stars":"★★★"},{"chapter":2,"kanji":"食品衛生","reading":"しょくひんえいせい","meaning":"Vệ sinh thực phẩm","stars":"★★★"},{"chapter":2,"kanji":"衛生管理","reading":"えいせいかんり","meaning":"Quản lý vệ sinh","stars":"★★★"},{"chapter":2,"kanji":"食品安全","reading":"しょくひんあんぜん","meaning":"An toàn thực phẩm","stars":"★★★"},{"chapter":2,"kanji":"食中毒","reading":"しょくちゅうどく","meaning":"Ngộ độc thực phẩm","stars":"★★★"},{"chapter":2,"kanji":"微生物","reading":"びせいぶつ","meaning":"Vi sinh vật","stars":"★★★"},{"chapter":2,"kanji":"細菌","reading":"さいきん","meaning":"Vi khuẩn","stars":"★★★"},{"chapter":2,"kanji":"ウイルス","reading":"ういるす","meaning":"Virus","stars":"★★★"},{"chapter":2,"kanji":"カビ","reading":"かび","meaning":"Nấm mốc","stars":"★★"},{"chapter":2,"kanji":"増殖","reading":"ぞうしょく","meaning":"Sinh sôi, tăng trưởng","stars":"★★★"},{"chapter":2,"kanji":"汚染","reading":"おせん","meaning":"Ô nhiễm / nhiễm bẩn","stars":"★★★"},{"chapter":2,"kanji":"交差汚染","reading":"こうさおせん","meaning":"Nhiễm chéo","stars":"★★★"},{"chapter":2,"kanji":"二次汚染","reading":"にじおせん","meaning":"Nhiễm bẩn thứ cấp","stars":"★★★"},{"chapter":2,"kanji":"感染","reading":"かんせん","meaning":"Lây nhiễm","stars":"★★"},{"chapter":2,"kanji":"予防","reading":"よぼう","meaning":"Phòng ngừa","stars":"★★★"},{"chapter":2,"kanji":"洗浄","reading":"せんじょう","meaning":"Rửa / làm sạch","stars":"★★★"},{"chapter":2,"kanji":"消毒","reading":"しょうどく","meaning":"Khử trùng","stars":"★★★"},{"chapter":2,"kanji":"殺菌","reading":"さっきん","meaning":"Diệt khuẩn","stars":"★★★"},{"chapter":2,"kanji":"除菌","reading":"じょきん","meaning":"Loại bỏ vi khuẩn","stars":"★★"},{"chapter":2,"kanji":"清掃","reading":"せいそう","meaning":"Vệ sinh, quét dọn","stars":"★★★"},{"chapter":2,"kanji":"手洗い","reading":"てあらい","meaning":"Rửa tay","stars":"★★★"},{"chapter":2,"kanji":"健康管理","reading":"けんこうかんり","meaning":"Quản lý sức khỏe","stars":"★★★"},{"chapter":2,"kanji":"体調不良","reading":"たいちょうふりょう","meaning":"Tình trạng sức khỏe không tốt","stars":"★★★"},{"chapter":2,"kanji":"嘔吐","reading":"おうと","meaning":"Nôn ói","stars":"★★"},{"chapter":2,"kanji":"下痢","reading":"げり","meaning":"Tiêu chảy","stars":"★★"},{"chapter":2,"kanji":"発熱","reading":"はつねつ","meaning":"Sốt","stars":"★★"},{"chapter":2,"kanji":"傷","reading":"きず","meaning":"Vết thương","stars":"★★★"},{"chapter":2,"kanji":"作業着","reading":"さぎょうぎ","meaning":"Quần áo làm việc","stars":"★★★"},{"chapter":2,"kanji":"帽子","reading":"ぼうし","meaning":"Mũ","stars":"★★"},{"chapter":2,"kanji":"マスク","reading":"ますく","meaning":"Khẩu trang","stars":"★★"},{"chapter":2,"kanji":"手袋","reading":"てぶくろ","meaning":"Găng tay","stars":"★★★"},{"chapter":2,"kanji":"毛髪","reading":"もうはつ","meaning":"Tóc","stars":"★★★"},{"chapter":2,"kanji":"異物","reading":"いぶつ","meaning":"Dị vật","stars":"★★★"},{"chapter":2,"kanji":"異物混入","reading":"いぶつこんにゅう","meaning":"Dị vật lẫn vào sản phẩm","stars":"★★★"},{"chapter":2,"kanji":"金属","reading":"きんぞく","meaning":"Kim loại","stars":"★★★"},{"chapter":2,"kanji":"ガラス","reading":"がらす","meaning":"Thủy tinh","stars":"★★★"},{"chapter":2,"kanji":"プラスチック","reading":"ぷらすちっく","meaning":"Nhựa","stars":"★★"},{"chapter":2,"kanji":"害虫","reading":"がいちゅう","meaning":"Côn trùng gây hại","stars":"★★★"},{"chapter":2,"kanji":"害獣","reading":"がいじゅう","meaning":"Động vật gây hại","stars":"★★"},{"chapter":2,"kanji":"防虫","reading":"ぼうちゅう","meaning":"Phòng chống côn trùng","stars":"★★"},{"chapter":2,"kanji":"防鼠","reading":"ぼうそ","meaning":"Phòng chống chuột","stars":"★★"},{"chapter":2,"kanji":"温度管理","reading":"おんどかんり","meaning":"Quản lý nhiệt độ","stars":"★★★"},{"chapter":2,"kanji":"冷蔵","reading":"れいぞう","meaning":"Bảo quản lạnh","stars":"★★★"},{"chapter":2,"kanji":"冷凍","reading":"れいとう","meaning":"Đông lạnh","stars":"★★★"},{"chapter":2,"kanji":"解凍","reading":"かいとう","meaning":"Rã đông","stars":"★★★"},{"chapter":2,"kanji":"加熱","reading":"かねつ","meaning":"Gia nhiệt","stars":"★★★"},{"chapter":2,"kanji":"冷却","reading":"れいきゃく","meaning":"Làm lạnh","stars":"★★★"},{"chapter":2,"kanji":"中心温度","reading":"ちゅうしんおんど","meaning":"Nhiệt độ tâm sản phẩm","stars":"★★★"},{"chapter":2,"kanji":"賞味期限","reading":"しょうみきげん","meaning":"Hạn dùng ngon nhất","stars":"★★"},{"chapter":2,"kanji":"消費期限","reading":"しょうひきげん","meaning":"Hạn sử dụng","stars":"★★★"},{"chapter":2,"kanji":"アレルゲン","reading":"あれるげん","meaning":"Chất gây dị ứng","stars":"★★★"},{"chapter":3,"kanji":"HACCP","reading":"はさっぷ","meaning":"HACCP - hệ thống phân tích mối nguy và điểm kiểm soát tới hạn","stars":"★★★"},{"chapter":3,"kanji":"危害要因","reading":"きがいよういん","meaning":"Mối nguy","stars":"★★★"},{"chapter":3,"kanji":"生物的危害","reading":"せいぶつてききがい","meaning":"Mối nguy sinh học","stars":"★★★"},{"chapter":3,"kanji":"化学的危害","reading":"かがくてききがい","meaning":"Mối nguy hóa học","stars":"★★★"},{"chapter":3,"kanji":"物理的危害","reading":"ぶつりてききがい","meaning":"Mối nguy vật lý","stars":"★★★"},{"chapter":3,"kanji":"重要管理点","reading":"じゅうようかんりてん","meaning":"Điểm kiểm soát tới hạn (CCP)","stars":"★★★"},{"chapter":3,"kanji":"管理基準","reading":"かんりきじゅん","meaning":"Tiêu chuẩn / giới hạn kiểm soát","stars":"★★★"},{"chapter":3,"kanji":"モニタリング","reading":"もにたりんぐ","meaning":"Giám sát","stars":"★★★"},{"chapter":3,"kanji":"監視","reading":"かんし","meaning":"Theo dõi, giám sát","stars":"★★★"},{"chapter":3,"kanji":"是正措置","reading":"ぜせいそち","meaning":"Hành động khắc phục","stars":"★★★"},{"chapter":3,"kanji":"検証","reading":"けんしょう","meaning":"Thẩm tra / xác minh","stars":"★★★"},{"chapter":3,"kanji":"記録保存","reading":"きろくほぞん","meaning":"Lưu giữ hồ sơ","stars":"★★★"},{"chapter":3,"kanji":"衛生管理計画","reading":"えいせいかんりけいかく","meaning":"Kế hoạch quản lý vệ sinh","stars":"★★★"},{"chapter":3,"kanji":"一般衛生管理","reading":"いっぱんえいせいかんり","meaning":"Quản lý vệ sinh chung","stars":"★★★"},{"chapter":3,"kanji":"品質","reading":"ひんしつ","meaning":"Chất lượng","stars":"★★★"},{"chapter":3,"kanji":"品質管理","reading":"ひんしつかんり","meaning":"Quản lý chất lượng","stars":"★★★"},{"chapter":3,"kanji":"品質保証","reading":"ひんしつほしょう","meaning":"Đảm bảo chất lượng","stars":"★★★"},{"chapter":3,"kanji":"規格","reading":"きかく","meaning":"Quy cách / tiêu chuẩn","stars":"★★★"},{"chapter":3,"kanji":"基準","reading":"きじゅん","meaning":"Tiêu chuẩn","stars":"★★★"},{"chapter":3,"kanji":"検査","reading":"けんさ","meaning":"Kiểm tra / xét nghiệm","stars":"★★★"},{"chapter":3,"kanji":"抜取検査","reading":"ぬきとりけんさ","meaning":"Kiểm tra lấy mẫu","stars":"★★"},{"chapter":3,"kanji":"全数検査","reading":"ぜんすうけんさ","meaning":"Kiểm tra toàn bộ","stars":"★★"},{"chapter":3,"kanji":"測定","reading":"そくてい","meaning":"Đo lường","stars":"★★★"},{"chapter":3,"kanji":"計量","reading":"けいりょう","meaning":"Cân / đo định lượng","stars":"★★★"},{"chapter":3,"kanji":"精度","reading":"せいど","meaning":"Độ chính xác","stars":"★★"},{"chapter":3,"kanji":"誤差","reading":"ごさ","meaning":"Sai số","stars":"★★"},{"chapter":3,"kanji":"不良品","reading":"ふりょうひん","meaning":"Sản phẩm lỗi","stars":"★★★"},{"chapter":3,"kanji":"不適合","reading":"ふてきごう","meaning":"Không phù hợp tiêu chuẩn","stars":"★★★"},{"chapter":3,"kanji":"合格","reading":"ごうかく","meaning":"Đạt / đỗ","stars":"★★"},{"chapter":3,"kanji":"判定","reading":"はんてい","meaning":"Phán định","stars":"★★★"},{"chapter":3,"kanji":"廃棄","reading":"はいき","meaning":"Loại bỏ / tiêu hủy","stars":"★★★"},{"chapter":3,"kanji":"隔離","reading":"かくり","meaning":"Cách ly","stars":"★★★"},{"chapter":3,"kanji":"回収","reading":"かいしゅう","meaning":"Thu hồi","stars":"★★★"},{"chapter":3,"kanji":"返品","reading":"へんぴん","meaning":"Trả hàng","stars":"★★"},{"chapter":3,"kanji":"苦情","reading":"くじょう","meaning":"Khiếu nại","stars":"★★★"},{"chapter":3,"kanji":"クレーム","reading":"くれーむ","meaning":"Khiếu nại khách hàng","stars":"★★★"},{"chapter":3,"kanji":"追跡","reading":"ついせき","meaning":"Theo dõi, truy vết","stars":"★★"},{"chapter":3,"kanji":"トレーサビリティ","reading":"とれーさびりてぃ","meaning":"Truy xuất nguồn gốc","stars":"★★★"},{"chapter":3,"kanji":"ロット","reading":"ろっと","meaning":"Lô sản xuất","stars":"★★★"},{"chapter":3,"kanji":"ロット番号","reading":"ろっとばんごう","meaning":"Số lô","stars":"★★★"},{"chapter":3,"kanji":"製造日","reading":"せいぞうび","meaning":"Ngày sản xuất","stars":"★★"},{"chapter":3,"kanji":"保管","reading":"ほかん","meaning":"Bảo quản / lưu giữ","stars":"★★★"},{"chapter":3,"kanji":"保管条件","reading":"ほかんじょうけん","meaning":"Điều kiện bảo quản","stars":"★★★"},{"chapter":3,"kanji":"校正","reading":"こうせい","meaning":"Hiệu chuẩn","stars":"★★★"},{"chapter":3,"kanji":"温度計","reading":"おんどけい","meaning":"Nhiệt kế","stars":"★★★"},{"chapter":3,"kanji":"金属探知機","reading":"きんぞくたんちき","meaning":"Máy dò kim loại","stars":"★★★"},{"chapter":3,"kanji":"X線検査","reading":"えっくすせんけんさ","meaning":"Kiểm tra X-quang","stars":"★★"},{"chapter":3,"kanji":"官能検査","reading":"かんのうけんさ","meaning":"Kiểm tra cảm quan","stars":"★★"},{"chapter":3,"kanji":"サンプル","reading":"さんぷる","meaning":"Mẫu","stars":"★★"},{"chapter":3,"kanji":"改善活動","reading":"かいぜんかつどう","meaning":"Hoạt động cải tiến","stars":"★★★"},{"chapter":4,"kanji":"生産管理","reading":"せいさんかんり","meaning":"Quản lý sản xuất","stars":"★★★"},{"chapter":4,"kanji":"工程管理","reading":"こうていかんり","meaning":"Quản lý công đoạn","stars":"★★★"},{"chapter":4,"kanji":"製造工程","reading":"せいぞうこうてい","meaning":"Quy trình sản xuất","stars":"★★★"},{"chapter":4,"kanji":"生産計画","reading":"せいさんけいかく","meaning":"Kế hoạch sản xuất","stars":"★★★"},{"chapter":4,"kanji":"生産量","reading":"せいさんりょう","meaning":"Sản lượng","stars":"★★★"},{"chapter":4,"kanji":"生産能力","reading":"せいさんのうりょく","meaning":"Năng lực sản xuất","stars":"★★"},{"chapter":4,"kanji":"生産性","reading":"せいさんせい","meaning":"Năng suất","stars":"★★★"},{"chapter":4,"kanji":"効率","reading":"こうりつ","meaning":"Hiệu suất","stars":"★★★"},{"chapter":4,"kanji":"稼働率","reading":"かどうりつ","meaning":"Tỷ lệ vận hành","stars":"★★"},{"chapter":4,"kanji":"作業時間","reading":"さぎょうじかん","meaning":"Thời gian thao tác","stars":"★★★"},{"chapter":4,"kanji":"標準時間","reading":"ひょうじゅんじかん","meaning":"Thời gian tiêu chuẩn","stars":"★★"},{"chapter":4,"kanji":"納期","reading":"のうき","meaning":"Thời hạn giao hàng","stars":"★★★"},{"chapter":4,"kanji":"遅延","reading":"ちえん","meaning":"Chậm trễ","stars":"★★"},{"chapter":4,"kanji":"原材料","reading":"げんざいりょう","meaning":"Nguyên vật liệu","stars":"★★★"},{"chapter":4,"kanji":"原料","reading":"げんりょう","meaning":"Nguyên liệu","stars":"★★★"},{"chapter":4,"kanji":"材料","reading":"ざいりょう","meaning":"Vật liệu / nguyên liệu","stars":"★★★"},{"chapter":4,"kanji":"受入れ","reading":"うけいれ","meaning":"Tiếp nhận","stars":"★★★"},{"chapter":4,"kanji":"入荷","reading":"にゅうか","meaning":"Nhập hàng","stars":"★★★"},{"chapter":4,"kanji":"出荷","reading":"しゅっか","meaning":"Xuất hàng","stars":"★★★"},{"chapter":4,"kanji":"在庫","reading":"ざいこ","meaning":"Tồn kho","stars":"★★★"},{"chapter":4,"kanji":"在庫管理","reading":"ざいこかんり","meaning":"Quản lý tồn kho","stars":"★★★"},{"chapter":4,"kanji":"棚卸し","reading":"たなおろし","meaning":"Kiểm kê tồn kho","stars":"★★"},{"chapter":4,"kanji":"先入先出","reading":"せんにゅうせんしゅつ","meaning":"Nhập trước xuất trước (FIFO)","stars":"★★★"},{"chapter":4,"kanji":"保管場所","reading":"ほかんばしょ","meaning":"Nơi bảo quản","stars":"★★"},{"chapter":4,"kanji":"仕掛品","reading":"しかかりひん","meaning":"Sản phẩm đang gia công","stars":"★★"},{"chapter":4,"kanji":"半製品","reading":"はんせいひん","meaning":"Bán thành phẩm","stars":"★★"},{"chapter":4,"kanji":"製品","reading":"せいひん","meaning":"Thành phẩm / sản phẩm","stars":"★★★"},{"chapter":4,"kanji":"包装","reading":"ほうそう","meaning":"Đóng gói","stars":"★★★"},{"chapter":4,"kanji":"充填","reading":"じゅうてん","meaning":"Chiết rót / làm đầy","stars":"★★★"},{"chapter":4,"kanji":"計量","reading":"けいりょう","meaning":"Định lượng / cân","stars":"★★★"},{"chapter":4,"kanji":"混合","reading":"こんごう","meaning":"Trộn","stars":"★★★"},{"chapter":4,"kanji":"攪拌","reading":"かくはん","meaning":"Khuấy trộn","stars":"★★"},{"chapter":4,"kanji":"切断","reading":"せつだん","meaning":"Cắt","stars":"★★"},{"chapter":4,"kanji":"成形","reading":"せいけい","meaning":"Tạo hình","stars":"★★"},{"chapter":4,"kanji":"加熱工程","reading":"かねつこうてい","meaning":"Công đoạn gia nhiệt","stars":"★★★"},{"chapter":4,"kanji":"冷却工程","reading":"れいきゃくこうてい","meaning":"Công đoạn làm lạnh","stars":"★★★"},{"chapter":4,"kanji":"冷凍工程","reading":"れいとうこうてい","meaning":"Công đoạn đông lạnh","stars":"★★★"},{"chapter":4,"kanji":"包装工程","reading":"ほうそうこうてい","meaning":"Công đoạn đóng gói","stars":"★★★"},{"chapter":4,"kanji":"設備","reading":"せつび","meaning":"Thiết bị","stars":"★★★"},{"chapter":4,"kanji":"機械","reading":"きかい","meaning":"Máy móc","stars":"★★★"},{"chapter":4,"kanji":"故障","reading":"こしょう","meaning":"Hỏng hóc","stars":"★★★"},{"chapter":4,"kanji":"停止","reading":"ていし","meaning":"Dừng","stars":"★★★"},{"chapter":4,"kanji":"稼働","reading":"かどう","meaning":"Vận hành","stars":"★★★"},{"chapter":4,"kanji":"保守","reading":"ほしゅ","meaning":"Bảo trì","stars":"★★★"},{"chapter":4,"kanji":"保全","reading":"ほぜん","meaning":"Bảo dưỡng / bảo toàn thiết bị","stars":"★★★"},{"chapter":4,"kanji":"予防保全","reading":"よぼうほぜん","meaning":"Bảo trì phòng ngừa","stars":"★★"},{"chapter":4,"kanji":"点検表","reading":"てんけんひょう","meaning":"Phiếu kiểm tra","stars":"★★★"},{"chapter":4,"kanji":"ロス","reading":"ろす","meaning":"Tổn thất / lãng phí","stars":"★★★"},{"chapter":4,"kanji":"歩留まり","reading":"ぶどまり","meaning":"Tỷ lệ thu hồi / yield","stars":"★★★"},{"chapter":4,"kanji":"改善提案","reading":"かいぜんていあん","meaning":"Đề xuất cải tiến","stars":"★★"},{"chapter":5,"kanji":"労働安全","reading":"ろうどうあんぜん","meaning":"An toàn lao động","stars":"★★★"},{"chapter":5,"kanji":"安全管理","reading":"あんぜんかんり","meaning":"Quản lý an toàn","stars":"★★★"},{"chapter":5,"kanji":"労働災害","reading":"ろうどうさいがい","meaning":"Tai nạn lao động","stars":"★★★"},{"chapter":5,"kanji":"事故","reading":"じこ","meaning":"Tai nạn / sự cố","stars":"★★★"},{"chapter":5,"kanji":"危険","reading":"きけん","meaning":"Nguy hiểm","stars":"★★★"},{"chapter":5,"kanji":"危険箇所","reading":"きけんかしょ","meaning":"Vị trí nguy hiểm","stars":"★★★"},{"chapter":5,"kanji":"危険予知","reading":"きけんよち","meaning":"Dự đoán nguy hiểm","stars":"★★★"},{"chapter":5,"kanji":"KY活動","reading":"けーわいかつどう","meaning":"Hoạt động dự đoán nguy hiểm KY","stars":"★★★"},{"chapter":5,"kanji":"ヒヤリハット","reading":"ひやりはっと","meaning":"Sự cố suýt gây tai nạn","stars":"★★★"},{"chapter":5,"kanji":"安全確認","reading":"あんぜんかくにん","meaning":"Xác nhận an toàn","stars":"★★★"},{"chapter":5,"kanji":"保護具","reading":"ほごぐ","meaning":"Đồ bảo hộ","stars":"★★★"},{"chapter":5,"kanji":"保護メガネ","reading":"ほごめがね","meaning":"Kính bảo hộ","stars":"★★"},{"chapter":5,"kanji":"安全靴","reading":"あんぜんぐつ","meaning":"Giày bảo hộ","stars":"★★★"},{"chapter":5,"kanji":"ヘルメット","reading":"へるめっと","meaning":"Mũ bảo hộ","stars":"★★"},{"chapter":5,"kanji":"巻き込まれ","reading":"まきこまれ","meaning":"Bị cuốn vào máy","stars":"★★★"},{"chapter":5,"kanji":"挟まれ","reading":"はさまれ","meaning":"Bị kẹp","stars":"★★★"},{"chapter":5,"kanji":"切創","reading":"せっそう","meaning":"Vết cắt","stars":"★★★"},{"chapter":5,"kanji":"転倒","reading":"てんとう","meaning":"Trượt / ngã","stars":"★★★"},{"chapter":5,"kanji":"転落","reading":"てんらく","meaning":"Ngã từ trên cao","stars":"★★"},{"chapter":5,"kanji":"火傷","reading":"やけど","meaning":"Bỏng","stars":"★★★"},{"chapter":5,"kanji":"感電","reading":"かんでん","meaning":"Điện giật","stars":"★★★"},{"chapter":5,"kanji":"化学物質","reading":"かがくぶっしつ","meaning":"Hóa chất","stars":"★★★"},{"chapter":5,"kanji":"薬品","reading":"やくひん","meaning":"Hóa chất / thuốc","stars":"★★"},{"chapter":5,"kanji":"表示","reading":"ひょうじ","meaning":"Nhãn / hiển thị","stars":"★★★"},{"chapter":5,"kanji":"注意","reading":"ちゅうい","meaning":"Chú ý","stars":"★★★"},{"chapter":5,"kanji":"禁止","reading":"きんし","meaning":"Cấm","stars":"★★★"},{"chapter":5,"kanji":"緊急停止","reading":"きんきゅうていし","meaning":"Dừng khẩn cấp","stars":"★★★"},{"chapter":5,"kanji":"非常口","reading":"ひじょうぐち","meaning":"Lối thoát hiểm","stars":"★★"},{"chapter":5,"kanji":"避難","reading":"ひなん","meaning":"Sơ tán","stars":"★★★"},{"chapter":5,"kanji":"消火器","reading":"しょうかき","meaning":"Bình chữa cháy","stars":"★★"},{"chapter":5,"kanji":"応急処置","reading":"おうきゅうしょち","meaning":"Sơ cứu","stars":"★★★"},{"chapter":5,"kanji":"救急","reading":"きゅうきゅう","meaning":"Cấp cứu","stars":"★★"},{"chapter":5,"kanji":"安全教育","reading":"あんぜんきょういく","meaning":"Đào tạo an toàn","stars":"★★★"},{"chapter":5,"kanji":"新人教育","reading":"しんじんきょういく","meaning":"Đào tạo nhân viên mới","stars":"★★★"},{"chapter":5,"kanji":"OJT","reading":"おーじぇーてぃー","meaning":"Đào tạo tại nơi làm việc","stars":"★★★"},{"chapter":5,"kanji":"作業分担","reading":"さぎょうぶんたん","meaning":"Phân công công việc","stars":"★★★"},{"chapter":5,"kanji":"適性","reading":"てきせい","meaning":"Sự phù hợp / năng lực thích hợp","stars":"★★"},{"chapter":5,"kanji":"技能","reading":"ぎのう","meaning":"Kỹ năng","stars":"★★★"},{"chapter":5,"kanji":"熟練","reading":"じゅくれん","meaning":"Thành thạo / lành nghề","stars":"★★"},{"chapter":5,"kanji":"多能工","reading":"たのうこう","meaning":"Công nhân đa kỹ năng","stars":"★★"},{"chapter":5,"kanji":"人材育成","reading":"じんざいいくせい","meaning":"Phát triển nhân lực","stars":"★★★"},{"chapter":5,"kanji":"指導方法","reading":"しどうほうほう","meaning":"Phương pháp hướng dẫn","stars":"★★★"},{"chapter":5,"kanji":"理解度","reading":"りかいど","meaning":"Mức độ hiểu","stars":"★★"},{"chapter":5,"kanji":"習得","reading":"しゅうとく","meaning":"Tiếp thu / thành thạo","stars":"★★"},{"chapter":5,"kanji":"注意喚起","reading":"ちゅういかんき","meaning":"Nhắc nhở cảnh báo","stars":"★★★"},{"chapter":5,"kanji":"ルール","reading":"るーる","meaning":"Quy tắc","stars":"★★★"},{"chapter":5,"kanji":"遵守","reading":"じゅんしゅ","meaning":"Tuân thủ","stars":"★★★"},{"chapter":5,"kanji":"規則","reading":"きそく","meaning":"Quy định","stars":"★★★"},{"chapter":5,"kanji":"整理整頓","reading":"せいりせいとん","meaning":"Sắp xếp ngăn nắp","stars":"★★★"},{"chapter":5,"kanji":"5S","reading":"ごえす","meaning":"5S: sàng lọc, sắp xếp, sạch sẽ, săn sóc, sẵn sàng","stars":"★★★"},{"chapter":6,"kanji":"食品企業","reading":"しょくひんきぎょう","meaning":"Doanh nghiệp thực phẩm","stars":"★★★"},{"chapter":6,"kanji":"企業方針","reading":"きぎょうほうしん","meaning":"Phương châm / chính sách công ty","stars":"★★★"},{"chapter":6,"kanji":"経営","reading":"けいえい","meaning":"Quản trị / kinh doanh","stars":"★★"},{"chapter":6,"kanji":"経営方針","reading":"けいえいほうしん","meaning":"Phương châm quản trị","stars":"★★"},{"chapter":6,"kanji":"法令","reading":"ほうれい","meaning":"Luật và quy định","stars":"★★★"},{"chapter":6,"kanji":"法令遵守","reading":"ほうれいじゅんしゅ","meaning":"Tuân thủ pháp luật","stars":"★★★"},{"chapter":6,"kanji":"コンプライアンス","reading":"こんぷらいあんす","meaning":"Tuân thủ pháp luật / quy tắc","stars":"★★★"},{"chapter":6,"kanji":"社会的責任","reading":"しゃかいてきせきにん","meaning":"Trách nhiệm xã hội","stars":"★★★"},{"chapter":6,"kanji":"消費者","reading":"しょうひしゃ","meaning":"Người tiêu dùng","stars":"★★★"},{"chapter":6,"kanji":"顧客","reading":"こきゃく","meaning":"Khách hàng","stars":"★★★"},{"chapter":6,"kanji":"信頼","reading":"しんらい","meaning":"Sự tin cậy","stars":"★★★"},{"chapter":6,"kanji":"信用","reading":"しんよう","meaning":"Uy tín","stars":"★★"},{"chapter":6,"kanji":"安全性","reading":"あんぜんせい","meaning":"Tính an toàn","stars":"★★★"},{"chapter":6,"kanji":"表示制度","reading":"ひょうじせいど","meaning":"Chế độ ghi nhãn","stars":"★★★"},{"chapter":6,"kanji":"食品表示","reading":"しょくひんひょうじ","meaning":"Nhãn thực phẩm","stars":"★★★"},{"chapter":6,"kanji":"原産地","reading":"げんさんち","meaning":"Nơi xuất xứ","stars":"★★"},{"chapter":6,"kanji":"原材料表示","reading":"げんざいりょうひょうじ","meaning":"Ghi nhãn nguyên liệu","stars":"★★★"},{"chapter":6,"kanji":"アレルギー表示","reading":"あれるぎーひょうじ","meaning":"Ghi nhãn dị ứng","stars":"★★★"},{"chapter":6,"kanji":"期限表示","reading":"きげんひょうじ","meaning":"Ghi hạn sử dụng","stars":"★★★"},{"chapter":6,"kanji":"偽装","reading":"ぎそう","meaning":"Gian dối / giả mạo","stars":"★★★"},{"chapter":6,"kanji":"不正","reading":"ふせい","meaning":"Sai phạm / gian lận","stars":"★★★"},{"chapter":6,"kanji":"内部通報","reading":"ないぶつうほう","meaning":"Báo cáo nội bộ / tố giác nội bộ","stars":"★★"},{"chapter":6,"kanji":"情報管理","reading":"じょうほうかんり","meaning":"Quản lý thông tin","stars":"★★★"},{"chapter":6,"kanji":"個人情報","reading":"こじんじょうほう","meaning":"Thông tin cá nhân","stars":"★★"},{"chapter":6,"kanji":"機密情報","reading":"きみつじょうほう","meaning":"Thông tin mật","stars":"★★"},{"chapter":6,"kanji":"環境","reading":"かんきょう","meaning":"Môi trường","stars":"★★★"},{"chapter":6,"kanji":"環境保全","reading":"かんきょうほぜん","meaning":"Bảo vệ môi trường","stars":"★★"},{"chapter":6,"kanji":"廃棄物","reading":"はいきぶつ","meaning":"Chất thải","stars":"★★★"},{"chapter":6,"kanji":"食品ロス","reading":"しょくひんろす","meaning":"Lãng phí thực phẩm","stars":"★★★"},{"chapter":6,"kanji":"削減","reading":"さくげん","meaning":"Cắt giảm","stars":"★★★"},{"chapter":6,"kanji":"省エネルギー","reading":"しょうえねるぎー","meaning":"Tiết kiệm năng lượng","stars":"★★"},{"chapter":6,"kanji":"節電","reading":"せつでん","meaning":"Tiết kiệm điện","stars":"★★"},{"chapter":6,"kanji":"節水","reading":"せっすい","meaning":"Tiết kiệm nước","stars":"★★"},{"chapter":6,"kanji":"リサイクル","reading":"りさいくる","meaning":"Tái chế","stars":"★★"},{"chapter":6,"kanji":"持続可能","reading":"じぞくかのう","meaning":"Bền vững","stars":"★★"},{"chapter":6,"kanji":"SDGs","reading":"えすでぃーじーず","meaning":"Các mục tiêu phát triển bền vững","stars":"★"},{"chapter":6,"kanji":"多様性","reading":"たようせい","meaning":"Tính đa dạng","stars":"★★"},{"chapter":6,"kanji":"外国人材","reading":"がいこくじんざい","meaning":"Nhân lực nước ngoài","stars":"★★★"},{"chapter":6,"kanji":"ハラスメント","reading":"はらすめんと","meaning":"Quấy rối tại nơi làm việc","stars":"★★★"},{"chapter":6,"kanji":"差別","reading":"さべつ","meaning":"Phân biệt đối xử","stars":"★★★"},{"chapter":6,"kanji":"相談窓口","reading":"そうだんまどぐち","meaning":"Bộ phận tư vấn","stars":"★★"},{"chapter":6,"kanji":"労働時間","reading":"ろうどうじかん","meaning":"Thời gian lao động","stars":"★★★"},{"chapter":6,"kanji":"休憩","reading":"きゅうけい","meaning":"Nghỉ giải lao","stars":"★★★"},{"chapter":6,"kanji":"休日","reading":"きゅうじつ","meaning":"Ngày nghỉ","stars":"★★"},{"chapter":6,"kanji":"残業","reading":"ざんぎょう","meaning":"Làm thêm giờ","stars":"★★★"},{"chapter":6,"kanji":"健康","reading":"けんこう","meaning":"Sức khỏe","stars":"★★★"},{"chapter":6,"kanji":"働き方","reading":"はたらきかた","meaning":"Cách thức làm việc","stars":"★★"},{"chapter":6,"kanji":"変化","reading":"へんか","meaning":"Sự thay đổi","stars":"★★"},{"chapter":6,"kanji":"対応","reading":"たいおう","meaning":"Ứng phó / xử lý","stars":"★★★"},{"chapter":6,"kanji":"継続的改善","reading":"けいぞくてきかいぜん","meaning":"Cải tiến liên tục","stars":"★★★"}];const BRANCH="<svg viewBox=\"0 0 520 240\" xmlns=\"http://www.w3.org/2000/svg\"><defs><linearGradient id=\"w\" x1=\"0\" y1=\"0\" x2=\"1\" y2=\"1\"><stop stop-color=\"#7a4a39\"/><stop offset=\"1\" stop-color=\"#4d3029\"/></linearGradient><radialGradient id=\"p\"><stop stop-color=\"#fff7fa\"/><stop offset=\".55\" stop-color=\"#f8bfd0\"/><stop offset=\"1\" stop-color=\"#ee8fb0\"/></radialGradient></defs><path d=\"M-20 105 C95 100 160 76 245 57 C340 35 420 25 540 -3\" fill=\"none\" stroke=\"url(#w)\" stroke-width=\"12\" stroke-linecap=\"round\"/><path d=\"M110 92 C142 58 163 29 181 0 M210 68 C250 82 286 92 321 121 M307 43 C346 15 377 -2 404 -18 M360 30 C399 52 438 71 477 93\" fill=\"none\" stroke=\"url(#w)\" stroke-width=\"6\" stroke-linecap=\"round\"/><g transform=\"translate(94 92) rotate(-35)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(126 72) rotate(-4)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(148 48) rotate(27)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(174 26) rotate(-12)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(204 66) rotate(19)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(239 73) rotate(-20)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(273 84) rotate(11)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(307 104) rotate(-28)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(315 43) rotate(3)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(348 22) rotate(34)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(382 5) rotate(-5)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(401 48) rotate(26)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(437 67) rotate(-13)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g><g transform=\"translate(471 86) rotate(18)\"><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(72)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(144)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(216)\" fill=\"url(#p)\"/><ellipse rx=\"14\" ry=\"7\" cy=\"-10\" transform=\"rotate(288)\" fill=\"url(#p)\"/><circle r=\"4\" fill=\"#e7a72b\"/></g></svg>";const LAND="<svg viewBox=\"0 0 1200 220\" xmlns=\"http://www.w3.org/2000/svg\"><g transform=\"translate(70 30)\"><path d=\"M40 170h210\" stroke=\"#e87d58\" stroke-width=\"14\" stroke-linecap=\"round\"/><path d=\"M72 60v110M218 60v110\" stroke=\"#e87d58\" stroke-width=\"16\"/><path d=\"M25 60h245M56 35h184\" stroke=\"#e87d58\" stroke-width=\"14\" stroke-linecap=\"round\"/></g><g transform=\"translate(770 10)\"><path d=\"M0 180L170 24l165 156z\" fill=\"#b7d2e6\"/><path d=\"M170 24l-46 50 48-14 48 15z\" fill=\"#fff\"/></g></svg>";const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));$('#b1').innerHTML=BRANCH;$('#b2').innerHTML=BRANCH;$('#cardBranch').innerHTML=BRANCH;$('#land').innerHTML=LAND;let role='student',idx=0,deck=VOCAB.slice(),autoTimer=null,menuTimer=null;let known;try{known=new Set(JSON.parse(localStorage.getItem('knownWords')||'[]'))}catch(e){known=new Set()}
-function key(w){return w.kanji+'|'+w.reading}function saveKnown(){localStorage.setItem('knownWords',JSON.stringify(Array.from(known)))}function say(t,l){try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(t);u.lang=l;speechSynthesis.speak(u)}catch(e){}}function closeMenu(){$('#drawer').classList.remove('show');$('#shade').classList.remove('show');clearTimeout(menuTimer)}function openMenu(){$('#drawer').classList.add('show');$('#shade').classList.add('show');clearTimeout(menuTimer);menuTimer=setTimeout(closeMenu,5000)}function showView(n){['home','ginou','jlpt','settings'].forEach(x=>$('#'+x+'View').classList.toggle('hidden',x!==n));$('#title').textContent={home:'Trang chủ',ginou:'Tokutei Ginou 2',jlpt:'JLPT N5 – N1',settings:'Cài đặt'}[n];closeMenu()}
-function render(){if(!deck.length)return;idx=(idx+deck.length)%deck.length;const w=deck[idx];$('#kanji').textContent=w.kanji;$('#reading').textContent=w.reading;$('#meaning').textContent=w.meaning;$('#stars').textContent=w.stars||'★★';$('#chapterLabel').textContent='Ginou 2 › Chương '+w.chapter;$('#counter').textContent=(idx+1)+' / '+deck.length;$('#reading').classList.add('hidden');$('#meaning').classList.add('hidden');$('#reveal').classList.remove('hidden');$('#again').classList.add('hidden');$('#known').classList.add('hidden')}function reveal(){$('#reading').classList.remove('hidden');$('#meaning').classList.remove('hidden');$('#reveal').classList.add('hidden');$('#again').classList.remove('hidden');$('#known').classList.remove('hidden')}function next(mark){const w=deck[idx];if(mark===true)known.add(key(w));if(mark===false)known.delete(key(w));saveKnown();idx=(idx+1)%deck.length;render()}function stopAuto(){if(autoTimer)clearInterval(autoTimer);autoTimer=null;$('#auto').textContent='▶️ Bật tự động'}function startAuto(){stopAuto();$('#auto').textContent='⏸ Dừng tự động';autoTimer=setInterval(()=>{reveal();setTimeout(()=>{idx=(idx+1)%deck.length;render()},2000)},5000)}
-$('#studentRole').onclick=()=>{role='student';$('#studentRole').classList.add('active');$('#adminRole').classList.remove('active')};$('#adminRole').onclick=()=>{role='admin';$('#adminRole').classList.add('active');$('#studentRole').classList.remove('active')};function login(){const u=$('#user').value.trim(),p=$('#pass').value;const ok=(role==='student'&&u==='hocvien'&&p==='123456')||(role==='admin'&&u==='admin'&&p==='123456');if(!ok){$('#loginError').textContent='Sai tài khoản, mật khẩu hoặc loại tài khoản.';return}const s=JSON.stringify({u:u,role:role});sessionStorage.setItem('tg316_session',s);if($('#remember').checked)localStorage.setItem('tg316_session',s);$('#auth').classList.add('hidden');$('#app').classList.remove('hidden');showView('home')}
-$('#loginBtn').onclick=login;$('#pass').addEventListener('keydown',e=>{if(e.key==='Enter')login()});$('#reveal').onclick=reveal;$('#again').onclick=()=>next(false);$('#known').onclick=()=>next(true);$('#speak').onclick=()=>say(deck[idx].kanji,'ja-JP');$('#shuffle').onclick=()=>{deck=deck.slice().sort(()=>Math.random()-.5);idx=0;render()};$('#auto').onclick=()=>autoTimer?stopAuto():startAuto();$('#menuBtn').onclick=openMenu;$('#bottomMenu').onclick=openMenu;$('#shade').onclick=closeMenu;$('#gearBtn').onclick=()=>showView('settings');$('#smallGear').onclick=()=>showView('settings');$('#backHome').onclick=()=>showView('home');$$('[data-nav="home"]').forEach(b=>b.onclick=()=>showView('home'));$$('[data-view]').forEach(b=>b.onclick=()=>showView(b.dataset.view));$('#logout').onclick=()=>{sessionStorage.removeItem('tg316_session');localStorage.removeItem('tg316_session');location.reload()};$('#clearCache').onclick=async()=>{try{const ks=await caches.keys();await Promise.all(ks.filter(k=>k!=='tg2-clean-316').map(k=>caches.delete(k)));$('#status').textContent='Đã dọn cache cũ.'}catch(e){$('#status').textContent='Không cần dọn thêm.'}};render();try{const s=sessionStorage.getItem('tg316_session')||localStorage.getItem('tg316_session');if(s){$('#auth').classList.add('hidden');$('#app').classList.remove('hidden');showView('home')}}catch(e){}window.addEventListener('load',()=>{if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js?v=316').catch(()=>{})});
-</script></body></html>
+const BASE_DATA = {"N5": [{"jp": "人", "reading": "ひと", "vi": "người", "example": "あの人は先生です。", "kanji": "人"}, {"jp": "家族", "reading": "かぞく", "vi": "gia đình", "example": "家族は五人です。", "kanji": "家"}, {"jp": "食べる", "reading": "たべる", "vi": "ăn", "example": "毎日ご飯を食べます。", "kanji": "食"}, {"jp": "飲む", "reading": "のむ", "vi": "uống", "example": "水を飲みます。", "kanji": "飲"}, {"jp": "行く", "reading": "いく", "vi": "đi", "example": "会社へ行きます。", "kanji": "行"}], "N4": [{"jp": "必要", "reading": "ひつよう", "vi": "cần thiết", "example": "これは仕事に必要です。", "kanji": "必"}, {"jp": "準備", "reading": "じゅんび", "vi": "chuẩn bị", "example": "試験の準備をします。", "kanji": "準"}, {"jp": "経験", "reading": "けいけん", "vi": "kinh nghiệm", "example": "日本で働いた経験があります。", "kanji": "経"}, {"jp": "説明", "reading": "せつめい", "vi": "giải thích", "example": "使い方を説明します。", "kanji": "説"}, {"jp": "連絡", "reading": "れんらく", "vi": "liên lạc", "example": "あとで連絡します。", "kanji": "連"}], "N3": [{"jp": "確認", "reading": "かくにん", "vi": "xác nhận / kiểm tra", "example": "内容を確認してください。", "kanji": "確"}, {"jp": "改善", "reading": "かいぜん", "vi": "cải thiện", "example": "作業方法を改善します。", "kanji": "改"}, {"jp": "状況", "reading": "じょうきょう", "vi": "tình trạng", "example": "今の状況を教えてください。", "kanji": "状"}, {"jp": "対応", "reading": "たいおう", "vi": "xử lý / ứng phó", "example": "すぐに対応します。", "kanji": "対"}, {"jp": "判断", "reading": "はんだん", "vi": "phán đoán", "example": "自分で判断しないでください。", "kanji": "判"}], "N2": [{"jp": "衛生", "reading": "えいせい", "vi": "vệ sinh", "example": "衛生管理を徹底します。", "kanji": "衛"}, {"jp": "徹底", "reading": "てってい", "vi": "triệt để", "example": "安全確認を徹底します。", "kanji": "徹"}, {"jp": "異常", "reading": "いじょう", "vi": "bất thường", "example": "異常があれば報告してください。", "kanji": "異"}, {"jp": "防止", "reading": "ぼうし", "vi": "phòng ngừa", "example": "事故を防止します。", "kanji": "防"}, {"jp": "責任", "reading": "せきにん", "vi": "trách nhiệm", "example": "責任を持って作業します。", "kanji": "責"}], "N1": [{"jp": "遵守", "reading": "じゅんしゅ", "vi": "tuân thủ", "example": "規則を遵守してください。", "kanji": "遵"}, {"jp": "遂行", "reading": "すいこう", "vi": "thực hiện / hoàn thành", "example": "業務を確実に遂行します。", "kanji": "遂"}, {"jp": "懸念", "reading": "けねん", "vi": "lo ngại", "example": "安全面で懸念があります。", "kanji": "懸"}, {"jp": "把握", "reading": "はあく", "vi": "nắm bắt", "example": "全体の状況を把握します。", "kanji": "把"}, {"jp": "是正", "reading": "ぜせい", "vi": "chấn chỉnh / khắc phục", "example": "問題点を是正します。", "kanji": "是"}], "GINOU2": [{"jp": "食品衛生管理", "reading": "しょくひんえいせいかんり", "vi": "quản lý vệ sinh thực phẩm", "example": "食品衛生管理を正しく行います。", "kanji": "衛", "importance":3}, {"jp": "温度管理", "reading": "おんどかんり", "vi": "quản lý nhiệt độ", "example": "製品の温度管理を徹底します。", "kanji": "温", "importance":3}, {"jp": "異物混入", "reading": "いぶつこんにゅう", "vi": "lẫn dị vật", "example": "異物混入を防止します。", "kanji": "異", "importance":3}, {"jp": "作業手順", "reading": "さぎょうてじゅん", "vi": "quy trình thao tác", "example": "作業手順を守ってください。", "kanji": "作", "importance":2}, {"jp": "品質管理", "reading": "ひんしつかんり", "vi": "quản lý chất lượng", "example": "品質管理は重要です。", "kanji": "品", "importance":3}]};
+const KEYS={
+  data:'TG2_V4_DATA', users:'TG2_V4_USERS', session:'TG2_V4_SESSION',
+  remember:'TG2_V4_REMEMBER', progress:'TG2_V4_PROGRESS', avatar:'TG2_V4_AVATAR'
+};
+const DEFAULT_USERS={
+  hocvien:{password:'123456',role:'student',name:'Trần Văn Khá'},
+  admin:{password:'123456',role:'admin',name:'Quản trị viên'}
+};
+const $=id=>document.getElementById(id);
+let roleChoice='student', currentUser=null, level='N5', idx=0, flipped=false, autoTimer=null, autoFlip=false, flipSeconds=4, studyMode='card', showKana=true, frontSeconds=3, backSeconds=5;
+let data=loadData(), progress=loadProgress();
+
+function clone(x){return JSON.parse(JSON.stringify(x))}
+function loadData(){try{return JSON.parse(localStorage.getItem(KEYS.data))||clone(BASE_DATA)}catch(e){return clone(BASE_DATA)}}
+function saveData(){localStorage.setItem(KEYS.data,JSON.stringify(data))}
+function loadUsers(){try{return Object.assign({},DEFAULT_USERS,JSON.parse(localStorage.getItem(KEYS.users)||'{}'))}catch(e){return clone(DEFAULT_USERS)}}
+function loadProgress(){try{return JSON.parse(localStorage.getItem(KEYS.progress))||{known:0,score:0,streak:1,studied:{},memory:{}}}catch(e){return {known:0,score:0,streak:1,studied:{},memory:{}}}}
+function saveProgress(){localStorage.setItem(KEYS.progress,JSON.stringify(progress))}
+function toast(msg){$('toast').textContent=msg;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2200)}
+function setRole(r){roleChoice=r==='admin'?'admin':'student';$('studentRole').classList.toggle('active',roleChoice==='student');$('adminRole').classList.toggle('active',roleChoice==='admin');$('loginErr').textContent=''}
+$('studentRole').onclick=()=>setRole('student'); $('adminRole').onclick=()=>setRole('admin');
+
+function login(){
+  const u=$('username').value.trim().toLowerCase(), p=$('password').value, users=loadUsers(), rec=users[u];
+  if(!rec || rec.password!==p){$('loginErr').textContent='Tên đăng nhập hoặc mật khẩu chưa đúng.';return}
+  if(rec.role!==roleChoice){$('loginErr').textContent='Tài khoản không đúng loại đã chọn.';return}
+  currentUser={username:u,...rec};
+  if($('rememberLogin').checked) localStorage.setItem(KEYS.remember,JSON.stringify(currentUser));
+  sessionStorage.setItem(KEYS.session,JSON.stringify(currentUser));
+  enterApp(true);
+}
+$('loginBtn').onclick=login;
+$('password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
+
+function enterApp(showWelcome=false){
+  $('loginView').classList.add('hidden'); $('appView').classList.remove('hidden');
+  $('profileName').textContent=currentUser.name; $('profileTag').textContent=currentUser.role==='admin'?'Quản trị viên':'Học mỗi ngày để tốt hơn';
+  $('adminMenu').classList.toggle('hidden',currentUser.role!=='admin');
+  const av=localStorage.getItem(KEYS.avatar+':'+currentUser.username);
+  $('avatar').innerHTML=av?'<img src="'+av+'">':(currentUser.role==='admin'?'🛠':'👤');
+  buildLevels(); renderCard(); renderProgress(); renderCalendar(); setStudyMode('card');
+  if(showWelcome) toast('Chào mừng '+currentUser.name+' trở lại 🌸');
+}
+function logout(){sessionStorage.removeItem(KEYS.session);localStorage.removeItem(KEYS.remember);location.reload()}
+$('logoutBtn').onclick=logout;
+
+function buildLevels(){
+  const box=$('levelButtons'); box.innerHTML='';
+  Object.keys(data).forEach(l=>{
+    const b=document.createElement('button'); b.textContent=l==='GINOU2'?'📁 Ginou 2 - Thực phẩm':('📄 '+l);
+    b.className=l===level?'active':''; b.onclick=()=>{level=l;idx=0;showSection('study');buildLevels();renderCard();clearInterval(ginouWordTimer)};
+    box.appendChild(b);
+  });
+}
+function current(){const arr=data[level]||[]; return arr[idx]||{jp:'—',reading:'',vi:'',example:'',kanji:'—'}}
+
+
+function cardKey(){const x=current();return level+':'+(x.jp||idx)}
+function ensureMemory(){if(!progress.memory)progress.memory={}}
+function importanceText(x){return '★'.repeat(x.importance||1)+'☆'.repeat(Math.max(0,3-(x.importance||1)))}
+function isGinou(){return level==='GINOU2'}
+function getRangeBounds(){
+  const arr=data[level]||[];
+  if(!arr.length)return [0,-1];
+  let s=0,e=arr.length-1;
+  if(isGinou()){
+    s=Math.max(1,Math.min(arr.length,parseInt($('rangeStart')?.value||1)))-1;
+    e=Math.max(s+1,Math.min(arr.length,parseInt($('rangeEnd')?.value||arr.length)))-1;
+    if($('rangeStart')){$('rangeStart').max=arr.length;$('rangeStart').value=s+1}
+    if($('rangeEnd')){$('rangeEnd').max=arr.length;$('rangeEnd').value=e+1}
+  }
+  return [s,e];
+}
+function keepIdxInRange(){
+  const [s,e]=getRangeBounds();
+  if(e<0)return;
+  if(idx<s||idx>e) idx=s;
+}
+function setMemory(status){
+  ensureMemory();progress.memory[cardKey()]=status;saveProgress();updateMemoryButtons();
+  toast(status==='known'?'Đã ghi nhớ từ này ✓':'Đã đánh dấu chưa thuộc');
+}
+function updateMemoryButtons(){
+  ensureMemory();const s=progress.memory[cardKey()]||'';
+  if($('knownBtnFront'))$('knownBtnFront').classList.toggle('active',s==='known');
+  if($('unknownBtnFront'))$('unknownBtnFront').classList.toggle('active',s==='unknown');
+}
+function applyKana(){
+  if($('reading')) $('reading').classList.toggle('hidden',!showKana);
+  if($('readingBack')) $('readingBack').classList.remove('hidden');
+  if($('hiraganaSetting')) $('hiraganaSetting').textContent='あ Hiragana mặt 1: '+(showKana?'Bật':'Tắt');
+}
+let tgUtterance=null,tgSpeechBusy=false,tgSpeechTimer=null,tgSpeechId=0;
+function tgStopSpeech(){
+  tgSpeechId++;clearTimeout(tgSpeechTimer);tgSpeechBusy=false;tgUtterance=null;
+  try{window.speechSynthesis?.cancel()}catch(_){}
+}
+function speakJapanese(){const x=current();return speakSafe(x.reading||x.jp,'ja-JP')}
+function speakSafe(text,lang){
+  tgStopSpeech();
+  if(!text)return;
+  if(!window.speechSynthesis||!window.SpeechSynthesisUtterance){toast('Cửa sổ này chưa hỗ trợ phát âm. Hãy mở app bằng Safari hoặc Chrome.');return}
+  const id=tgSpeechId;
+  try{
+    const synth=window.speechSynthesis,u=new SpeechSynthesisUtterance(text);
+    tgUtterance=u;tgSpeechBusy=true;
+    const voices=synth.getVoices().filter(v=>(v.lang||'').toLowerCase().replace('_','-').startsWith(lang.slice(0,2)));
+    const pref=voices.find(v=>v.localService)||voices[0];
+    if(pref)u.voice=pref;
+    u.lang=lang;u.rate=lang==='ja-JP'?.86:.9;u.volume=1;u.pitch=1;
+    const fail=message=>{if(id!==tgSpeechId)return;tgStopSpeech();clearTimeout(autoTimer);autoFlip=false;if($('autoBtn'))$('autoBtn').textContent='▶ Tự động lật';if($('autoFlipSetting'))$('autoFlipSetting').textContent='⏱ Tự động lật thẻ: Tắt';toast(message)};
+    u.onstart=()=>{if(id!==tgSpeechId)return;clearTimeout(tgSpeechTimer);tgSpeechTimer=setTimeout(()=>fail('Giọng đọc bị gián đoạn. Chạm loa để thử lại.'),60000)};
+    u.onend=()=>{if(id!==tgSpeechId)return;clearTimeout(tgSpeechTimer);tgSpeechBusy=false;tgUtterance=null};
+    u.onerror=e=>{if(id!==tgSpeechId)return;fail(e.error==='not-allowed'?'Chạm nút loa để cho phép phát âm.':'Không phát được giọng đọc. Kiểm tra âm lượng và giọng Nhật / Việt trên thiết bị.')};
+    tgSpeechTimer=setTimeout(()=>fail('Giọng đọc chưa bắt đầu. Chạm nút loa để thử lại.'),8000);
+    if(synth.paused)synth.resume();
+    synth.speak(u);
+  }catch(_){tgStopSpeech();toast('Không khởi động được giọng đọc. Hãy thử lại trong Safari hoặc Chrome.')}
+}
+function speak(text,lang){return speakSafe(text,lang)}
+
+function speakCurrentAuto(side){
+  const mode=$('voiceMode')?.value||'both';
+  if(mode==='off')return;
+  if(side==='front'){
+    if(mode==='jp'||mode==='both') speakJapanese();
+  }else{
+    if(mode==='vi'||mode==='both') speak(current().vi,'vi-VN');
+  }
+}
+function illustrationFor(x,side){
+  const map={
+    '人': side==='front' ? '<div class="emoji-main">🚶</div>' : '<div><div class="emoji-main">🚶‍♂️</div><div class="mini-note">Một người</div></div>',
+    '家族': side==='front' ? '<div class="emoji-main">🏠</div>' : '<div><div class="emoji-main">👨‍👩‍👧‍👦</div><div class="mini-note">Gia đình</div></div>',
+    '食べる': side==='front' ? '<div class="emoji-main">🍚</div>' : '<div><div class="emoji-row"><span>🍚</span><span>🥢</span></div><div class="mini-note">Ăn</div></div>',
+    '飲む': side==='front' ? '<div class="emoji-main">🥤</div>' : '<div><div class="emoji-row"><span>🥤</span><span>💧</span></div><div class="mini-note">Uống</div></div>',
+    '行く': side==='front' ? '<div class="emoji-main">🚶</div>' : '<div><div class="emoji-row"><span>🚶</span><span>➡️</span></div><div class="mini-note">Đi</div></div>',
+    '必要': side==='front' ? '<div class="emoji-main">📌</div>' : '<div><div class="emoji-row"><span>📌</span><span>✅</span></div><div class="mini-note">Cần thiết</div></div>',
+    '準備': side==='front' ? '<div class="emoji-main">🎒</div>' : '<div><div class="emoji-row"><span>📝</span><span>🎒</span></div><div class="mini-note">Chuẩn bị</div></div>',
+    '経験': side==='front' ? '<div class="emoji-main">🛠️</div>' : '<div><div class="emoji-row"><span>🛠️</span><span>⭐</span></div><div class="mini-note">Kinh nghiệm</div></div>',
+    '説明': side==='front' ? '<div class="emoji-main">🗣️</div>' : '<div><div class="emoji-row"><span>🗣️</span><span>📘</span></div><div class="mini-note">Giải thích</div></div>',
+    '連絡': side==='front' ? '<div class="emoji-main">📱</div>' : '<div><div class="emoji-row"><span>📱</span><span>💬</span></div><div class="mini-note">Liên lạc</div></div>',
+    '確認': side==='front' ? '<div class="emoji-main">🔎</div>' : '<div><div class="emoji-row"><span>📄</span><span>🔎</span></div><div class="mini-note">Kiểm tra</div></div>',
+    '改善': side==='front' ? '<div class="emoji-main">📈</div>' : '<div><div class="emoji-row"><span>🔧</span><span>📈</span></div><div class="mini-note">Cải thiện</div></div>',
+    '状況': side==='front' ? '<div class="emoji-main">📊</div>' : '<div><div class="emoji-row"><span>📊</span><span>👀</span></div><div class="mini-note">Tình trạng</div></div>',
+    '対応': side==='front' ? '<div class="emoji-main">🤝</div>' : '<div><div class="emoji-row"><span>⚡</span><span>🤝</span></div><div class="mini-note">Xử lý</div></div>',
+    '判断': side==='front' ? '<div class="emoji-main">🧠</div>' : '<div><div class="emoji-row"><span>🧠</span><span>⚖️</span></div><div class="mini-note">Phán đoán</div></div>',
+    '衛生': side==='front' ? '<div class="emoji-main">🧼</div>' : '<div><div class="emoji-row"><span>🧼</span><span>✨</span></div><div class="mini-note">Vệ sinh</div></div>',
+    '徹底': side==='front' ? '<div class="emoji-main">🎯</div>' : '<div><div class="emoji-row"><span>🎯</span><span>✅</span></div><div class="mini-note">Triệt để</div></div>',
+    '異常': side==='front' ? '<div class="emoji-main">⚠️</div>' : '<div><div class="emoji-row"><span>⚠️</span><span>🔔</span></div><div class="mini-note">Bất thường</div></div>',
+    '防止': side==='front' ? '<div class="emoji-main">🛡️</div>' : '<div><div class="emoji-row"><span>🛡️</span><span>⛔</span></div><div class="mini-note">Phòng ngừa</div></div>',
+    '責任': side==='front' ? '<div class="emoji-main">🧑‍💼</div>' : '<div><div class="emoji-row"><span>🧑‍💼</span><span>✅</span></div><div class="mini-note">Trách nhiệm</div></div>',
+    '食品衛生管理': side==='front' ? '<div class="emoji-row"><span>🧼</span><span>🧤</span></div>' : '<div><div class="emoji-row"><span>🧼</span><span>🧤</span><span>🥗</span></div><div class="mini-note">Quản lý vệ sinh thực phẩm</div></div>',
+    '温度管理': side==='front' ? '<div class="emoji-row"><span>🌡️</span><span>🧊</span></div>' : '<div><div class="emoji-row"><span>🌡️</span><span>🥶</span><span>📦</span></div><div class="mini-note">Quản lý nhiệt độ</div></div>',
+    '異物混入': side==='front' ? '<div class="emoji-row"><span>🍚</span><span>⚠️</span></div>' : '<div><div class="emoji-row"><span>🥣</span><span>🔩</span><span>⚠️</span></div><div class="mini-note">Dị vật lẫn vào thực phẩm</div></div>',
+    '作業手順': side==='front' ? '<div class="emoji-main">📋</div>' : '<div><div class="emoji-row"><span>1️⃣</span><span>2️⃣</span><span>3️⃣</span></div><div class="mini-note">Quy trình thao tác</div></div>',
+    '品質管理': side==='front' ? '<div class="emoji-row"><span>✅</span><span>📦</span></div>' : '<div><div class="emoji-row"><span>🔍</span><span>📦</span><span>✅</span></div><div class="mini-note">Quản lý chất lượng</div></div>'
+  };
+  return map[x.jp] || (side==='front' ? '<div class="emoji-main">🌸</div>' : '<div><div class="emoji-main">🌸</div><div class="mini-note">'+(x.vi||'')+'</div></div>');
+}
+let activeStudySide='front';
+function setActiveStudySide(side){
+  activeStudySide = side==='back' ? 'back' : 'front';
+  if($('frontCard')){$('frontCard').classList.toggle('active',activeStudySide==='front');$('frontCard').classList.toggle('inactive',activeStudySide!=='front')}
+  if($('backCard')){$('backCard').classList.toggle('active',activeStudySide==='back');$('backCard').classList.toggle('inactive',activeStudySide!=='back')}
+}
+function renderList(){
+  const body=$('vocabListBody'); if(!body)return; body.innerHTML='';
+  const arr=data[level]||[]; const [s,e]=getRangeBounds();
+  arr.slice(s,e+1).forEach((x,off)=>{
+    const i=s+off; const tr=document.createElement('tr'); if(i===idx)tr.className='current';
+    tr.innerHTML=`<td>${i+1}</td><td><button class="vocab-row-btn jump-row" data-i="${i}">${x.jp||''}</button></td><td>${x.reading||''}</td><td>${x.vi||''}</td><td><button class="vocab-row-btn speak-row" data-i="${i}">🔊 Nhật</button></td>`;
+    body.appendChild(tr);
+  });
+  body.querySelectorAll('.jump-row').forEach(b=>b.onclick=()=>{idx=+b.dataset.i; renderCard(); setStudyMode('card')});
+  body.querySelectorAll('.speak-row').forEach(b=>b.onclick=()=>{idx=+b.dataset.i; renderCard(); speakJapanese()});
+}
+function setStudyMode(mode){
+  studyMode = (mode==='list'||mode==='kanji') ? mode : 'card';
+  if(studyMode!=='card'){tgStopSpeech();}
+  ['cardModeBtn','listModeBtn','kanjiModeBtn'].forEach(id=>$(id)&&$(id).classList.remove('active'));
+  const activeId = studyMode==='list' ? 'listModeBtn' : (studyMode==='kanji' ? 'kanjiModeBtn' : 'cardModeBtn');
+  $(activeId) && $(activeId).classList.add('active');
+  if($('cardStudyWrap'))$('cardStudyWrap').classList.toggle('hidden',studyMode!=='card');
+  if($('listSection'))$('listSection').classList.toggle('hidden',studyMode!=='list');
+  if($('kanjiSection'))$('kanjiSection').classList.toggle('hidden',studyMode!=='kanji');
+  if($('studyTools'))$('studyTools').classList.toggle('hidden',studyMode==='kanji');
+  if(studyMode==='list') renderList();
+  if(studyMode==='kanji'){clearTimeout(autoTimer);autoFlip=false;if($('autoBtn'))$('autoBtn').textContent='▶ Tự động lật';updateStrokeNumbers();}
+}
+function renderCard(){
+  const arr=data[level]||[]; keepIdxInRange(); const x=current(); const [s,e]=getRangeBounds();
+  const total = isGinou() ? Math.max(0,e-s+1) : arr.length;
+  const pos = isGinou() ? idx-s+1 : idx+1;
+  $('counter').textContent=arr.length ? `${pos} / ${total}` : '0 / 0';
+  $('topTitle').textContent=(level==='GINOU2'?'Ginou 2':level)+' › '+(x.jp||'');
+  $('levelBadge').textContent=level; $('levelBadge2').textContent=level;
+  $('importanceBadge').textContent=importanceText(x); $('importanceBadge2').textContent=importanceText(x);
+  $('jp').textContent=x.jp; $('jpBack').textContent=x.jp;
+  $('reading').textContent=x.reading||''; if($('readingBack'))$('readingBack').textContent=x.reading||'';
+  $('meaning').textContent=x.vi||'';
+  $('kanjiBig').textContent=x.kanji||x.jp?.[0]||'—';
+  if($('illustrationFront'))$('illustrationFront').innerHTML=illustrationFor(x,'front');
+  if($('illustrationBack'))$('illustrationBack').innerHTML=illustrationFor(x,'back');
+  applyKana(); updateMemoryButtons(); renderList(); updateStrokeNumbers(); setActiveStudySide('front');
+  progress.known=Math.max(progress.known,pos); progress.score=Math.max(progress.score, progress.known*10);
+  progress.studied[new Date().toISOString().slice(0,10)]=true; saveProgress(); renderProgress();
+}
+function moveWithinRange(step){
+  const arr=data[level]||[]; if(!arr.length) return;
+  keepIdxInRange(); const [s,e]=getRangeBounds();
+  idx += step;
+  if(idx>e) idx=s; if(idx<s) idx=e;
+  renderCard();speakCurrentAuto('front');
+}
+function next(){moveWithinRange(1)}
+function prev(){moveWithinRange(-1)}
+function manualFlip(){setActiveStudySide(activeStudySide==='front' ? 'back' : 'front');speakCurrentAuto(activeStudySide);scheduleAutoStep();}
+function scheduleAutoStep(){
+  clearTimeout(autoTimer); if(!autoFlip||studyMode!=='card') return;
+  const delay=tgSpeechBusy?250:(activeStudySide==='front'?frontSeconds:backSeconds)*1000;
+  autoTimer=setTimeout(()=>{
+    if(!autoFlip) return;
+    if(tgSpeechBusy){scheduleAutoStep();return;}
+    if(activeStudySide==='front'){ setActiveStudySide('back'); speakCurrentAuto('back'); }
+    else { next(); setActiveStudySide('front'); }
+    scheduleAutoStep();
+  }, delay);
+}
+function toggleAuto(){
+  autoFlip=!autoFlip;
+  $('autoBtn').textContent=autoFlip?'⏸ Dừng tự động':'▶ Tự động lật';
+  $('autoFlipSetting').textContent='⏱ Tự động lật thẻ: '+(autoFlip?'Bật':'Tắt');
+  clearTimeout(autoTimer);
+  if(autoFlip){ setActiveStudySide('front'); speakCurrentAuto('front'); scheduleAutoStep(); }else{tgStopSpeech();}
+}
+$('prevBtn').onclick=prev; $('nextBtn').onclick=next; $('mobileBack').onclick=prev;
+$('shuffleBtn').onclick=()=>{const arr=data[level]||[]; if(!arr.length)return; const [s,e]=getRangeBounds(); idx=Math.floor(Math.random()*((e-s)+1))+s; renderCard();};
+$('speakJp').onclick=e=>{e.stopPropagation();speakJapanese()};
+$('speakVi').onclick=e=>{e.stopPropagation();speak(current().vi,'vi-VN')};
+$('knownBtnFront').onclick=e=>{e.stopPropagation();setMemory('known')};
+$('unknownBtnFront').onclick=e=>{e.stopPropagation();setMemory('unknown')};
+$('cardModeBtn').onclick=()=>setStudyMode('card');
+$('listModeBtn').onclick=()=>setStudyMode('list');
+$('kanjiModeBtn').onclick=()=>setStudyMode('kanji');
+$('autoBtn').onclick=toggleAuto; $('autoFlipSetting').onclick=toggleAuto;
+$('frontCard').onclick=()=>{setActiveStudySide('front');speakCurrentAuto('front');scheduleAutoStep()}; $('backCard').onclick=()=>{setActiveStudySide('back');speakCurrentAuto('back');scheduleAutoStep()};
+$('flipGuide').onclick=manualFlip; $('flipGuide').onkeydown=e=>{if(e.key==='Enter'||e.key===' ')manualFlip()};
+['rangeStart','rangeEnd'].forEach(id=>$(id).addEventListener('change',()=>{keepIdxInRange();renderCard()}));
+
+function renderProgress(){$('knownStat').textContent=progress.known;$('scoreStat').textContent=progress.score;$('streakStat').textContent=progress.streak}
+function renderCalendar(){
+  const now=new Date(), y=now.getFullYear(),m=now.getMonth();$('monthText').textContent=(m+1)+'/'+y;
+  const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate(),g=$('calendarGrid');g.innerHTML='';
+  ['CN','T2','T3','T4','T5','T6','T7'].forEach(x=>{const d=document.createElement('div');d.textContent=x;d.style.fontWeight='900';g.appendChild(d)});
+  for(let i=0;i<first;i++){g.appendChild(document.createElement('div'))}
+  for(let d=1;d<=days;d++){const el=document.createElement('div');el.className='day';el.textContent=d;const key=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;if(progress.studied[key])el.classList.add('study');g.appendChild(el)}
+}
+
+$('saveDataBtn').onclick=()=>{try{const d=JSON.parse($('dataEditor').value);data=d;saveData();buildLevels();idx=0;renderCard();$('adminMsg').textContent='Đã lưu dữ liệu mới.';toast('Lưu dữ liệu thành công')}catch(e){$('adminMsg').textContent='JSON chưa đúng định dạng.'}};
+$('resetDataBtn').onclick=()=>{data=clone(BASE_DATA);saveData();buildLevels();idx=0;renderCard();$('dataEditor').value=JSON.stringify(data,null,2);toast('Đã khôi phục dữ liệu gốc')};
+
+
+// Kanji canvas v4.5
+const c=$('kanjiCanvas'),ctx=c.getContext('2d');
+ctx.lineWidth=12;ctx.lineCap='round';ctx.lineJoin='round';ctx.strokeStyle='#0f766e';
+let drawing=false,snapEnabled=true,strokeGuideVisible=true;
+function pos(e){
+  const r=c.getBoundingClientRect(),p=e.touches?e.touches[0]:e;
+  return {x:(p.clientX-r.left)*c.width/r.width,y:(p.clientY-r.top)*c.height/r.height}
+}
+function snapPoint(p){
+  if(!snapEnabled)return p;
+  const cx=c.width/2,cy=c.height/2;
+  const strength=.14;
+  return {x:p.x+(cx-p.x)*strength,y:p.y+(cy-p.y)*strength}
+}
+function start(e){drawing=true;let p=snapPoint(pos(e));ctx.beginPath();ctx.moveTo(p.x,p.y);e.preventDefault()}
+function move(e){if(!drawing)return;let p=snapPoint(pos(e));ctx.lineTo(p.x,p.y);ctx.stroke();e.preventDefault()}
+function end(){drawing=false}
+['mousedown','touchstart'].forEach(ev=>c.addEventListener(ev,start,{passive:false}));
+['mousemove','touchmove'].forEach(ev=>c.addEventListener(ev,move,{passive:false}));
+['mouseup','mouseleave','touchend'].forEach(ev=>c.addEventListener(ev,end));
+$('clearCanvas').onclick=()=>ctx.clearRect(0,0,c.width,c.height);
+$('snapCanvas').onclick=()=>{snapEnabled=!snapEnabled;$('snapCanvas').textContent=snapEnabled?'🧲 Hút nét: Bật':'🧲 Hút nét: Tắt';toast(snapEnabled?'Đã bật hút nét':'Đã tắt hút nét')};
+$('toggleStrokeGuide').onclick=()=>{strokeGuideVisible=!strokeGuideVisible;$('strokeNumbers').classList.toggle('hidden',!strokeGuideVisible)};
+function updateStrokeNumbers(){
+  if(!$('strokeNumbers'))return;
+  const k=(current().kanji||current().jp||'人').charAt(0);
+  const counts={'人':2,'家':10,'食':9,'飲':12,'行':6,'必':5,'準':13,'経':11,'説':14,'連':10,'確':15,'改':7,'状':7,'対':7,'判':7,'衛':16,'徹':15,'異':11,'防':7,'責':11,'遵':15,'遂':12,'懸':20,'把':7,'是':9,'温':12,'作':7,'品':9};
+  const n=counts[k]||Math.max(2,Math.min(12,k.length*4));
+  const pts=[[33,26],[50,19],[66,29],[25,43],[47,39],[70,45],[34,59],[56,58],[74,64],[41,75],[61,78],[27,80],[78,34],[18,60],[84,72],[52,88],[66,88],[38,88],[85,52],[15,40]];
+  $('strokeNumbers').innerHTML=Array.from({length:n},(_,i)=>`<span style="left:${pts[i][0]}%;top:${pts[i][1]}%">${i+1}</span>`).join('');
+}
+
+try{
+  const savedKana=localStorage.getItem('TG2_SHOW_KANA'); if(savedKana!==null)showKana=savedKana==='1';
+  const remembered=JSON.parse(localStorage.getItem(KEYS.remember)||'null');
+  const sess=JSON.parse(sessionStorage.getItem(KEYS.session)||'null');
+  if(sess||remembered){currentUser=sess||remembered;enterApp(false)}
+}catch(e){}
+
+if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=4.5.2',{updateViaCache:'none'}).catch(()=>{}))}
+document.body.dataset.appVersion='4.5.2';
+document.addEventListener('visibilitychange',()=>{if(document.hidden){tgStopSpeech();clearTimeout(autoTimer);autoFlip=false;$('autoBtn').textContent='▶ Tự động lật';$('autoFlipSetting').textContent='⏱ Tự động lật thẻ: Tắt'}});
+</script>
+</body>
+</html>
