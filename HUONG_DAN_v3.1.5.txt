@@ -1,0 +1,12 @@
+Tokutei Ginou 2 v3.1.5 SAFE CLEAN
+
+Sửa lỗi v3.1.4 bị gián đoạn/blank khi load:
+- Không xóa Service Worker trong lúc trang đang khởi động.
+- Không location.reload()/location.replace() tự động.
+- Dọn cache cũ sau khi giao diện đã tải xong.
+- sw.js được viết lại đúng JavaScript, không còn ký tự \n sai.
+- Navigation dùng network-first để GitHub Pages ưu tiên bản mới.
+- Không xóa tiến độ học hoặc tài khoản localStorage.
+
+Upload và ghi đè 4 file chính lên GitHub: index.html, sw.js, version.json, manifest.webmanifest.
+Sau commit, mở trang và refresh 1 lần.

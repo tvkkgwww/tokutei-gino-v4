@@ -1,11 +1,8 @@
 {
   "name": "Tokutei Ginou 2 - Sakura Kanji N5-N1",
-  "short_name": "Ginou 2",
-  "start_url": "./index.html?appv=3.1.4",
-  "scope": "./",
+  "short_name": "Tokutei Gino 2",
+  "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#f6fbff",
-  "theme_color": "#0b89ef",
-  "lang": "vi",
-  "icons": []
+  "background_color": "#f7fbff",
+  "theme_color": "#087ee8"
 }
