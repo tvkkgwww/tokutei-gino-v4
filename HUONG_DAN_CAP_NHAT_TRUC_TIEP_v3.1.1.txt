@@ -1,0 +1,13 @@
+TOKUTEI GINOU 2 - v3.1.1 DIRECT UPDATE
+
+1. Mở ứng dụng.
+2. Vào Cài đặt > Cập nhật ứng dụng.
+3. Chọn file .tg2app hoặc .html mới.
+4. Bấm “Cập nhật trực tiếp từ file”.
+5. Ứng dụng lưu bản mới vào bộ nhớ cục bộ và tự tải lại.
+
+Nếu bản cập nhật gặp lỗi:
+- Vào Cài đặt > Cập nhật ứng dụng.
+- Bấm “Khôi phục bản gốc”.
+
+Tiến độ học và dữ liệu học lưu trong localStorage không bị xóa bởi thao tác cập nhật/khôi phục giao diện.
