@@ -1397,7 +1397,7 @@ setTimeout(()=>{refreshAdmin500();const us=el('updateStatus');if(us)us.textConte
 <script id="v510-admin-update-patch">
 (function(){
 'use strict';
-const VERSION510='5.3';
+const VERSION510='5.5';
 const $=id=>document.getElementById(id);
 const users510=()=>{try{return JSON.parse(localStorage.getItem('tg_users')||'{}')}catch(e){return {}}};
 const saveUsers510=x=>localStorage.setItem('tg_users',JSON.stringify(x));
@@ -1451,10 +1451,10 @@ function renderAccount510(){
 function renderAdmin510(){
   ensurePanels510();const box=$('adminPanel510');if(!box)return;const isAdmin=current510()==='admin';box.classList.toggle('hidden',!isAdmin);if(!isAdmin)return;
   const x=users510(),levels=['N5','N4','N3','N2','N1','GINO2'];
-  box.innerHTML='<h3>🛡️ Quản trị & cấp quyền học</h3><div class="note">Admin có thể phê duyệt, khóa, đặt lại mật khẩu và chọn chính xác nội dung mỗi học viên được phép học.</div><div id="users510"></div>';
+  box.innerHTML='<h3>🛡️ Quản trị & cấp quyền học</h3><div class="note">Admin có thể phê duyệt, khóa/khôi phục tài khoản, đặt lại mật khẩu và chọn chính xác nội dung mỗi học viên được phép học.</div><div id="users510"></div>';
   const host=$('users510'),entries=Object.entries(x);if(!entries.length){host.innerHTML='<div class="note" style="margin-top:10px">Chưa có học viên đăng ký.</div>';return}
-  host.innerHTML=entries.map(([k,u])=>{const acc=Array.isArray(u.access)?u.access:[];return `<div class="adminUser500" data-k510="${encodeURIComponent(k)}"><b>${u.name||u.username||u.email||k}</b> <small>• ${u.status||'pending'}</small><div class="meta500">${u.username||'—'} · ${u.email||'—'} · Mục tiêu: ${u.target||'—'}</div><div class="access500">${levels.map(l=>`<label><input type="checkbox" value="${l}" ${acc.includes(l)?'checked':''}> ${l==='GINO2'?'Gino2':l}</label>`).join('')}</div><div class="adminBtns500"><button class="approve500" data-act="approve">✓ Phê duyệt</button><button class="save500" data-act="save">💾 Lưu quyền</button><button data-act="reset">🔑 Đặt lại MK</button><button class="block500" data-act="block">⛔ Khóa</button></div></div>`}).join('');
-  host.querySelectorAll('.adminUser500').forEach(card=>card.addEventListener('click',e=>{const b=e.target.closest('button[data-act]');if(!b)return;const k=decodeURIComponent(card.dataset.k510),z=users510(),u=z[k];if(!u)return;const act=b.dataset.act;if(act==='save'){u.access=[...card.querySelectorAll('input[type=checkbox]:checked')].map(i=>i.value);saveUsers510(z);return msg510('Đã lưu quyền học cho '+(u.name||u.username||u.email));}if(act==='approve'){u.status='approved';if(!u.password){u.password='TG'+Math.floor(100000+Math.random()*900000);u.mustChange=true}if(!Array.isArray(u.access)||!u.access.length)u.access=u.target?[u.target]:[];saveUsers510(z);const pw=u.password;renderAdmin510();return alert('Đã phê duyệt.\nTên đăng nhập: '+(u.username||u.email)+'\nMật khẩu tạm thời: '+pw);}if(act==='reset'){u.password='TG'+Math.floor(100000+Math.random()*900000);u.mustChange=true;saveUsers510(z);return alert('Mật khẩu tạm thời mới: '+u.password);}if(act==='block'){u.status='blocked';saveUsers510(z);renderAdmin510();msg510('Đã khóa tài khoản');}}));
+  host.innerHTML=entries.map(([k,u])=>{const acc=Array.isArray(u.access)?u.access:[];return `<div class="adminUser500" data-k510="${encodeURIComponent(k)}"><b>${u.name||u.username||u.email||k}</b> <small>• ${u.status||'pending'}</small><div class="meta500">${u.username||'—'} · ${u.email||'—'} · Mục tiêu: ${u.target||'—'}</div><div class="access500">${levels.map(l=>`<label><input type="checkbox" value="${l}" ${acc.includes(l)?'checked':''}> ${l==='GINO2'?'Gino2':l}</label>`).join('')}</div><div class="adminBtns500">${u.status!=='approved'&&u.status!=='blocked'?'<button class="approve500" data-act="approve">✓ Phê duyệt</button>':''}<button class="save500" data-act="save">💾 Lưu quyền</button><button data-act="reset">🔑 Đặt lại MK</button>${u.status==='blocked'?'<button class="approve500" data-act="restore">♻️ Khôi phục tài khoản</button>':'<button class="block500" data-act="block">⛔ Khóa</button>'}</div></div>`}).join('');
+  host.querySelectorAll('.adminUser500').forEach(card=>card.addEventListener('click',e=>{const b=e.target.closest('button[data-act]');if(!b)return;const k=decodeURIComponent(card.dataset.k510),z=users510(),u=z[k];if(!u)return;const act=b.dataset.act;if(act==='save'){u.access=[...card.querySelectorAll('input[type=checkbox]:checked')].map(i=>i.value);saveUsers510(z);return msg510('Đã lưu quyền học cho '+(u.name||u.username||u.email));}if(act==='approve'){u.status='approved';if(!u.password){u.password='TG'+Math.floor(100000+Math.random()*900000);u.mustChange=true}if(!Array.isArray(u.access)||!u.access.length)u.access=u.target?[u.target]:[];saveUsers510(z);const pw=u.password;renderAdmin510();return alert('Đã phê duyệt.\nTên đăng nhập: '+(u.username||u.email)+'\nMật khẩu tạm thời: '+pw);}if(act==='reset'){u.password='TG'+Math.floor(100000+Math.random()*900000);u.mustChange=true;saveUsers510(z);return alert('Mật khẩu tạm thời mới: '+u.password);}if(act==='restore'){u.status='approved';u.restoredAt=Date.now();saveUsers510(z);renderAdmin510();return msg510('Đã khôi phục tài khoản học viên');}if(act==='block'){u.status='blocked';u.blockedAt=Date.now();saveUsers510(z);renderAdmin510();msg510('Đã khóa tài khoản');}}));
 }
 
 // Direct in-app update: choose a new HTML update and apply it immediately.
@@ -1722,6 +1722,82 @@ const oldRender=window.renderHomeMain;
 if(typeof oldRender==='function'){window.renderHomeMain=function(){const r=oldRender.apply(this,arguments);setTimeout(refresh530,30);return r;};}
 document.addEventListener('click',()=>setTimeout(refresh530,50));
 setTimeout(refresh530,250);
+})();
+</script>
+
+
+<style id="v540-admin-permission-style">
+#adminPermission540{margin-top:14px;padding:14px;border:1px solid #cfe5f4;border-radius:16px;background:#fafdff}
+#adminPermission540 h3{margin:0 0 8px;color:#0a5b95}
+.adminRights540{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px;margin-top:10px}
+.adminRight540{padding:10px;border:1px solid #d7e9f5;border-radius:12px;background:#fff;color:#315b86;font-weight:800}
+.adminBadge540{display:inline-block;padding:4px 9px;border-radius:999px;background:#0b6fae;color:#fff;font-size:12px;font-weight:900}
+.adminUser540{margin-top:10px;padding:12px;border:1px solid #d7e9f5;border-radius:14px;background:#fff}
+.adminUser540 .meta{font-size:12px;color:#678195;line-height:1.5;margin:5px 0 8px}
+.adminUser540 .levels{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.adminUser540 .levels label{padding:6px 9px;border:1px solid #cfe5f4;border-radius:10px;background:#f7fbfe}
+.adminUser540 .actions{display:flex;flex-wrap:wrap;gap:7px}
+.adminUser540 .actions button{margin:0}
+</style>
+<script id="v540-admin-permission-patch">
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const users=()=>{try{return JSON.parse(localStorage.getItem('tg_users')||'{}')}catch(e){return {}}};
+const save=x=>localStorage.setItem('tg_users',JSON.stringify(x));
+const cur=()=>{try{return String(currentUser||'')}catch(e){return ''}};
+const toast540=s=>{try{toast(s)}catch(e){alert(s)}};
+const labels={N5:'N5',N4:'N4',N3:'N3',N2:'N2',N1:'N1',GINO2:'Gino2'};
+function ensure(){
+ const panel=document.querySelector('#settingsView .panel'); if(!panel)return null;
+ let box=$('adminPermission540');
+ if(!box){box=document.createElement('div');box.id='adminPermission540';box.className='hidden';
+   const old=$('adminPanel510'); if(old&&old.parentNode===panel) panel.insertBefore(box,old); else panel.appendChild(box);
+ }
+ return box;
+}
+function render(){
+ const box=ensure(); if(!box)return;
+ const admin=cur().toLowerCase()==='admin'; box.classList.toggle('hidden',!admin); if(!admin)return;
+ const data=users(); const entries=Object.entries(data); const levels=Object.keys(labels);
+ box.innerHTML=`<h3>🛡️ Phân quyền quản trị <span class="adminBadge540">ADMIN</span></h3>
+ <div class="note">Tài khoản admin có toàn quyền. Tại đây có thể cấp hoặc thu hồi quyền học riêng cho từng học viên.</div>
+ <div class="adminRights540">
+  <div class="adminRight540">✓ Quản lý học viên</div><div class="adminRight540">✓ Cấp quyền khóa học</div>
+  <div class="adminRight540">✓ Phê duyệt / khóa tài khoản</div><div class="adminRight540">✓ Đặt lại mật khẩu</div>
+  <div class="adminRight540">✓ Tủ sách riêng học viên</div><div class="adminRight540">✓ Thông báo & tin nhắn</div>
+ </div>
+ <div style="margin-top:12px"><b>Danh sách học viên & quyền truy cập</b></div>
+ <div id="adminUsers540"></div>`;
+ const host=$('adminUsers540');
+ if(!entries.length){host.innerHTML='<div class="note" style="margin-top:10px">Chưa có học viên đăng ký.</div>';return}
+ host.innerHTML=entries.map(([k,u])=>{const acc=Array.isArray(u.access)?u.access:[];return `<div class="adminUser540" data-key="${encodeURIComponent(k)}">
+  <b>${u.name||u.username||u.email||k}</b> <small>• ${u.status||'pending'}</small>
+  <div class="meta">${u.username||'—'} · ${u.email||'—'}<br>Quyền hiện tại: ${acc.length?acc.map(a=>labels[a]||a).join(', '):'Chưa cấp quyền'}</div>
+  <div class="levels">${levels.map(l=>`<label><input type="checkbox" value="${l}" ${acc.includes(l)?'checked':''}> ${labels[l]}</label>`).join('')}</div>
+  <div class="actions"><button data-a="save" class="play">💾 Lưu quyền</button><button data-a="approve">✓ Phê duyệt</button><button data-a="reset">🔑 Đặt lại MK</button><button data-a="toggle">${u.status==='blocked'?'🔓 Mở khóa':'⛔ Khóa'}</button></div>
+ </div>`}).join('');
+ host.querySelectorAll('.adminUser540').forEach(card=>card.addEventListener('click',e=>{
+   const b=e.target.closest('button[data-a]'); if(!b)return;
+   const key=decodeURIComponent(card.dataset.key), all=users(), u=all[key]; if(!u)return;
+   const a=b.dataset.a;
+   if(a==='save'){u.access=[...card.querySelectorAll('input[type=checkbox]:checked')].map(i=>i.value);save(all);toast540('Đã lưu quyền cho '+(u.name||u.username||u.email));render();}
+   if(a==='approve'){u.status='approved';if(!u.password){u.password='TG'+Math.floor(100000+Math.random()*900000);u.mustChange=true}save(all);alert('Đã phê duyệt.\nTên đăng nhập: '+(u.username||u.email)+'\nMật khẩu: '+u.password);render();}
+   if(a==='reset'){u.password='TG'+Math.floor(100000+Math.random()*900000);u.mustChange=true;save(all);alert('Mật khẩu tạm thời mới: '+u.password);}
+   if(a==='toggle'){u.status=u.status==='blocked'?'approved':'blocked';save(all);toast540(u.status==='blocked'?'Đã khóa tài khoản':'Đã mở khóa tài khoản');render();}
+ }));
+}
+function addHomeButton(){
+ const tools=$('homeTools520'); if(!tools||$('adminManageBtn540'))return;
+ const b=document.createElement('button');b.id='adminManageBtn540';b.textContent='🛡️ Phân quyền quản trị';b.className='hidden';
+ b.onclick=()=>{try{show('settingsView','Cài đặt')}catch(e){};setTimeout(()=>{render();$('adminPermission540')?.scrollIntoView({behavior:'smooth',block:'start'})},80)};
+ tools.prepend(b);
+}
+function sync(){addHomeButton(); const b=$('adminManageBtn540'); if(b)b.classList.toggle('hidden',cur().toLowerCase()!=='admin'); render();}
+['gearBtn','settingsBtn'].forEach(id=>$(id)?.addEventListener('click',()=>setTimeout(sync,0)));
+const login=$('loginBtn'); if(login) login.addEventListener('click',()=>setTimeout(sync,80));
+const oldShow=window.show;if(typeof oldShow==='function'){window.show=function(){const r=oldShow.apply(this,arguments);setTimeout(sync,0);return r}};
+setTimeout(sync,120);
 })();
 </script>
 
