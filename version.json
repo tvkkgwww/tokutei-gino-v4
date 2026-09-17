@@ -1,5 +1,5 @@
 {
-  "version": "7.0.2-test",
-  "build": "lite-login-assets",
-  "notes": "Externalized embedded backgrounds; status bar; preserves existing data model."
+  "version": "7.0.3",
+  "build": "sakura-cloud-status",
+  "notes": "Sakura cloud online/offline status with clear load and upload percentage indicators; preserves existing user data model."
 }

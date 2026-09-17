@@ -2236,7 +2236,7 @@ window.addEventListener('pageshow',sync670);
 window.addEventListener('load',sync670);
 setTimeout(sync670,0);setTimeout(sync670,250);setTimeout(sync670,1000);
 if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=6.7',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=7.0.3',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));
 }
 })();
 </script>
@@ -2249,7 +2249,7 @@ if('serviceWorker' in navigator){
 </style>
 <script id="v702-transfer-status">
 (function(){
-'use strict'; const V='7.0.2-test'; window.TG_APP_VERSION=V;
+'use strict'; const V='7.0.3'; window.TG_APP_VERSION=V;
 function host(){let anchor=document.getElementById('app')||document.querySelector('main')||document.body;let cloud=document.getElementById('tgCloudStatus702');if(!cloud){cloud=document.createElement('div');cloud.id='tgCloudStatus702';cloud.textContent='☁️ Đang kiểm tra kết nối…';anchor.appendChild(cloud)}let box=document.getElementById('tgTransfer702');if(!box){box=document.createElement('div');box.id='tgTransfer702';box.innerHTML='<div class="tgRow702"><div class="tgHead702"><span>🌸 LOAD ↓ Tải dữ liệu</span><span id="tgLoadPct702">0%</span></div><div class="tgTrack702"><div id="tgLoadFill702" class="tgFill702"></div></div><div id="tgLoadMeta702" class="tgMeta702">Sẵn sàng tải dữ liệu từ Server → thiết bị</div></div><div class="tgRow702"><div class="tgHead702"><span>☁️ UPLOAD ↑ Đồng bộ</span><span id="tgUpPct702">0%</span></div><div class="tgTrack702"><div id="tgUpFill702" class="tgFill702"></div></div><div id="tgUpMeta702" class="tgMeta702">Chưa có dữ liệu cần gửi lên Server</div></div>';anchor.appendChild(box)}return {cloud,box}}
 function net(){const h=host(),on=navigator.onLine;h.cloud.textContent=on?'☁️ 🟢 ONLINE · Server đã kết nối · Dữ liệu trên thiết bị sẵn sàng':'☁️ 🔴 OFFLINE · Đang sử dụng dữ liệu đã lưu trên thiết bị';['updateStatus','directStatus510','status590'].forEach(id=>{let x=document.getElementById(id);if(x)x.textContent='Phiên bản hiện tại: v'+V})}
 function set(kind,pct,msg){host();pct=Math.max(0,Math.min(100,Number(pct)||0));let pre=kind==='upload'?'tgUp':'tgLoad';document.getElementById(pre+'Pct702').textContent=Math.round(pct)+'%';document.getElementById(pre+'Fill702').style.width=pct+'%';if(msg)document.getElementById(pre+'Meta702').textContent=msg}
