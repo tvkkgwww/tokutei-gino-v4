@@ -1,0 +1,6 @@
+Gino2 v7.1.6
+- Preload/cache toàn bộ tài nguyên chính trước khi mở tương tác.
+- Lưu cache trên thiết bị để lần sau mở nhanh.
+- Loại bỏ 5 bộ xử lý toàn cục chạy lại sau MỖI click, giảm lag khi thao tác.
+- Giữ các hook/observer mục tiêu để chức năng quản trị và giao diện vẫn cập nhật.
+- Không chủ động xóa tài khoản hoặc tiến độ local.

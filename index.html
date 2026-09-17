@@ -1432,7 +1432,7 @@ if(loginBtn510) loginBtn510.onclick=function(){
   if($('remember')?.checked)localStorage.setItem('tg461login',raw);
   $('login')?.classList.add('hidden');$('app')?.classList.remove('hidden');
   try{show('homeView','Khóa học')}catch(e){}
-  setTimeout(()=>{renderAdmin510();renderAccount510()},0);
+  setTimeout(()=>{renderAccount510();},0); // v7.1.7: full Admin list renders only when Settings is opened
   try{refreshStudyStats()}catch(e){}
 };
 
@@ -1478,7 +1478,7 @@ function normalizeUpdate510(){const us=$('updateStatus');if(us)us.textContent='P
 
 ['gearBtn','settingsBtn'].forEach(id=>$(id)?.addEventListener('click',()=>setTimeout(()=>{renderAccount510();renderAdmin510();renderUpdate510();normalizeUpdate510()},0)));
 const oldShow=window.show; if(typeof oldShow==='function'){window.show=function(){const r=oldShow.apply(this,arguments);setTimeout(()=>{if(!$('settingsView')?.classList.contains('hidden')){renderAccount510();renderAdmin510();renderUpdate510();normalizeUpdate510()}},0);return r}}
-setTimeout(()=>{ensurePanels510();renderAccount510();renderAdmin510();renderUpdate510();normalizeUpdate510()},50);
+setTimeout(()=>{ensurePanels510();renderAccount510();renderUpdate510();normalizeUpdate510()},80); // v7.1.7 lazy Admin panel
 })();
 </script>
 
@@ -1649,10 +1649,13 @@ const saveLogs=v=>setJSON('tg_access_logs_520',v);
    }
  }
  const loginBtn=el('loginBtn'); if(loginBtn){ const prev=loginBtn.onclick; loginBtn.onclick=function(){ const r=prev&&prev.apply(this,arguments); setTimeout(refreshAll520,120); return r; }; }
- ['gearBtn','homeBtn','settingsBtn'].forEach(id=>el(id)?.addEventListener('click',()=>setTimeout(refreshAll520,50)));
- const oldShow=window.show; if(typeof oldShow==='function'){ window.show=function(){ const r=oldShow.apply(this,arguments); setTimeout(refreshAll520,80); return r; }; }
- document.addEventListener('click',e=>{ if(e.target.closest && e.target.closest('[data-go="home"]')) setTimeout(refreshAll520,80); });
- setTimeout(refreshAll520,120);
+ // v7.1.7 Admin performance: refresh the heavy admin home only when Home is actually requested.
+ let refreshTimer717=null;
+ const scheduleHomeRefresh717=(delay=120)=>{clearTimeout(refreshTimer717);refreshTimer717=setTimeout(()=>{const hv=el('homeView');if(hv&&!hv.classList.contains('hidden'))refreshAll520();},delay)};
+ ['homeBtn'].forEach(id=>el(id)?.addEventListener('click',()=>scheduleHomeRefresh717(80)));
+ const oldShow=window.show; if(typeof oldShow==='function'){ window.show=function(viewId){ const r=oldShow.apply(this,arguments); if(viewId==='homeView')scheduleHomeRefresh717(100); return r; }; }
+ document.addEventListener('click',e=>{ if(e.target.closest && e.target.closest('[data-go="home"]')) scheduleHomeRefresh717(100); });
+ setTimeout(()=>{const hv=el('homeView');if(hv&&!hv.classList.contains('hidden'))refreshAll520()},180);
 })();
 </script>
 
@@ -1729,7 +1732,7 @@ bagObserver.observe(document.documentElement,{childList:true,subtree:true});
 
 const oldRender=window.renderHomeMain;
 if(typeof oldRender==='function'){window.renderHomeMain=function(){const r=oldRender.apply(this,arguments);setTimeout(refresh530,30);return r;};}
-document.addEventListener('click',()=>setTimeout(refresh530,50));
+/* v7.1.6 perf: removed global per-click refresh530; targeted refresh hooks remain */
 setTimeout(refresh530,250);
 })();
 </script>
@@ -1909,7 +1912,7 @@ function install560(){
 }
 
 // Reinstall after settings/account panels are re-rendered.
-document.addEventListener('click',()=>setTimeout(install560,80));
+/* v7.1.6 perf: removed global per-click admin installer; MutationObserver/initial install remain */
 const obs560=new MutationObserver(()=>{if(cur560()==='admin')setTimeout(install560,30)});
 obs560.observe(document.documentElement,{childList:true,subtree:true});
 setInterval(()=>{
@@ -1983,7 +1986,7 @@ function installLogin(){
 document.addEventListener('click',function(e){if(!isAdmin())return;const c=e.target.closest?.('.course[data-level]');if(c){e.cancelBubble=false}},false);
 ['gearBtn','settingsBtn','homeBtn'].forEach(id=>$(id)?.addEventListener('click',()=>setTimeout(()=>{markSuper();ensureHome();render()},30)));
 const mo=new MutationObserver(()=>{if(isAdmin()){markSuper();ensureHome(); if(!$('settingsView')?.classList.contains('hidden'))render()}});mo.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
-setTimeout(()=>{installLogin();markSuper();ensureHome();render();const us=$('updateStatus');if(us)us.textContent='Phiên bản hiện tại: v7.1.4';},80);
+setTimeout(()=>{installLogin();markSuper();ensureHome();render();const us=$('updateStatus');if(us)us.textContent='Phiên bản hiện tại: v7.1.6';},80);
 })();
 </script>
 
@@ -2092,9 +2095,10 @@ function installLoginFinal(){
     setTimeout(()=>{try{document.body.classList.toggle('tg-super-admin',cur()==='admin')}catch(e){};installPasswordBox();},50);
   };
 }
-function sync(){installLoginFinal();installPasswordBox();const u=$('updateStatus');if(u)u.textContent='Phiên bản hiện tại: v6.2';const d=$('directStatus510');if(d)d.textContent='Phiên bản hiện tại: v6.2';}
-document.addEventListener('click',()=>setTimeout(sync,40));
-new MutationObserver(()=>{if(cur()==='admin')setTimeout(installPasswordBox,20)}).observe(document.documentElement,{childList:true,subtree:true});
+function sync(){installLoginFinal();installPasswordBox();const u=$('updateStatus');if(u)u.textContent='Phiên bản hiện tại: v7.1.7';const d=$('directStatus510');if(d)d.textContent='Phiên bản hiện tại: v7.1.7';}
+/* v7.1.6 perf: removed global per-click sync; targeted/observer sync remains */
+let adminObsTimer717=null;
+new MutationObserver(()=>{if(cur()!=='admin')return;const sv=document.getElementById('settingsView');if(!sv||sv.classList.contains('hidden'))return;clearTimeout(adminObsTimer717);adminObsTimer717=setTimeout(installPasswordBox,250)}).observe(document.documentElement,{childList:true,subtree:true});
 setTimeout(sync,120);
 })();
 </script>
@@ -2216,7 +2220,7 @@ function openSettingsClean(e){
 // Capture only the gear outside vocabulary list to prevent multiple legacy handlers firing at once (lag/double action).
 document.addEventListener('click',openSettingsClean,true);
 // Recheck after navigation without a heavy subtree observer.
-document.addEventListener('click',()=>setTimeout(()=>{ensureButtons();contextualGear()},0),false);
+/* v7.1.6 perf: removed global per-click button maintenance; settings capture + initial hooks remain */
 window.addEventListener('load',()=>{ensureButtons();contextualGear()});
 setTimeout(()=>{ensureButtons();contextualGear()},80);
 setTimeout(()=>{ensureButtons();contextualGear()},400);
@@ -2240,7 +2244,7 @@ function updateGear670(){
   g.classList.toggle('hidden',!studying);
 }
 function sync670(){syncVersion670();updateGear670();}
-document.addEventListener('click',()=>setTimeout(sync670,0));
+/* v7.1.6 perf: removed global per-click version sync; startup sync remains */
 window.addEventListener('pageshow',sync670);
 window.addEventListener('load',sync670);
 setTimeout(sync670,0);setTimeout(sync670,250);setTimeout(sync670,1000);
@@ -2279,7 +2283,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 </script>
 
 
-<script id="v715-course-preload">
+<script id="v716-course-preload">
 (()=>{
 'use strict';
 const VERSION='7.1.5', KEY='gino2_course_ready_'+VERSION;
@@ -2287,7 +2291,7 @@ const $=id=>document.getElementById(id);
 function paint(n,t){n=Math.max(0,Math.min(100,Math.round(n)));const f=$('preloadFill714'),p=$('preloadPct714'),s=$('preloadSub714');if(f)f.style.width=n+'%';if(p)p.textContent=n+'%';if(s&&t)s.textContent=t}
 async function cacheLocal(progress){
   if(!('caches' in window)){progress(75,'Đang lưu dữ liệu cục bộ…');return}
-  try{const c=await caches.open('gino2-7.1.5');const urls=['./','./index.html','./manifest.webmanifest'];let done=0;for(const u of urls){try{const r=await fetch(u,{cache:'no-store'});if(r.ok)await c.put(u,r.clone())}catch(e){}done++;progress(48+(done/urls.length)*38,'Đang lưu dữ liệu trên thiết bị…')} }catch(e){}
+  try{const c=await caches.open('gino2-7.1.6');const urls=['./','./index.html','./manifest.webmanifest','./version.json','./assets/bg-903c48e781bb.png','./assets/bg-02ccd034873c.png','./Tokutei_Ginou_2_v3.1.3_Responsive_Background_Flashcard_Fix.tg2app','./GINOU2_v4.6.tg2update'];let done=0;for(const u of urls){try{const r=await fetch(u,{cache:'no-store'});if(r.ok)await c.put(u,r.clone())}catch(e){}done++;progress(48+(done/urls.length)*38,'Đang lưu dữ liệu trên thiết bị…')} }catch(e){}
 }
 async function preload(){
  const ov=$('coursePreload714');if(!ov)return;ov.classList.add('on');document.documentElement.style.overflow='hidden';paint(2,'Đang kiểm tra dữ liệu khóa học…');
@@ -2297,8 +2301,8 @@ async function preload(){
  try{localStorage.setItem(KEY,'1');localStorage.setItem('gino2_course_ready_version',VERSION);localStorage.setItem('gino2_course_ready_at',String(Date.now()))}catch(e){}
  paint(100,ready?'Dữ liệu đã sẵn sàng — dùng bản lưu trên thiết bị':'Đã tải và lưu dữ liệu khóa học trên thiết bị');await new Promise(r=>setTimeout(r,280));ov.classList.remove('on');document.documentElement.style.overflow='';
 }
-function hook(){const b=$('loginBtn');if(!b||b.dataset.pre715)return;b.dataset.pre715='1';b.addEventListener('click',()=>{setTimeout(()=>{if($('login')?.classList.contains('hidden')&&!$('app')?.classList.contains('hidden'))preload()},0)},true)}
+function hook(){const b=$('loginBtn');if(!b||b.dataset.pre716)return;b.dataset.pre716='1';b.addEventListener('click',()=>{setTimeout(()=>{if($('login')?.classList.contains('hidden')&&!$('app')?.classList.contains('hidden'))preload()},0)},true)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',hook);else hook();setTimeout(hook,150);
-window.gino2PreloadCourses715=preload;
+window.gino2PreloadCourses716=preload;
 })();
 </script>\n</body></html>

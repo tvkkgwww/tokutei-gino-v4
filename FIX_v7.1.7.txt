@@ -1,0 +1,7 @@
+Gino2 v7.1.7 Admin Smooth
+- Giữ nguyên phần Học viên đang mượt.
+- Admin không render danh sách quản trị nặng ngay sau đăng nhập.
+- Chỉ render quản trị khi mở Cài đặt.
+- Không refresh toàn bộ Admin sau mọi lần chuyển màn hình.
+- Debounce MutationObserver để tránh render lặp.
+- Không xóa tài khoản, tiến độ hay cache học tập.
