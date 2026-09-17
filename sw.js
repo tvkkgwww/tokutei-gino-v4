@@ -1,13 +1,5 @@
-const CACHE='gino2-v7.0-test-lite';
-const ASSETS=['./','./index.html',
-  './assets/bg-02ccd034873c.png',
-  './assets/bg-903c48e781bb.png','./manifest.webmanifest'];
-self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting())));
-self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('tg2-')&&key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
-self.addEventListener('fetch',event=>{
- if(event.request.method!=='GET'||new URL(event.request.url).origin!==self.location.origin)return;
- event.respondWith(fetch(event.request,{cache:'no-store'}).then(response=>{
-  if(response.ok){const copy=response.clone();event.waitUntil(caches.open(CACHE).then(cache=>cache.put(event.request,copy)).catch(()=>{}));}
-  return response;
- }).catch(async()=>{const cached=await caches.match(event.request);return cached||(event.request.mode==='navigate'?await caches.match('./index.html'):null)||Response.error()}));
-});
+const CACHE='gino2-v6.7.1-admin-clean';
+const CORE=['./','./index.html','./manifest.webmanifest','./version.json'];
+self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).catch(()=>{}))});
+self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin)return;e.respondWith(fetch(e.request).then(r=>{const cp=r.clone();caches.open(CACHE).then(c=>c.put(e.request,cp)).catch(()=>{});return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
