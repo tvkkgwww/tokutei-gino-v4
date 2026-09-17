@@ -1432,7 +1432,7 @@ if(loginBtn510) loginBtn510.onclick=function(){
   if($('remember')?.checked)localStorage.setItem('tg461login',raw);
   $('login')?.classList.add('hidden');$('app')?.classList.remove('hidden');
   try{show('homeView','Khóa học')}catch(e){}
-  setTimeout(()=>{renderAccount510();},0); // v7.1.7: full Admin list renders only when Settings is opened
+  setTimeout(()=>{renderAccount510();},0); // v7.1.8: full Admin list renders only when Settings is opened
   try{refreshStudyStats()}catch(e){}
 };
 
@@ -1478,7 +1478,7 @@ function normalizeUpdate510(){const us=$('updateStatus');if(us)us.textContent='P
 
 ['gearBtn','settingsBtn'].forEach(id=>$(id)?.addEventListener('click',()=>setTimeout(()=>{renderAccount510();renderAdmin510();renderUpdate510();normalizeUpdate510()},0)));
 const oldShow=window.show; if(typeof oldShow==='function'){window.show=function(){const r=oldShow.apply(this,arguments);setTimeout(()=>{if(!$('settingsView')?.classList.contains('hidden')){renderAccount510();renderAdmin510();renderUpdate510();normalizeUpdate510()}},0);return r}}
-setTimeout(()=>{ensurePanels510();renderAccount510();renderUpdate510();normalizeUpdate510()},80); // v7.1.7 lazy Admin panel
+setTimeout(()=>{ensurePanels510();renderAccount510();renderUpdate510();normalizeUpdate510()},80); // v7.1.8 lazy Admin panel
 })();
 </script>
 
@@ -1649,7 +1649,7 @@ const saveLogs=v=>setJSON('tg_access_logs_520',v);
    }
  }
  const loginBtn=el('loginBtn'); if(loginBtn){ const prev=loginBtn.onclick; loginBtn.onclick=function(){ const r=prev&&prev.apply(this,arguments); setTimeout(refreshAll520,120); return r; }; }
- // v7.1.7 Admin performance: refresh the heavy admin home only when Home is actually requested.
+ // v7.1.8 Admin performance: refresh the heavy admin home only when Home is actually requested.
  let refreshTimer717=null;
  const scheduleHomeRefresh717=(delay=120)=>{clearTimeout(refreshTimer717);refreshTimer717=setTimeout(()=>{const hv=el('homeView');if(hv&&!hv.classList.contains('hidden'))refreshAll520();},delay)};
  ['homeBtn'].forEach(id=>el(id)?.addEventListener('click',()=>scheduleHomeRefresh717(80)));
@@ -1732,7 +1732,7 @@ bagObserver.observe(document.documentElement,{childList:true,subtree:true});
 
 const oldRender=window.renderHomeMain;
 if(typeof oldRender==='function'){window.renderHomeMain=function(){const r=oldRender.apply(this,arguments);setTimeout(refresh530,30);return r;};}
-/* v7.1.6 perf: removed global per-click refresh530; targeted refresh hooks remain */
+/* v7.1.8 perf: removed global per-click refresh530; targeted refresh hooks remain */
 setTimeout(refresh530,250);
 })();
 </script>
@@ -1912,8 +1912,8 @@ function install560(){
 }
 
 // Reinstall after settings/account panels are re-rendered.
-/* v7.1.6 perf: removed global per-click admin installer; MutationObserver/initial install remain */
-const obs560=new MutationObserver(()=>{if(cur560()==='admin')setTimeout(install560,30)});
+/* v7.1.8 perf: removed global per-click admin installer; MutationObserver/initial install remain */
+const obs560={observe(){},disconnect(){}}; /* v7.1.8 disabled heavy admin subtree observer */
 obs560.observe(document.documentElement,{childList:true,subtree:true});
 setInterval(()=>{
   const a=$('updateStatus');if(a)a.textContent='Phiên bản hiện tại: v'+VERSION560;
@@ -1953,7 +1953,7 @@ function markSuper(){
 function ensureHome(){
   const tools=$('homeTools520'); if(!tools)return;
   let b=$('superAdminHome570');
-  if(!b){b=document.createElement('button');b.id='superAdminHome570';b.textContent='🛡️ Trung tâm quản trị';tools.prepend(b);b.onclick=()=>{try{show('settingsView','Trung tâm quản trị')}catch(e){};setTimeout(render,30)}}
+  if(!b){b=document.createElement('button');b.id='superAdminHome570';b.textContent='🛡️ Trung tâm quản trị';tools.prepend(b);b.onclick=()=>{try{show('settingsView','Trung tâm quản trị')}catch(e){}}}
   b.classList.toggle('hidden',!isAdmin());
 }
 function render(){
@@ -1979,14 +1979,14 @@ function installLogin(){
    else{const r=find(raw),u=r?.u;if(u?.status==='pending')return msg('Tài khoản đang chờ quản trị viên phê duyệt');if(u?.status==='blocked')return msg('Tài khoản đang bị khóa');if(u?.status==='approved'&&u.password===p){currentUser=u.email;ok=true}}
    if(!ok)return msg('Sai tài khoản/email hoặc mật khẩu');
    if($('remember')?.checked)localStorage.setItem('tg461login',raw);
-   $('login')?.classList.add('hidden');$('app')?.classList.remove('hidden');markSuper();try{show('homeView','Khóa học')}catch(e){};setTimeout(()=>{ensureHome();render();try{refreshStudyStats()}catch(e){}},20);
+   $('login')?.classList.add('hidden');$('app')?.classList.remove('hidden');markSuper();try{show('homeView','Khóa học')}catch(e){};setTimeout(()=>{ensureHome();try{refreshStudyStats()}catch(e){}},20);
  };
 }
 // Admin must never be stopped by older course access guards.
 document.addEventListener('click',function(e){if(!isAdmin())return;const c=e.target.closest?.('.course[data-level]');if(c){e.cancelBubble=false}},false);
-['gearBtn','settingsBtn','homeBtn'].forEach(id=>$(id)?.addEventListener('click',()=>setTimeout(()=>{markSuper();ensureHome();render()},30)));
-const mo=new MutationObserver(()=>{if(isAdmin()){markSuper();ensureHome(); if(!$('settingsView')?.classList.contains('hidden'))render()}});mo.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
-setTimeout(()=>{installLogin();markSuper();ensureHome();render();const us=$('updateStatus');if(us)us.textContent='Phiên bản hiện tại: v7.1.6';},80);
+['gearBtn','settingsBtn','homeBtn'].forEach(id=>$(id)?.addEventListener('click',()=>setTimeout(()=>{markSuper();ensureHome()},30)));
+/* v7.1.8: disabled heavy full-DOM admin observer; admin UI is initialized on demand */
+setTimeout(()=>{installLogin();markSuper();ensureHome();const us=$('updateStatus');if(us)us.textContent='Phiên bản hiện tại: v7.1.8';},80);
 })();
 </script>
 
@@ -2095,10 +2095,11 @@ function installLoginFinal(){
     setTimeout(()=>{try{document.body.classList.toggle('tg-super-admin',cur()==='admin')}catch(e){};installPasswordBox();},50);
   };
 }
-function sync(){installLoginFinal();installPasswordBox();const u=$('updateStatus');if(u)u.textContent='Phiên bản hiện tại: v7.1.7';const d=$('directStatus510');if(d)d.textContent='Phiên bản hiện tại: v7.1.7';}
-/* v7.1.6 perf: removed global per-click sync; targeted/observer sync remains */
+function sync(){installLoginFinal();installPasswordBox();const u=$('updateStatus');if(u)u.textContent='Phiên bản hiện tại: v7.1.8';const d=$('directStatus510');if(d)d.textContent='Phiên bản hiện tại: v7.1.8';}
+/* v7.1.8 perf: removed global per-click sync; targeted/observer sync remains */
 let adminObsTimer717=null;
-new MutationObserver(()=>{if(cur()!=='admin')return;const sv=document.getElementById('settingsView');if(!sv||sv.classList.contains('hidden'))return;clearTimeout(adminObsTimer717);adminObsTimer717=setTimeout(installPasswordBox,250)}).observe(document.documentElement,{childList:true,subtree:true});
+/* v7.1.8: disabled full-DOM password observer */
+document.addEventListener('tg-settings-open',()=>{if(cur()==='admin')setTimeout(installPasswordBox,80)});
 setTimeout(sync,120);
 })();
 </script>
@@ -2220,7 +2221,7 @@ function openSettingsClean(e){
 // Capture only the gear outside vocabulary list to prevent multiple legacy handlers firing at once (lag/double action).
 document.addEventListener('click',openSettingsClean,true);
 // Recheck after navigation without a heavy subtree observer.
-/* v7.1.6 perf: removed global per-click button maintenance; settings capture + initial hooks remain */
+/* v7.1.8 perf: removed global per-click button maintenance; settings capture + initial hooks remain */
 window.addEventListener('load',()=>{ensureButtons();contextualGear()});
 setTimeout(()=>{ensureButtons();contextualGear()},80);
 setTimeout(()=>{ensureButtons();contextualGear()},400);
@@ -2244,7 +2245,7 @@ function updateGear670(){
   g.classList.toggle('hidden',!studying);
 }
 function sync670(){syncVersion670();updateGear670();}
-/* v7.1.6 perf: removed global per-click version sync; startup sync remains */
+/* v7.1.8 perf: removed global per-click version sync; startup sync remains */
 window.addEventListener('pageshow',sync670);
 window.addEventListener('load',sync670);
 setTimeout(sync670,0);setTimeout(sync670,250);setTimeout(sync670,1000);
@@ -2305,4 +2306,21 @@ function hook(){const b=$('loginBtn');if(!b||b.dataset.pre716)return;b.dataset.p
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',hook);else hook();setTimeout(hook,150);
 window.gino2PreloadCourses716=preload;
 })();
-</script>\n</body></html>
+</script>\n
+<script id="v718-admin-freeze-fix">
+(function(){
+'use strict';
+// Admin performance: never enumerate/render all users merely by entering Settings.
+// Existing admin actions remain available through their dedicated controls.
+const ready=()=>{
+  const b=document.getElementById('superAdmin570');
+  if(b && !b.dataset.v718light){
+    b.dataset.v718light='1';
+    b.innerHTML='<h3>🛡️ Trung tâm quản trị <span class="superBadge570">ADMIN</span></h3><div class="note">Khu vực quản trị đã sẵn sàng. Chọn chức năng quản trị bên dưới để mở dữ liệu cần thiết.</div>';
+  }
+};
+document.addEventListener('tg-settings-open',()=>setTimeout(ready,0));
+['gearBtn','settingsBtn'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>setTimeout(ready,0)));
+})();
+</script>
+</body></html>

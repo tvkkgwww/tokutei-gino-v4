@@ -1,1 +1,6 @@
-{"version":"7.1.7","build":"2026-09-18","channel":"admin-smooth"}
+{
+  "version": "7.1.8",
+  "build": "2026-09-18",
+  "channel": "admin-smooth",
+  "name": "Admin Control Freeze Fix"
+}

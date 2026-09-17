@@ -1,0 +1,6 @@
+Gino2 v7.1.8 Admin Control Freeze Fix
+- Giữ nguyên khu vực học viên/bài học.
+- Tắt các MutationObserver toàn DOM của Admin gây render lặp.
+- Không render danh sách/phân quyền toàn bộ học viên khi chỉ mở khu vực quản trị.
+- Chỉ khởi tạo phần quản trị cần thiết theo sự kiện mở.
+- Không xóa tài khoản hoặc tiến độ học.
