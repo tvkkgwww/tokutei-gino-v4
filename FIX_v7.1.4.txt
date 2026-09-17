@@ -1,0 +1,6 @@
+Gino2 v7.1.4 - Course Preload 100%
+- Sau đăng nhập: khóa tương tác và hiện thanh tải dữ liệu khóa học 0-100%.
+- Chỉ mở tương tác khi đạt 100%.
+- Lưu core app/cache trên thiết bị để lần sau mở nhanh hơn.
+- Nếu đã có cache đúng phiên bản, ưu tiên dữ liệu local và kiểm tra nhanh.
+- Không xóa tài khoản hoặc tiến độ localStorage hiện có.
