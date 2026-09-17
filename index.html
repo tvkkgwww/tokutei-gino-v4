@@ -2242,17 +2242,19 @@ if('serviceWorker' in navigator){
 </script>
 
 
-<style id="v700-status-style">
-#tgSyncBar700{position:fixed;left:0;right:0;bottom:0;z-index:9999;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;padding:6px 10px calc(6px + env(safe-area-inset-bottom));font-size:12px;font-weight:800;background:rgba(255,255,255,.96);border-top:1px solid #cfe4f2;color:#155778;backdrop-filter:blur(8px)}
-#tgSyncBar700 .ok{color:#17653b}#tgSyncBar700 .off{color:#a33}#tgSyncBar700 .wait{color:#8a6400}
-body{padding-bottom:34px}
+<style id="v702-status-style">
+#tgCloudStatus702{margin:12px auto 8px;max-width:760px;padding:10px 14px;text-align:center;font-size:13px;font-weight:800;color:#684356;background:linear-gradient(145deg,#fffafd,#ffe7f1);border:1px solid #f6bfd4;border-radius:16px;box-shadow:0 5px 14px rgba(181,91,126,.16),inset 0 1px 0 #fff}
+#tgTransfer702{margin:8px auto 16px;max-width:760px;padding:12px 14px;background:linear-gradient(145deg,#fff,#fff0f6);border:1px solid #f5bfd3;border-radius:18px;box-shadow:0 7px 18px rgba(177,82,119,.15),inset 0 1px 0 rgba(255,255,255,.95)}
+.tgRow702{margin:7px 0}.tgHead702{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:900;color:#75465a;margin-bottom:5px}.tgTrack702{height:12px;border-radius:999px;background:#f4d9e5;box-shadow:inset 0 2px 5px rgba(119,55,80,.18);overflow:hidden}.tgFill702{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#f7a9c7,#ff76ab,#ffd0e1);box-shadow:inset 0 1px 2px #fff,0 0 8px rgba(255,103,161,.32);transition:width .28s ease}.tgMeta702{margin-top:5px;font-size:11px;color:#8b6876}.tgDone702 .tgFill702{background:linear-gradient(90deg,#ef9fbe,#ff6fa7,#ffd7e5)}
 </style>
-<script id="v700-lite-status">
+<script id="v702-transfer-status">
 (function(){
-'use strict'; const V='7.0-test'; window.TG_APP_VERSION=V;
-function bar(){let b=document.getElementById('tgSyncBar700');if(!b){b=document.createElement('div');b.id='tgSyncBar700';b.innerHTML='<span id="tgServer700">● Server</span><span id="tgSync700">● Đồng bộ</span><span id="tgNet700">● Online</span>';document.body.appendChild(b)}return b}
-function paint(){bar();const on=navigator.onLine;let n=document.getElementById('tgNet700'),sv=document.getElementById('tgServer700'),sy=document.getElementById('tgSync700');n.textContent=on?'🌐 Online':'📵 Offline';n.className=on?'ok':'off';sv.textContent=on?'🟢 Server: sẵn sàng':'🔴 Server: mất kết nối';sv.className=on?'ok':'off';sy.textContent=on?'💾 Dữ liệu cục bộ: sẵn sàng':'💾 Offline: dùng dữ liệu trên máy';sy.className=on?'ok':'wait';['updateStatus','directStatus510','status590'].forEach(id=>{let x=document.getElementById(id);if(x)x.textContent='Phiên bản hiện tại: v'+V})}
-addEventListener('online',paint);addEventListener('offline',paint);addEventListener('load',paint);addEventListener('pageshow',paint);setTimeout(paint,0);setTimeout(paint,500);
+'use strict'; const V='7.0.2-test'; window.TG_APP_VERSION=V;
+function host(){let anchor=document.getElementById('app')||document.querySelector('main')||document.body;let cloud=document.getElementById('tgCloudStatus702');if(!cloud){cloud=document.createElement('div');cloud.id='tgCloudStatus702';cloud.textContent='☁️ Đang kiểm tra kết nối…';anchor.appendChild(cloud)}let box=document.getElementById('tgTransfer702');if(!box){box=document.createElement('div');box.id='tgTransfer702';box.innerHTML='<div class="tgRow702"><div class="tgHead702"><span>🌸 LOAD ↓ Tải dữ liệu</span><span id="tgLoadPct702">0%</span></div><div class="tgTrack702"><div id="tgLoadFill702" class="tgFill702"></div></div><div id="tgLoadMeta702" class="tgMeta702">Sẵn sàng tải dữ liệu từ Server → thiết bị</div></div><div class="tgRow702"><div class="tgHead702"><span>☁️ UPLOAD ↑ Đồng bộ</span><span id="tgUpPct702">0%</span></div><div class="tgTrack702"><div id="tgUpFill702" class="tgFill702"></div></div><div id="tgUpMeta702" class="tgMeta702">Chưa có dữ liệu cần gửi lên Server</div></div>';anchor.appendChild(box)}return {cloud,box}}
+function net(){const h=host(),on=navigator.onLine;h.cloud.textContent=on?'☁️ 🟢 ONLINE · Server đã kết nối · Dữ liệu trên thiết bị sẵn sàng':'☁️ 🔴 OFFLINE · Đang sử dụng dữ liệu đã lưu trên thiết bị';['updateStatus','directStatus510','status590'].forEach(id=>{let x=document.getElementById(id);if(x)x.textContent='Phiên bản hiện tại: v'+V})}
+function set(kind,pct,msg){host();pct=Math.max(0,Math.min(100,Number(pct)||0));let pre=kind==='upload'?'tgUp':'tgLoad';document.getElementById(pre+'Pct702').textContent=Math.round(pct)+'%';document.getElementById(pre+'Fill702').style.width=pct+'%';if(msg)document.getElementById(pre+'Meta702').textContent=msg}
+window.TG_TRANSFER_STATUS={load:(p,m)=>set('load',p,m),upload:(p,m)=>set('upload',p,m),network:net};
+addEventListener('online',net);addEventListener('offline',net);addEventListener('load',net);addEventListener('pageshow',net);setTimeout(net,0);
 })();
 </script>
 </body></html>

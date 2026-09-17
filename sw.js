@@ -1,4 +1,4 @@
-const CACHE='gino2-v7.0-test-lite';
+const CACHE='gino2-7.0.2-test';
 const ASSETS=['./','./index.html',
   './assets/bg-02ccd034873c.png',
   './assets/bg-903c48e781bb.png','./manifest.webmanifest'];

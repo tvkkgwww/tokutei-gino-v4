@@ -1,5 +1,5 @@
 {
-  "version": "7.0.1-test",
+  "version": "7.0.2-test",
   "build": "lite-login-assets",
   "notes": "Externalized embedded backgrounds; status bar; preserves existing data model."
 }
