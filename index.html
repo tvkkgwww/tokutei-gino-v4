@@ -2278,4 +2278,27 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 </script>
 
-\n<script id="v714-course-preload">\n(()=>{\n'use strict';\nconst VERSION='7.1.4', KEY='gino2_course_ready_'+VERSION;\nconst $=id=>document.getElementById(id);\nfunction paint(n,t){n=Math.max(0,Math.min(100,Math.round(n)));const f=$('preloadFill714'),p=$('preloadPct714'),s=$('preloadSub714');if(f)f.style.width=n+'%';if(p)p.textContent=n+'%';if(s&&t)s.textContent=t}\nasync function cacheLocal(progress){\n  if(!('caches' in window)){progress(75,'Đang lưu dữ liệu cục bộ…');return}\n  try{const c=await caches.open('gino2-7.1.4');const urls=['./','./index.html','./manifest.webmanifest'];let done=0;for(const u of urls){try{const r=await fetch(u,{cache:'no-store'});if(r.ok)await c.put(u,r.clone())}catch(e){}done++;progress(48+(done/urls.length)*38,'Đang lưu dữ liệu trên thiết bị…')} }catch(e){}\n}\nasync function preload(){\n const ov=$('coursePreload714');if(!ov)return;ov.classList.add('on');document.documentElement.style.overflow='hidden';paint(2,'Đang kiểm tra dữ liệu khóa học…');\n const ready=localStorage.getItem(KEY)==='1';\n if(ready){paint(55,'Đã tìm thấy dữ liệu đã lưu…');await new Promise(r=>setTimeout(r,100));paint(90,'Đang kiểm tra bản dữ liệu…')}\n else {paint(12,'Đang chuẩn bị dữ liệu khóa học…');await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));paint(32,'Đang khởi tạo nội dung học…');try{if(typeof ensureHome==='function')ensureHome();if(typeof refreshStudyStats==='function')refreshStudyStats()}catch(e){}await cacheLocal(paint)}\n try{localStorage.setItem(KEY,'1');localStorage.setItem('gino2_course_ready_version',VERSION);localStorage.setItem('gino2_course_ready_at',String(Date.now()))}catch(e){}\n paint(100,ready?'Dữ liệu đã sẵn sàng — dùng bản lưu trên thiết bị':'Đã tải và lưu dữ liệu khóa học trên thiết bị');await new Promise(r=>setTimeout(r,280));ov.classList.remove('on');document.documentElement.style.overflow='';\n}\nfunction hook(){const b=$('loginBtn');if(!b||b.dataset.pre714)return;b.dataset.pre714='1';b.addEventListener('click',()=>{setTimeout(()=>{if($('login')?.classList.contains('hidden')&&!$('app')?.classList.contains('hidden'))preload()},0)},true)}\nif(document.readyState==='loading')document.addEventListener('DOMContentLoaded',hook);else hook();setTimeout(hook,150);\nwindow.gino2PreloadCourses714=preload;\n})();\n</script>\n</body></html>
+
+<script id="v715-course-preload">
+(()=>{
+'use strict';
+const VERSION='7.1.5', KEY='gino2_course_ready_'+VERSION;
+const $=id=>document.getElementById(id);
+function paint(n,t){n=Math.max(0,Math.min(100,Math.round(n)));const f=$('preloadFill714'),p=$('preloadPct714'),s=$('preloadSub714');if(f)f.style.width=n+'%';if(p)p.textContent=n+'%';if(s&&t)s.textContent=t}
+async function cacheLocal(progress){
+  if(!('caches' in window)){progress(75,'Đang lưu dữ liệu cục bộ…');return}
+  try{const c=await caches.open('gino2-7.1.5');const urls=['./','./index.html','./manifest.webmanifest'];let done=0;for(const u of urls){try{const r=await fetch(u,{cache:'no-store'});if(r.ok)await c.put(u,r.clone())}catch(e){}done++;progress(48+(done/urls.length)*38,'Đang lưu dữ liệu trên thiết bị…')} }catch(e){}
+}
+async function preload(){
+ const ov=$('coursePreload714');if(!ov)return;ov.classList.add('on');document.documentElement.style.overflow='hidden';paint(2,'Đang kiểm tra dữ liệu khóa học…');
+ const ready=localStorage.getItem(KEY)==='1';
+ if(ready){paint(55,'Đã tìm thấy dữ liệu đã lưu…');await new Promise(r=>setTimeout(r,100));paint(90,'Đang kiểm tra bản dữ liệu…')}
+ else {paint(12,'Đang chuẩn bị dữ liệu khóa học…');await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));paint(32,'Đang khởi tạo nội dung học…');try{if(typeof ensureHome==='function')ensureHome();if(typeof refreshStudyStats==='function')refreshStudyStats()}catch(e){}await cacheLocal(paint)}
+ try{localStorage.setItem(KEY,'1');localStorage.setItem('gino2_course_ready_version',VERSION);localStorage.setItem('gino2_course_ready_at',String(Date.now()))}catch(e){}
+ paint(100,ready?'Dữ liệu đã sẵn sàng — dùng bản lưu trên thiết bị':'Đã tải và lưu dữ liệu khóa học trên thiết bị');await new Promise(r=>setTimeout(r,280));ov.classList.remove('on');document.documentElement.style.overflow='';
+}
+function hook(){const b=$('loginBtn');if(!b||b.dataset.pre715)return;b.dataset.pre715='1';b.addEventListener('click',()=>{setTimeout(()=>{if($('login')?.classList.contains('hidden')&&!$('app')?.classList.contains('hidden'))preload()},0)},true)}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',hook);else hook();setTimeout(hook,150);
+window.gino2PreloadCourses715=preload;
+})();
+</script>\n</body></html>
