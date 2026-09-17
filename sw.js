@@ -1,4 +1,4 @@
-const CACHE='gino2-7.0.3';
+const CACHE='gino2-7.1.0';
 const ASSETS=['./','./index.html',
   './assets/bg-02ccd034873c.png',
   './assets/bg-903c48e781bb.png','./manifest.webmanifest'];

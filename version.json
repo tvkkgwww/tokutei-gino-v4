@@ -1,5 +1,1 @@
-{
-  "version": "7.0.3",
-  "build": "sakura-cloud-status",
-  "notes": "Sakura cloud online/offline status with clear load and upload percentage indicators; preserves existing user data model."
-}
+{"version":"7.1.0","build":"Gino2_v7.1.0_Sync","date":"2026-09-17"}
