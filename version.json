@@ -1,1 +1,5 @@
-{"version":"6.7.1-admin-clean","build":"2026-09-17","notes":"Admin login clean: removed legacy render-loop observers and deferred heavy admin rendering."}
+{
+  "version": "7.0.1-test",
+  "build": "lite-login-assets",
+  "notes": "Externalized embedded backgrounds; status bar; preserves existing data model."
+}
