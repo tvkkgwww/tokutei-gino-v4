@@ -1,5 +1,1 @@
-{
-  "version": "3.1.5",
-  "build": "safe-clean",
-  "cache": "tokutei-ginou-v3.1.5"
-}
+{"version":"6.7.1-admin-clean","build":"2026-09-17","notes":"Admin login clean: removed legacy render-loop observers and deferred heavy admin rendering."}

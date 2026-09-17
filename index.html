@@ -1973,7 +1973,7 @@ function installLogin(){
 // Admin must never be stopped by older course access guards.
 document.addEventListener('click',function(e){if(!isAdmin())return;const c=e.target.closest?.('.course[data-level]');if(c){e.cancelBubble=false}},false);
 ['gearBtn','settingsBtn','homeBtn'].forEach(id=>$(id)?.addEventListener('click',()=>setTimeout(()=>{markSuper();ensureHome();render()},30)));
-const mo=new MutationObserver(()=>{if(isAdmin()){markSuper();ensureHome(); if(!$('settingsView')?.classList.contains('hidden'))render()}});mo.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['class']});
+// Admin Clean: removed legacy global admin MutationObserver (caused render loops / freezes).
 setTimeout(()=>{installLogin();markSuper();ensureHome();render();const us=$('updateStatus');if(us)us.textContent='Phiên bản hiện tại: v5.7';},80);
 })();
 </script>
@@ -2013,7 +2013,7 @@ function render(){
 }
 function hook(){render();const old=$('applyUpdate');if(old){old.textContent='⬆ Cập nhật trực tiếp trong ứng dụng';old.onclick=()=>{render();$('directUpdate510')?.scrollIntoView({behavior:'smooth',block:'start'});setTimeout(()=>$('file590')?.click(),200)}}}
 ['gearBtn','settingsBtn'].forEach(id=>$(id)?.addEventListener('click',()=>setTimeout(hook,120)));
-const mo=new MutationObserver(()=>{if($('directUpdate510')&&!$('file590'))render()});mo.observe(document.documentElement,{subtree:true,childList:true});
+// Admin Clean: removed legacy updater MutationObserver; updater renders on explicit navigation.
 setTimeout(hook,250);
 })();
 </script>
@@ -2085,7 +2085,7 @@ function installLoginFinal(){
 }
 function sync(){installLoginFinal();installPasswordBox();const u=$('updateStatus');if(u)u.textContent='Phiên bản hiện tại: v6.2';const d=$('directStatus510');if(d)d.textContent='Phiên bản hiện tại: v6.2';}
 document.addEventListener('click',()=>setTimeout(sync,40));
-new MutationObserver(()=>{if(cur()==='admin')setTimeout(installPasswordBox,20)}).observe(document.documentElement,{childList:true,subtree:true});
+// Admin Clean: removed password-box subtree observer; installPasswordBox runs from explicit sync/navigation.
 setTimeout(sync,120);
 })();
 </script>
@@ -2114,8 +2114,7 @@ function finishLogin(raw){
   $('app')?.classList.remove('hidden');
   try{ if(typeof show==='function') show('homeView','Khóa học'); }catch(e){}
   setTimeout(()=>{
-    try{ if(typeof refreshAll520==='function') refreshAll520(); }catch(e){}
-    try{ if(typeof refreshAdmin==='function') refreshAdmin(); }catch(e){}
+    // Admin Clean: defer heavy admin panels until the user explicitly opens Settings/Admin.
     try{ if(typeof refreshStudyStats==='function') refreshStudyStats(); }catch(e){}
     try{ document.body.classList.toggle('tg-super-admin', String(window.currentUser||'').toLowerCase()==='admin'); }catch(e){}
   },50);
@@ -2219,7 +2218,7 @@ setTimeout(()=>{ensureButtons();contextualGear()},400);
 <script id="v670-github-release">
 (function(){
 'use strict';
-const APP_VERSION_670='6.7';
+const APP_VERSION_670='6.7.1-admin-clean';
 window.TG_APP_VERSION=APP_VERSION_670;
 function syncVersion670(){
   ['updateStatus','directStatus510','status590'].forEach(id=>{const n=document.getElementById(id);if(n)n.textContent='Phiên bản hiện tại: v'+APP_VERSION_670;});
@@ -2236,7 +2235,7 @@ window.addEventListener('pageshow',sync670);
 window.addEventListener('load',sync670);
 setTimeout(sync670,0);setTimeout(sync670,250);setTimeout(sync670,1000);
 if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=6.7',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=6.7.1-admin-clean',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));
 }
 })();
 </script>
