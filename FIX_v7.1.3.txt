@@ -1,0 +1,6 @@
+Gino2 v7.1.3 Performance Fix
+- Loai bo cac khoi dong bo cu bi trung lap (6.7 / 7.1.1).
+- Giu mot luong dong bo 7.1.3 duy nhat.
+- Service Worker cache-first cho tai nguyen tinh de giam tai lai tren iPhone.
+- Duy tri phien dang nhap Supabase tren thiet bi.
+- Khong xoa localStorage, tai khoan hoac tien do hoc hien co.

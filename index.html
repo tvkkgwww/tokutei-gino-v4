@@ -2236,64 +2236,13 @@ window.addEventListener('pageshow',sync670);
 window.addEventListener('load',sync670);
 setTimeout(sync670,0);setTimeout(sync670,250);setTimeout(sync670,1000);
 if('serviceWorker' in navigator){
-  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=7.0.3',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));
+  window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=7.1.3',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));
 }
 })();
 </script>
 
 
-<style id="v702-status-style">
-#tgCloudStatus702{margin:12px auto 8px;max-width:760px;padding:10px 14px;text-align:center;font-size:13px;font-weight:800;color:#684356;background:linear-gradient(145deg,#fffafd,#ffe7f1);border:1px solid #f6bfd4;border-radius:16px;box-shadow:0 5px 14px rgba(181,91,126,.16),inset 0 1px 0 #fff}
-#tgTransfer702{margin:8px auto 16px;max-width:760px;padding:12px 14px;background:linear-gradient(145deg,#fff,#fff0f6);border:1px solid #f5bfd3;border-radius:18px;box-shadow:0 7px 18px rgba(177,82,119,.15),inset 0 1px 0 rgba(255,255,255,.95)}
-.tgRow702{margin:7px 0}.tgHead702{display:flex;justify-content:space-between;gap:10px;font-size:12px;font-weight:900;color:#75465a;margin-bottom:5px}.tgTrack702{height:12px;border-radius:999px;background:#f4d9e5;box-shadow:inset 0 2px 5px rgba(119,55,80,.18);overflow:hidden}.tgFill702{height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,#f7a9c7,#ff76ab,#ffd0e1);box-shadow:inset 0 1px 2px #fff,0 0 8px rgba(255,103,161,.32);transition:width .28s ease}.tgMeta702{margin-top:5px;font-size:11px;color:#8b6876}.tgDone702 .tgFill702{background:linear-gradient(90deg,#ef9fbe,#ff6fa7,#ffd7e5)}
-</style>
-<script id="v702-transfer-status">
-(function(){
-'use strict'; const V='7.1.1'; window.TG_APP_VERSION=V;
-function host(){let anchor=document.getElementById('app')||document.querySelector('main')||document.body;let cloud=document.getElementById('tgCloudStatus702');if(!cloud){cloud=document.createElement('div');cloud.id='tgCloudStatus702';cloud.textContent='☁️ Đang kiểm tra kết nối…';anchor.appendChild(cloud)}let box=document.getElementById('tgTransfer702');if(!box){box=document.createElement('div');box.id='tgTransfer702';box.innerHTML='<div class="tgRow702"><div class="tgHead702"><span>🌸 LOAD ↓ Tải dữ liệu</span><span id="tgLoadPct702">0%</span></div><div class="tgTrack702"><div id="tgLoadFill702" class="tgFill702"></div></div><div id="tgLoadMeta702" class="tgMeta702">Sẵn sàng tải dữ liệu từ Server → thiết bị</div></div><div class="tgRow702"><div class="tgHead702"><span>☁️ UPLOAD ↑ Đồng bộ</span><span id="tgUpPct702">0%</span></div><div class="tgTrack702"><div id="tgUpFill702" class="tgFill702"></div></div><div id="tgUpMeta702" class="tgMeta702">Chưa có dữ liệu cần gửi lên Server</div></div>';anchor.appendChild(box)}return {cloud,box}}
-function net(){const h=host(),on=navigator.onLine;h.cloud.textContent=on?'☁️ ONLINE':'☁️ OFFLINE · Dữ liệu trên máy';['updateStatus','directStatus510','status590'].forEach(id=>{let x=document.getElementById(id);if(x)x.textContent='Phiên bản hiện tại: v'+V})}
-function set(kind,pct,msg){host();pct=Math.max(0,Math.min(100,Number(pct)||0));let pre=kind==='upload'?'tgUp':'tgLoad';document.getElementById(pre+'Pct702').textContent=Math.round(pct)+'%';document.getElementById(pre+'Fill702').style.width=pct+'%';if(msg)document.getElementById(pre+'Meta702').textContent=msg}
-window.TG_TRANSFER_STATUS={load:(p,m)=>set('load',p,m),upload:(p,m)=>set('upload',p,m),network:net};
-addEventListener('online',net);addEventListener('offline',net);addEventListener('load',net);addEventListener('pageshow',net);setTimeout(net,0);
-})();
-</script>
-
-<style id="gino71-sync-style">
-#tgTransfer702{display:none!important}
-#tgCloudStatus702{position:fixed!important;left:50%!important;right:auto!important;bottom:calc(76px + env(safe-area-inset-bottom))!important;transform:translateX(-50%)!important;z-index:9998!important;width:auto!important;max-width:92vw!important;margin:0!important;padding:8px 14px!important;border-radius:999px!important;background:linear-gradient(180deg,#fff8fc,#ffe8f3)!important;border:1px solid #f4b9d3!important;box-shadow:0 8px 24px #a8477a30!important;font-size:12px!important;font-weight:900!important;color:#7b2d57!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;transition:.25s ease!important}
-#tgCloudStatus702.syncing{padding:0!important;box-shadow:none!important}
-</style>
-<style id="gino711-cloud-minimal">
-#tgTransfer702{display:none!important}
-#tgCloudStatus702{position:fixed!important;left:50%!important;bottom:calc(76px + env(safe-area-inset-bottom))!important;transform:translateX(-50%)!important;z-index:9998!important;width:auto!important;max-width:92vw!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:12px!important;font-weight:900!important;color:#7b2d57!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;transition:none!important;pointer-events:none!important}
-#tgCloudStatus702.syncing{padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important}
-</style>
-<script id="gino71-real-sync">
-(function(){
-'use strict';
-const URL='https://tmzonqhtcwkrghinjhma.supabase.co';
-const KEY='sb_publishable_FDWoFRPqpxbdvAzoqXssDQ_t1P2mpne';
-let sb=null;
-function cloud(msg,busy){let c=document.getElementById('tgCloudStatus702');if(!c){c=document.createElement('div');c.id='tgCloudStatus702';document.body.appendChild(c)}c.textContent=msg;c.classList.toggle('syncing',!!busy)}
-function loadSB(){if(sb)return Promise.resolve(sb);if(window.supabase?.createClient){sb=window.supabase.createClient(URL,KEY);return Promise.resolve(sb)}return new Promise((res,rej)=>{let x=document.createElement('script');x.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js';x.onload=()=>{sb=window.supabase.createClient(URL,KEY);res(sb)};x.onerror=()=>rej(new Error('Không tải được dịch vụ đồng bộ'));document.head.appendChild(x)})}
-function openApp(label){currentUser=label;document.getElementById('login')?.classList.add('hidden');document.getElementById('app')?.classList.remove('hidden');if(typeof show==='function')show('homeView','Khóa học')}
-function packLocal(){let j=k=>{try{return JSON.parse(localStorage.getItem(k)||'{}')}catch{return {}}};return {progress:j('tg_progress'),study_log:j('tg_study_log'),settings:{flip:localStorage.getItem('tg_flip'),next:localStorage.getItem('tg_next'),hira:localStorage.getItem('tg_hira')},client_updated_at:new Date().toISOString()}}
-async function syncNow(user){if(!navigator.onLine){cloud('☁️ OFFLINE · Dùng dữ liệu trên thiết bị');return}cloud('☁️🌸 Đang đồng bộ…',1);try{let x=await loadSB(),local=packLocal();let {error}=await x.from('learning_sync').upsert({user_id:user.id,...local},{onConflict:'user_id'});if(error)throw error;let {data,error:e2}=await x.from('learning_sync').select('progress,study_log,settings,updated_at').eq('user_id',user.id).maybeSingle();if(e2)throw e2;if(data){if(data.progress)localStorage.setItem('tg_progress',JSON.stringify(data.progress));if(data.study_log)localStorage.setItem('tg_study_log',JSON.stringify(data.study_log))}cloud('☁️🌸 ONLINE · Đã đồng bộ ✓');}catch(e){console.error(e);cloud('☁️⚠️ Online · Đồng bộ chưa hoàn tất')}}
-async function studentLogin(email,password){if(!email.includes('@')){cloud('☁️ Nhập email để đồng bộ tài khoản');if(typeof toast==='function')toast('Tài khoản đồng bộ đăng nhập bằng email');return}cloud('☁️ Đang đăng nhập Server…',1);try{let x=await loadSB();let {data,error}=await x.auth.signInWithPassword({email,password});if(error)throw error;openApp(data.user.email);setTimeout(()=>syncNow(data.user),300)}catch(e){console.error(e);cloud('☁️⚠️ Đăng nhập chưa thành công');if(typeof toast==='function')toast(e.message||'Sai email hoặc mật khẩu')}}
-async function register(){let name=document.getElementById('regNameStatic')?.value.trim(),email=document.getElementById('regEmailStatic')?.value.trim(),password=document.getElementById('regPassStatic')?.value||'',st=document.getElementById('regStatusStatic');if(!name||!email||password.length<6){if(st)st.textContent='Vui lòng nhập tên, email và mật khẩu ít nhất 6 ký tự.';return}if(st)st.textContent='☁️ Đang tạo tài khoản trên Server…';try{let x=await loadSB();let username=(email.split('@')[0]||'hocvien').replace(/[^a-zA-Z0-9_.-]/g,'').slice(0,30);let {data,error}=await x.auth.signUp({email,password,options:{data:{display_name:name,username}}});if(error)throw error;if(st)st.textContent=data.session?'✅ Tài khoản đã tạo và đồng bộ.':'✅ Đã tạo tài khoản. Hãy xác nhận email rồi đăng nhập trên mọi thiết bị.';cloud('☁️🌸 Tài khoản đã gửi lên Server ✓')}catch(e){console.error(e);if(st)st.textContent='⚠️ '+(e.message||'Không tạo được tài khoản');cloud('☁️⚠️ Chưa đồng bộ tài khoản')}}
-window.addEventListener('load',()=>{
- document.querySelector('meta[name="tg-app-version"]')?.setAttribute('content','7.1.1');
- let b=document.getElementById('loginBtn');if(b)b.addEventListener('click',function(ev){let u=document.getElementById('user')?.value.trim()||'',p=document.getElementById('pass')?.value||'';if(u==='admin'){return}ev.preventDefault();ev.stopImmediatePropagation();studentLogin(u,p)},true);
- let r=document.getElementById('sendRegisterStatic');if(r)r.addEventListener('click',function(ev){ev.preventDefault();ev.stopImmediatePropagation();register()},true);
- window.addEventListener('online',()=>{cloud('☁️🟢 ONLINE · Sẵn sàng đồng bộ');setTimeout(async()=>{try{let x=await loadSB(),{data}=await x.auth.getUser();if(data?.user)syncNow(data.user)}catch{}},1200)});
- window.addEventListener('offline',()=>cloud('☁️🔴 OFFLINE · Dùng dữ liệu trên thiết bị'));
- setTimeout(()=>cloud(navigator.onLine?'☁️🟢 ONLINE · Sẵn sàng đồng bộ':'☁️🔴 OFFLINE · Dùng dữ liệu trên thiết bị'),250);
-});
-})();
-</script>
-
-
-<!-- Gino2 v7.1.2 Core Sync + Performance patch -->
+<!-- Gino2 v7.1.3 Core Sync + Performance patch -->
 <style id="gino712-core-style">
 #tgTransfer702{display:none!important}
 #tgCloudStatus702{position:fixed!important;left:50%!important;bottom:calc(4px + env(safe-area-inset-bottom))!important;transform:translateX(-50%)!important;z-index:9999!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;width:auto!important;max-width:94vw!important;font-size:11px!important;font-weight:900!important;line-height:1.15!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;pointer-events:none!important;transition:color .28s ease,opacity .28s ease!important}
@@ -2303,11 +2252,11 @@ window.addEventListener('load',()=>{
 <script id="gino712-core-sync">
 (function(){
 'use strict';
-const VER='7.1.2', URL='https://tmzonqhtcwkrghinjhma.supabase.co', KEY='sb_publishable_FDWoFRPqpxbdvAzoqXssDQ_t1P2mpne';
+const VER='7.1.3', URL='https://tmzonqhtcwkrghinjhma.supabase.co', KEY='sb_publishable_FDWoFRPqpxbdvAzoqXssDQ_t1P2mpne';
 window.TG_APP_VERSION=VER;
 let sb=null,sbPromise=null,syncTimer=0,syncing=false;
 function status(type,text){let c=document.getElementById('tgCloudStatus702');if(!c){c=document.createElement('div');c.id='tgCloudStatus702';document.body.appendChild(c)}c.className='tg-'+type;c.textContent='☁️ '+text}
-function client(){if(sb)return Promise.resolve(sb);if(sbPromise)return sbPromise;sbPromise=new Promise((resolve,reject)=>{function make(){try{sb=window.supabase.createClient(URL,KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});resolve(sb)}catch(e){reject(e)}}if(window.supabase?.createClient)return make();let s=document.querySelector('script[data-gino712-sb]');if(!s){s=document.createElement('script');s.dataset.gino712Sb='1';s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js';s.async=true;document.head.appendChild(s)}s.addEventListener('load',make,{once:true});s.addEventListener('error',()=>reject(new Error('Không tải được dịch vụ đồng bộ')),{once:true})}).finally(()=>{if(!sb)sbPromise=null});return sbPromise}
+function client(){if(sb)return Promise.resolve(sb);if(sbPromise)return sbPromise;sbPromise=new Promise((resolve,reject)=>{function make(){try{sb=window.supabase.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});resolve(sb)}catch(e){reject(e)}}if(window.supabase?.createClient)return make();let s=document.querySelector('script[data-gino712-sb]');if(!s){s=document.createElement('script');s.dataset.gino712Sb='1';s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js';s.async=true;document.head.appendChild(s)}s.addEventListener('load',make,{once:true});s.addEventListener('error',()=>reject(new Error('Không tải được dịch vụ đồng bộ')),{once:true})}).finally(()=>{if(!sb)sbPromise=null});return sbPromise}
 function readJSON(k){try{return JSON.parse(localStorage.getItem(k)||'{}')}catch{return {}}}
 function pack(){return {progress:readJSON('tg_progress'),study_log:readJSON('tg_study_log'),settings:{flip:localStorage.getItem('tg_flip'),next:localStorage.getItem('tg_next'),hira:localStorage.getItem('tg_hira')},client_updated_at:new Date().toISOString()}}
 function openApp(label){try{window.currentUser=label}catch{};document.getElementById('login')?.classList.add('hidden');document.getElementById('app')?.classList.remove('hidden');try{if(typeof show==='function')show('homeView','Khóa học')}catch{}}
