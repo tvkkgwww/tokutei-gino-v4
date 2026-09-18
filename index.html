@@ -133,7 +133,7 @@ function rangedData(){let a=studyData(),r=rangeSettings();return a.slice(r.from-
 function speakDone(text,lang,token,done){if(!document.getElementById('voice')?.checked||!('speechSynthesis' in window)){if(token===listSpeechToken)done&&done();return}let u=new SpeechSynthesisUtterance(text);u.lang=lang;u.rate=lang==='ja-JP'?.88:.95;let finished=false;const finish=()=>{if(finished)return;finished=true;if(token===listSpeechToken)done&&done()};u.onend=finish;u.onerror=finish;try{speechSynthesis.speak(u)}catch(e){finish()}}
 function renderList(){let a=rangedData(),r=rangeSettings();document.getElementById('listbox').innerHTML='<div class="row head"><div>#</div><div>Kanji</div><div>Hiragana</div><div class="vi">Nghĩa</div><div>🔊</div></div>'+a.map((x,i)=>`<div class="row" data-listrow="${i}"><div>${r.from+i}</div><div><b>${x[0]}</b></div><div>${x[1]}</div><div class="vi">${x[2]}</div><div class="speak-cell"><button data-s="${i}">▶</button></div></div>`).join('');document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{stopListAuto();let token=++listSpeechToken,x=a[+b.dataset.s],gap=Number(document.getElementById('jpViGap').value||2)*1000;speakDone(x[1]||x[0],'ja-JP',token,()=>setTimeout(()=>{if(token!==listSpeechToken)return;speakDone(x[2],'vi-VN',token,()=>{})},gap))})}
 function stopListAuto(){listSpeechToken++;if(listTimer){clearTimeout(listTimer);listTimer=null}let b=document.getElementById('autoList');if(b)b.textContent='▶ Tự chạy';try{speechSynthesis?.cancel?.()}catch(e){}}
-function highlightListRow(i){document.querySelectorAll('[data-listrow]').forEach((r,j)=>r.classList.toggle('currentRow',j===i));let row=document.querySelector(`[data-listrow="${i}"]`);if(row)row.scrollIntoView({block:'nearest',behavior:'smooth'})}
+function highlightListRow(i){document.querySelectorAll('[data-listrow]').forEach((r,j)=>r.classList.toggle('currentRow',j===i));let row=document.querySelector(`[data-listrow="${i}"]`);if(row)row.scrollIntoView({block:'center',behavior:'smooth'})}
 function toggleListAuto(){if(listTimer){stopListAuto();return}let a=rangedData();if(!a.length)return;document.getElementById('autoList').textContent='⏸ Dừng';listPlayIndex=0;listTimer=1;let token=++listSpeechToken;const run=()=>{if(!listTimer||token!==listSpeechToken)return;let x=a[listPlayIndex];highlightListRow(listPlayIndex);speakDone(x[1]||x[0],'ja-JP',token,()=>{let jpGap=Number(document.getElementById('jpViGap').value||2)*1000;listTimer=setTimeout(()=>{if(!listTimer||token!==listSpeechToken)return;speakDone(x[2],'vi-VN',token,()=>{let nextGap=Number(document.getElementById('nextGap').value||2)*1000;listTimer=setTimeout(()=>{if(!listTimer||token!==listSpeechToken)return;listPlayIndex=(listPlayIndex+1)%a.length;run()},nextGap)})},jpGap)})};run()}
 // v4.7.5: the original app bound old list functions before this patch. Rebind all list entry points to the fixed sequence.
 window.renderList=renderList;
@@ -1581,7 +1581,7 @@ const saveLogs=v=>setJSON('tg_access_logs_520',v);
    } else {
      const p=currentProfile()||{}; const acc=Array.isArray(p.access)?p.access:[]; const last=latestAccessFor(current());
      tools.innerHTML='<button id="studentInfo520">👤 Thông tin học viên</button><button id="studentCourse520">🎒 Khóa học được cấp</button><button id="studentNotify520">🔔 Thông báo</button><button id="studentMsg520">💬 Nhắn quản trị</button>';
-     panel.innerHTML='<h3>👋 Khu vực học viên</h3><div class="summary520"><div class="summaryCard520"><b>'+esc(p.name||p.username||'Học viên')+'</b><span>Tên học viên</span></div><div class="summaryCard520"><b>'+(acc.length||0)+'</b><span>Nội dung được học</span></div><div class="summaryCard520"><b>'+unreadNotifications()+'</b><span>Thông báo chưa đọc</span></div><div class="summaryCard520"><b>'+esc(last?fmt(last.at):'—')+'</b><span>Lần truy cập gần nhất</span></div></div><div id="homePanelBody520"></div>';
+     panel.innerHTML='<h3>👋 Khu vực học viên</h3><div class="summary520"><div class="summaryCard520"><b>'+esc(p.name||p.username||'Học viên')+'</b><span>Tên học viên</span></div><div class="summaryCard520"><b>'+(acc.length||0)+'</b><span>Nội dung được học</span></div><div class="summaryCard520"><b>'+unreadNotifications()+'</b><span>Thông báo chưa đọc</span></div></div><div id="homePanelBody520"></div>';
      const body=el('homePanelBody520');
      const renderStudentInfo=()=>{body.innerHTML='<div class="list520"><div class="row520"><b>Thông tin học viên</b><div class="meta520">Họ tên: '+esc(p.name||'—')+'<br>Ngày sinh: '+esc(p.dob||'—')+'<br>Email: '+esc(p.email||'—')+'<br>Tên đăng nhập: '+esc(p.username||'—')+'<br>Mục đích học tập: '+esc(p.purpose||'—')+'<br>Thi vào tháng: '+esc(p.examMonth||'—')+'<br>Mục tiêu: '+esc(ACCESS_LABEL[p.target]||p.target||'—')+'</div></div></div>';};
      const renderStudentCourse=()=>{body.innerHTML='<div class="list520"><div class="row520"><b>Khóa học được cấp quyền</b><div class="chips520">'+(acc.length?acc.map(x=>'<span class="chip520">'+esc(ACCESS_LABEL[x]||x)+'</span>').join(''):'<span class="chip520">Chưa được cấp quyền</span>')+'</div></div></div>';};
@@ -2323,4 +2323,61 @@ document.addEventListener('tg-settings-open',()=>setTimeout(ready,0));
 ['gearBtn','settingsBtn'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>setTimeout(ready,0)));
 })();
 </script>
+
+
+<!-- Gino2 v7.1.9 Account Sync + light UI patch -->
+<style id="gino719-light-ui">
+/* Cloud state sits exactly above the bottom navigation divider. */
+#tgCloudStatus702{bottom:calc(78px + env(safe-area-inset-bottom))!important;z-index:31!important;background:rgba(255,255,255,.82)!important;padding:3px 9px!important;border-radius:999px!important;backdrop-filter:blur(6px)!important;-webkit-backdrop-filter:blur(6px)!important}
+/* Keep the currently spoken vocabulary visually anchored around screen center. */
+.currentRow{scroll-margin-block:42vh!important}
+</style>
+<script id="gino719-account-sync">
+(()=>{
+'use strict';
+const VER='7.1.9', URL='https://tmzonqhtcwkrghinjhma.supabase.co', KEY='sb_publishable_FDWoFRPqpxbdvAzoqXssDQ_t1P2mpne';
+let cloud=null, ready=null;
+function getCloud(){
+ if(cloud)return Promise.resolve(cloud); if(ready)return ready;
+ ready=new Promise((resolve,reject)=>{
+  const make=()=>{try{cloud=window.supabase.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});resolve(cloud)}catch(e){reject(e)}};
+  if(window.supabase?.createClient)return make();
+  let sc=document.querySelector('script[data-gino719-sb]');
+  if(!sc){sc=document.createElement('script');sc.dataset.gino719Sb='1';sc.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js';sc.async=true;document.head.appendChild(sc)}
+  sc.addEventListener('load',make,{once:true});sc.addEventListener('error',()=>reject(new Error('Không tải được dịch vụ đồng bộ')),{once:true});
+ }).finally(()=>{if(!cloud)ready=null}); return ready;
+}
+function cloudState(type,text){let c=document.getElementById('tgCloudStatus702');if(!c)return;c.className='tg-'+type;c.textContent='☁️ '+text}
+function openSession(email){try{window.currentUser=email}catch(e){};document.getElementById('login')?.classList.add('hidden');document.getElementById('app')?.classList.remove('hidden');try{if(typeof show==='function')show('homeView','Khóa học')}catch(e){};setTimeout(()=>{try{if(typeof ensureHome==='function')ensureHome();if(typeof refreshStudyStats==='function')refreshStudyStats()}catch(e){}},20)}
+async function restore(){
+ if(!navigator.onLine)return;
+ try{const sb=await getCloud(),{data}=await sb.auth.getSession(),session=data?.session;if(!session?.user)return;
+  const email=session.user.email||'';localStorage.setItem('gino719_cloud_email',email);
+  /* Auto restore only when the user previously selected remember-login. */
+  if(localStorage.getItem('tg461login')){const u=document.getElementById('user');if(u)u.value=email;openSession(email);cloudState('online','ONLINE · Tài khoản đã đồng bộ ✓')}
+ }catch(e){console.warn('v7.1.9 restore',e)}
+}
+async function changeCloudPassword(e){
+ const btn=e.target.closest?.('#changePw510');if(!btn||String(window.currentUser||'').toLowerCase()==='admin')return;
+ try{const sb=await getCloud(),{data}=await sb.auth.getSession();if(!data?.session?.user)return; // legacy local account: keep old handler
+  e.preventDefault();e.stopImmediatePropagation();
+  const old=document.getElementById('oldPw510')?.value||'',nw=document.getElementById('newPw510')?.value||'',nw2=document.getElementById('newPw2_510')?.value||'';
+  if(nw.length<6)return window.toast?.('Mật khẩu mới phải có ít nhất 6 ký tự');if(nw!==nw2)return window.toast?.('Hai mật khẩu mới không khớp');
+  cloudState('loading','Đang cập nhật mật khẩu…');
+  const email=data.session.user.email;const check=await sb.auth.signInWithPassword({email,password:old});if(check.error){cloudState('error','Mật khẩu hiện tại không đúng');return window.toast?.('Mật khẩu hiện tại không đúng')}
+  const r=await sb.auth.updateUser({password:nw});if(r.error)throw r.error;
+  ['oldPw510','newPw510','newPw2_510'].forEach(id=>{let n=document.getElementById(id);if(n)n.value=''});cloudState('online','ONLINE · Mật khẩu đã đồng bộ ✓');window.toast?.('✅ Đã đổi mật khẩu trên tất cả thiết bị');
+ }catch(err){console.error(err);cloudState('error','Không cập nhật được mật khẩu');window.toast?.(err.message||'Không cập nhật được mật khẩu')}
+}
+async function cloudLogout(e){
+ const b=e.target.closest?.('#logout');if(!b)return;let sb;try{sb=await getCloud();const {data}=await sb.auth.getSession();if(!data?.session)return}catch(_){return}
+ e.preventDefault();e.stopImmediatePropagation();cloudState('loading','Đang đăng xuất…');try{await sb.auth.signOut()}catch(_){}localStorage.removeItem('tg461login');localStorage.removeItem('gino712_email');localStorage.removeItem('gino719_cloud_email');sessionStorage.removeItem('gino712_active');location.reload();
+}
+document.addEventListener('click',changeCloudPassword,true);document.addEventListener('click',cloudLogout,true);
+window.addEventListener('online',restore);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',restore,{once:true});else restore();
+/* Keep visible version labels consistent without touching the stable cache strategy. */
+window.TG_APP_VERSION=VER;setTimeout(()=>{['updateStatus','directStatus510','status590'].forEach(id=>{let n=document.getElementById(id);if(n)n.textContent='Phiên bản hiện tại: v'+VER})},50);
+})();
+</script>
+
 </body></html>
