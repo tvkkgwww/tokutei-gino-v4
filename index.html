@@ -2293,7 +2293,7 @@ const $=id=>document.getElementById(id);
 function paint(n,t){n=Math.max(0,Math.min(100,Math.round(n)));const f=$('preloadFill714'),p=$('preloadPct714'),s=$('preloadSub714');if(f)f.style.width=n+'%';if(p)p.textContent=n+'%';if(s&&t)s.textContent=t}
 async function cacheLocal(progress){
   if(!('caches' in window)){progress(75,'Đang lưu dữ liệu cục bộ…');return}
-  try{const c=await caches.open('gino2-7.1.6');const urls=['./','./index.html','./manifest.webmanifest','./version.json','./assets/bg-903c48e781bb.png','./assets/bg-02ccd034873c.png','./Tokutei_Ginou_2_v3.1.3_Responsive_Background_Flashcard_Fix.tg2app','./GINOU2_v4.6.tg2update'];let done=0;for(const u of urls){try{const r=await fetch(u,{cache:'no-store'});if(r.ok)await c.put(u,r.clone())}catch(e){}done++;progress(48+(done/urls.length)*38,'Đang lưu dữ liệu trên thiết bị…')} }catch(e){}
+  try{const c=await caches.open('gino2-7.2.1');const urls=['./','./index.html','./manifest.webmanifest','./version.json','./assets/bg-903c48e781bb.png','./assets/bg-02ccd034873c.png','./Tokutei_Ginou_2_v3.1.3_Responsive_Background_Flashcard_Fix.tg2app','./GINOU2_v4.6.tg2update'];let done=0;for(const u of urls){try{const r=await fetch(u,{cache:'no-store'});if(r.ok)await c.put(u,r.clone())}catch(e){}done++;progress(48+(done/urls.length)*38,'Đang lưu dữ liệu trên thiết bị…')} }catch(e){}
 }
 async function preload(){
  const ov=$('coursePreload714');if(!ov)return;ov.classList.add('on');document.documentElement.style.overflow='hidden';paint(2,'Đang kiểm tra dữ liệu khóa học…');
@@ -2327,7 +2327,7 @@ document.addEventListener('tg-settings-open',()=>setTimeout(ready,0));
 <script id="gino720-cloud-account-hardfix">
 (()=>{
 'use strict';
-const VER='7.2.0', URL='https://tmzonqhtcwkrghinjhma.supabase.co', KEY='sb_publishable_FDWoFRPqpxbdvAzoqXssDQ_t1P2mpne';
+const VER='7.2.1', URL='https://tmzonqhtcwkrghinjhma.supabase.co', KEY='sb_publishable_FDWoFRPqpxbdvAzoqXssDQ_t1P2mpne';
 let sb=null, loading=null;
 const $=id=>document.getElementById(id);
 function cloud(){
@@ -2365,8 +2365,25 @@ async function loginCloud(email,password){
  const {data:profile,error:pe}=await c.from('profiles').select('id,display_name,username,role,approved,account_enabled,course_permissions').eq('id',data.user.id).maybeSingle(); if(pe)throw pe;
  if(profile && profile.account_enabled===false){await c.auth.signOut();throw new Error('Tài khoản đang bị khóa')}
  if(profile && profile.approved===false){await c.auth.signOut();throw new Error('Tài khoản đang chờ quản trị viên phê duyệt')}
- window.currentUser=email;try{currentUser=email}catch(e){};localStorage.setItem('gino720_email',email);sessionStorage.setItem('gino720_active','1');
- $('login')?.classList.add('hidden');$('app')?.classList.remove('hidden');try{if(typeof show==='function')show('homeView','Khóa học')}catch(e){};cloudStatus('online','ONLINE · Tài khoản đã đồng bộ ✓');return true;
+ const cloudRole=String(profile?.role||'student').toLowerCase();
+ const isCloudAdmin=cloudRole==='admin';
+ const rawPerm=profile?.course_permissions;
+ let cloudAccess=[];
+ if(Array.isArray(rawPerm)) cloudAccess=rawPerm;
+ else if(rawPerm && typeof rawPerm==='object') cloudAccess=Object.keys(rawPerm).filter(k=>rawPerm[k]===true);
+ cloudAccess=cloudAccess.map(x=>String(x).toUpperCase().replace('GINOU2','GINO2'));
+ if(isCloudAdmin) cloudAccess=['N5','N4','N3','N2','N1','GINO2'];
+ // Bridge Cloud identity into the legacy UI permission layer.
+ window.ginoCloudProfile=profile||{};
+ window.ginoCloudEmail=email;
+ window.currentUser=isCloudAdmin?'admin':email;try{currentUser=isCloudAdmin?'admin':email}catch(e){};
+ localStorage.setItem('gino720_email',email);localStorage.setItem('tg_current_role',isCloudAdmin?'admin':'student');
+ if(isCloudAdmin){sessionStorage.setItem('tg_admin_verified_session','1');localStorage.setItem('tg_admin_access',JSON.stringify(cloudAccess));}
+ else {try{const all=JSON.parse(localStorage.getItem('tg_users')||'{}');all[email]={...(all[email]||{}),name:profile?.display_name||email,email,username:profile?.username||'',status:'approved',access:cloudAccess,cloud_uid:data.user.id,cloud_role:cloudRole};localStorage.setItem('tg_users',JSON.stringify(all))}catch(_){}}
+ sessionStorage.setItem('gino720_active','1');
+ $('login')?.classList.add('hidden');$('app')?.classList.remove('hidden');try{if(typeof show==='function')show('homeView','Khóa học')}catch(e){};
+ try{if(typeof refreshAdmin==='function')refreshAdmin();if(typeof refreshAdmin500==='function')refreshAdmin500()}catch(e){}
+ cloudStatus('online',isCloudAdmin?'ONLINE · SUPER ADMIN CLOUD ✓':'ONLINE · Tài khoản đã đồng bộ ✓');return true;
 }
 function install(){
  ensurePassword();
