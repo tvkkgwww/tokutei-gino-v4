@@ -1306,7 +1306,7 @@ if(box){
     <input id="regNameStatic" class="full500" placeholder="Họ và tên" autocomplete="name">
     <input id="regDob500" type="date" aria-label="Ngày tháng năm sinh">
     <input id="regEmailStatic" type="email" placeholder="Email" autocomplete="email">
-    <input id="regUsername500" placeholder="Tên đăng nhập" autocomplete="username"><input id="regPassStatic" type="password" placeholder="Mật khẩu (ít nhất 6 ký tự)" autocomplete="new-password">
+    <input id="regUsername500" placeholder="Tên đăng nhập" autocomplete="username">
     <select id="regTarget500"><option value="">N mấy?</option><option>N5</option><option>N4</option><option>N3</option><option>N2</option><option>N1</option><option value="GINO2">Gino2</option></select>
     <input id="regExamMonth500" type="month" aria-label="Thi vào tháng mấy">
     <textarea id="regPurpose500" placeholder="Mục đích học tập"></textarea>
@@ -2256,29 +2256,33 @@ if('serviceWorker' in navigator){
 </script>
 
 
-<!-- Gino2 v7.2.0 Cloud Account Sync -->
-<style id="gino720-core-style">
+<!-- Gino2 v7.1.3 Core Sync + Performance patch -->
+<style id="gino712-core-style">
 #tgTransfer702{display:none!important}
-#tgCloudStatus702{position:fixed!important;left:50%!important;bottom:calc(80px + env(safe-area-inset-bottom))!important;transform:translateX(-50%)!important;z-index:9999!important;margin:0!important;padding:3px 10px!important;border:0!important;background:rgba(255,255,255,.82)!important;border-radius:99px!important;box-shadow:0 2px 10px #1232!important;width:auto!important;max-width:94vw!important;font-size:11px!important;font-weight:900!important;line-height:1.15!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;pointer-events:none!important}
+#tgCloudStatus702{position:fixed!important;left:50%!important;bottom:calc(4px + env(safe-area-inset-bottom))!important;transform:translateX(-50%)!important;z-index:9999!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;width:auto!important;max-width:94vw!important;font-size:11px!important;font-weight:900!important;line-height:1.15!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;pointer-events:none!important;transition:color .28s ease,opacity .28s ease!important}
 #tgCloudStatus702.tg-online{color:#159447!important}#tgCloudStatus702.tg-offline{color:#ee6fa4!important}#tgCloudStatus702.tg-loading{color:#d39b00!important}#tgCloudStatus702.tg-error{color:#c93434!important}
+.bottom{padding-bottom:calc(14px + env(safe-area-inset-bottom))!important;height:78px!important}.screen{padding-bottom:calc(94px + env(safe-area-inset-bottom))!important}
 </style>
-<script id="gino720-cloud-account">
-(function(){'use strict';
-const VER='7.2.0',URL='https://tmzonqhtcwkrghinjhma.supabase.co',KEY='sb_publishable_FDWoFRPqpxbdvAzoqXssDQ_t1P2mpne';window.TG_APP_VERSION=VER;
-let sb=null,promise=null,syncing=false,timer=0;
-function status(t,x){let n=document.getElementById('tgCloudStatus702');if(!n){n=document.createElement('div');n.id='tgCloudStatus702';document.body.appendChild(n)}n.className='tg-'+t;n.textContent='☁️ '+x}
-function client(){if(sb)return Promise.resolve(sb);if(promise)return promise;promise=new Promise((ok,no)=>{const make=()=>{try{sb=window.supabase.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});ok(sb)}catch(e){no(e)}};if(window.supabase?.createClient)return make();let z=document.querySelector('script[data-gino720-sb]');if(!z){z=document.createElement('script');z.dataset.gino720Sb='1';z.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js';z.async=true;document.head.appendChild(z)}z.addEventListener('load',make,{once:true});z.addEventListener('error',()=>no(new Error('Không tải được dịch vụ đồng bộ')),{once:true})}).finally(()=>{if(!sb)promise=null});return promise}
-function json(k){try{return JSON.parse(localStorage.getItem(k)||'{}')}catch{return {}}}
-function pack(){return{progress:json('tg_progress'),study_log:json('tg_study_log'),settings:{flip:localStorage.getItem('tg_flip'),next:localStorage.getItem('tg_next'),hira:localStorage.getItem('tg_hira')},client_updated_at:new Date().toISOString()}}
+<script id="gino712-core-sync">
+(function(){
+'use strict';
+const VER='7.2.0', URL='https://tmzonqhtcwkrghinjhma.supabase.co', KEY='sb_publishable_FDWoFRPqpxbdvAzoqXssDQ_t1P2mpne';
+window.TG_APP_VERSION=VER;
+let sb=null,sbPromise=null,syncTimer=0,syncing=false;
+function status(type,text){let c=document.getElementById('tgCloudStatus702');if(!c){c=document.createElement('div');c.id='tgCloudStatus702';document.body.appendChild(c)}c.className='tg-'+type;c.textContent='☁️ '+text}
+function client(){if(sb)return Promise.resolve(sb);if(sbPromise)return sbPromise;sbPromise=new Promise((resolve,reject)=>{function make(){try{sb=window.supabase.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});resolve(sb)}catch(e){reject(e)}}if(window.supabase?.createClient)return make();let s=document.querySelector('script[data-gino712-sb]');if(!s){s=document.createElement('script');s.dataset.gino712Sb='1';s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js';s.async=true;document.head.appendChild(s)}s.addEventListener('load',make,{once:true});s.addEventListener('error',()=>reject(new Error('Không tải được dịch vụ đồng bộ')),{once:true})}).finally(()=>{if(!sb)sbPromise=null});return sbPromise}
+function readJSON(k){try{return JSON.parse(localStorage.getItem(k)||'{}')}catch{return {}}}
+function pack(){return {progress:readJSON('tg_progress'),study_log:readJSON('tg_study_log'),settings:{flip:localStorage.getItem('tg_flip'),next:localStorage.getItem('tg_next'),hira:localStorage.getItem('tg_hira')},client_updated_at:new Date().toISOString()}}
 function openApp(label){try{window.currentUser=label}catch{};document.getElementById('login')?.classList.add('hidden');document.getElementById('app')?.classList.remove('hidden');try{if(typeof show==='function')show('homeView','Khóa học')}catch{}}
-async function profile(x,id){let r=await x.from('profiles').select('id,display_name,username,role,approved,account_enabled,course_permissions').eq('id',id).maybeSingle();if(r.error)throw r.error;return r.data}
-async function syncUser(user){if(syncing||!user||!navigator.onLine)return;if(timer)clearTimeout(timer);timer=setTimeout(async()=>{syncing=true;status('loading','Đang đồng bộ…');try{let x=await client(),local=pack();let u=await x.from('learning_sync').upsert({user_id:user.id,...local},{onConflict:'user_id'});if(u.error)throw u.error;let r=await x.from('learning_sync').select('progress,study_log,settings,updated_at').eq('user_id',user.id).maybeSingle();if(r.error)throw r.error;if(r.data?.progress)localStorage.setItem('tg_progress',JSON.stringify(r.data.progress));if(r.data?.study_log)localStorage.setItem('tg_study_log',JSON.stringify(r.data.study_log));status('online','ONLINE · Đã đồng bộ ✓')}catch(e){console.error(e);status('error','Online · Đồng bộ lỗi')}finally{syncing=false}},500)}
-async function login(email,password){email=(email||'').trim().toLowerCase();if(!email.includes('@')){status('error','Nhập email để đồng bộ');return false}status('loading','Đang đăng nhập…');try{let x=await client(),r=await x.auth.signInWithPassword({email,password});if(r.error)throw r.error;let p=await profile(x,r.data.user.id);if(!p){await x.auth.signOut();throw new Error('Chưa có hồ sơ học viên trên máy chủ')}if(!p.account_enabled){await x.auth.signOut();throw new Error('Tài khoản đang bị khóa')}if(!p.approved){await x.auth.signOut();throw new Error('Tài khoản đang chờ quản trị viên phê duyệt')}localStorage.setItem('gino720_email',email);localStorage.setItem('gino720_profile',JSON.stringify(p));openApp(email);status('online','ONLINE · Đã kết nối');syncUser(r.data.user);return true}catch(e){console.error(e);status('error','Đăng nhập không thành công');try{toast(e.message||'Sai email hoặc mật khẩu')}catch{}return false}}
-async function register(){let name=document.getElementById('regNameStatic')?.value.trim(),dob=document.getElementById('regDob500')?.value||'',email=document.getElementById('regEmailStatic')?.value.trim().toLowerCase(),username=document.getElementById('regUsername500')?.value.trim().toLowerCase(),password=document.getElementById('regPassStatic')?.value||'',purpose=document.getElementById('regPurpose500')?.value.trim()||'',exam=document.getElementById('regExamMonth500')?.value||'',level=document.getElementById('regTarget500')?.value||'',st=document.getElementById('regStatusStatic');if(!name||!dob||!email.includes('@')||username.length<3||password.length<6||!purpose||!exam||!level){if(st)st.textContent='Vui lòng nhập đầy đủ thông tin và mật khẩu ít nhất 6 ký tự.';return}status('loading','Đang tạo tài khoản trên máy chủ…');try{let x=await client(),r=await x.auth.signUp({email,password,options:{data:{display_name:name,full_name:name,username,birth_date:dob,study_purpose:purpose,exam_month:exam,jlpt_level:level}}});if(r.error)throw r.error;if(st)st.textContent='✅ Đã tạo tài khoản trên máy chủ. Tài khoản đang chờ quản trị viên phê duyệt.';status('online','ONLINE · Đăng ký đã đồng bộ ✓')}catch(e){console.error(e);if(st)st.textContent='⚠️ '+(e.message||'Không tạo được tài khoản');status('error','Không tạo được tài khoản')}}
-function bind(){document.querySelector('meta[name="tg-app-version"]')?.setAttribute('content',VER);['updateStatus','directStatus510','status590'].forEach(id=>{let n=document.getElementById(id);if(n)n.textContent='Phiên bản hiện tại: v'+VER});let email=localStorage.getItem('gino720_email');if(email&&document.getElementById('user'))document.getElementById('user').value=email;let b=document.getElementById('loginBtn');if(b)b.addEventListener('click',e=>{let u=document.getElementById('user')?.value.trim()||'',p=document.getElementById('pass')?.value||'';if(u==='admin')return;e.preventDefault();e.stopImmediatePropagation();login(u,p)},true);let r=document.getElementById('sendRegisterStatic');if(r)r.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();register()},true);let out=document.getElementById('logout');if(out)out.addEventListener('click',()=>client().then(x=>x.auth.signOut()).catch(()=>{}),true);status(navigator.onLine?'online':'offline',navigator.onLine?'ONLINE · Sẵn sàng':'OFFLINE · Dữ liệu trên máy')}
-window.addEventListener('online',()=>status('online','ONLINE · Sẵn sàng'));window.addEventListener('offline',()=>status('offline','OFFLINE · Dữ liệu trên máy'));if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
+async function syncUser(user){if(syncing||!user||!navigator.onLine)return;if(syncTimer)clearTimeout(syncTimer);syncTimer=setTimeout(async()=>{syncing=true;status('loading','Đang đồng bộ…');try{let x=await client(),local=pack();let up=await x.from('learning_sync').upsert({user_id:user.id,...local},{onConflict:'user_id'});if(up.error)throw up.error;let r=await x.from('learning_sync').select('progress,study_log,settings,updated_at').eq('user_id',user.id).maybeSingle();if(r.error)throw r.error;if(r.data?.progress)localStorage.setItem('tg_progress',JSON.stringify(r.data.progress));if(r.data?.study_log)localStorage.setItem('tg_study_log',JSON.stringify(r.data.study_log));status('online','ONLINE · Đã đồng bộ ✓')}catch(e){console.error(e);status('error','Online · Đồng bộ lỗi')}finally{syncing=false}},700)}
+async function login(email,password){email=(email||'').trim();if(!email.includes('@')){status('error','Nhập email để đồng bộ');return false}status('loading','Đang đăng nhập…');try{let x=await client(),r=await x.auth.signInWithPassword({email,password});if(r.error)throw r.error;sessionStorage.setItem('gino712_active','1');localStorage.setItem('gino712_email',email);openApp(email);status('online','ONLINE · Đã kết nối');syncUser(r.data.user);return true}catch(e){console.error(e);status('error','Đăng nhập không thành công');try{toast(e.message||'Sai email hoặc mật khẩu')}catch{}return false}}
+async function register(){let name=document.getElementById('regNameStatic')?.value.trim(),email=document.getElementById('regEmailStatic')?.value.trim(),password=document.getElementById('regPassStatic')?.value||'',st=document.getElementById('regStatusStatic');if(!name||!email||password.length<6){if(st)st.textContent='Vui lòng nhập tên, email và mật khẩu ít nhất 6 ký tự.';return}status('loading','Đang tạo tài khoản…');try{let x=await client(),username=(email.split('@')[0]||'hocvien').replace(/[^a-zA-Z0-9_.-]/g,'').slice(0,30),r=await x.auth.signUp({email,password,options:{data:{display_name:name,username}}});if(r.error)throw r.error;if(st)st.textContent=r.data.session?'✅ Tài khoản đã tạo.':'✅ Đã tạo tài khoản. Hãy xác nhận email nếu hệ thống yêu cầu.';status('online','ONLINE · Tài khoản đã tạo ✓')}catch(e){console.error(e);if(st)st.textContent='⚠️ '+(e.message||'Không tạo được tài khoản');status('error','Không tạo được tài khoản')}}
+function bind(){document.querySelector('meta[name="tg-app-version"]')?.setAttribute('content',VER);['updateStatus','directStatus510','status590'].forEach(id=>{let n=document.getElementById(id);if(n)n.textContent='Phiên bản hiện tại: v'+VER});let email=localStorage.getItem('gino712_email');if(email&&document.getElementById('user'))document.getElementById('user').value=email;let btn=document.getElementById('loginBtn');if(btn)btn.addEventListener('click',e=>{let u=document.getElementById('user')?.value.trim()||'',p=document.getElementById('pass')?.value||'';if(u==='admin')return;e.preventDefault();e.stopImmediatePropagation();login(u,p)},true);let pass=document.getElementById('pass');if(pass)pass.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();btn?.click()}},true);let user=document.getElementById('user');if(user)user.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();pass?.focus()}},true);let reg=document.getElementById('sendRegisterStatic');if(reg)reg.addEventListener('click',e=>{e.preventDefault();e.stopImmediatePropagation();register()},true);let out=document.getElementById('logout');if(out)out.addEventListener('click',()=>{sessionStorage.removeItem('gino712_active')},true);status(navigator.onLine?'online':'offline',navigator.onLine?'ONLINE · Sẵn sàng':'OFFLINE · Dữ liệu trên máy');}
+window.addEventListener('online',()=>status('online','ONLINE · Sẵn sàng'));window.addEventListener('offline',()=>status('offline','OFFLINE · Dữ liệu trên máy'));
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
 })();
 </script>
+
 
 <script id="v716-course-preload">
 (()=>{
@@ -2317,6 +2321,58 @@ const ready=()=>{
 };
 document.addEventListener('tg-settings-open',()=>setTimeout(ready,0));
 ['gearBtn','settingsBtn'].forEach(id=>document.getElementById(id)?.addEventListener('click',()=>setTimeout(ready,0)));
+})();
+</script>
+<script id="gino720-cloud-account-hardfix">
+(()=>{
+'use strict';
+const VER='7.2.0', URL='https://tmzonqhtcwkrghinjhma.supabase.co', KEY='sb_publishable_FDWoFRPqpxbdvAzoqXssDQ_t1P2mpne';
+let sb=null, loading=null;
+const $=id=>document.getElementById(id);
+function cloud(){
+ if(sb)return Promise.resolve(sb); if(loading)return loading;
+ loading=new Promise((resolve,reject)=>{
+  const make=()=>{try{sb=window.supabase.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});resolve(sb)}catch(e){reject(e)}};
+  if(window.supabase?.createClient)return make();
+  let x=document.querySelector('script[data-gino720-sb]');
+  if(!x){x=document.createElement('script');x.dataset.gino720Sb='1';x.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.4/dist/umd/supabase.js';x.async=true;document.head.appendChild(x)}
+  x.addEventListener('load',make,{once:true});x.addEventListener('error',()=>reject(new Error('Không kết nối được máy chủ tài khoản')),{once:true});
+ }).finally(()=>{if(!sb)loading=null}); return loading;
+}
+function cloudStatus(type,msg){let n=$('tgCloudStatus702');if(n){n.className='tg-'+type;n.textContent='☁️ '+msg}}
+function ensurePassword(){
+ const grid=$('registerStaticBox')?.querySelector('.regGrid500'); if(!grid||$('regPass720'))return;
+ const u=$('regUsername500'); const i=document.createElement('input');i.id='regPass720';i.type='password';i.placeholder='Mật khẩu (ít nhất 6 ký tự)';i.autocomplete='new-password';
+ if(u)u.insertAdjacentElement('afterend',i);else grid.prepend(i);
+}
+async function registerCloud(){
+ ensurePassword(); const st=$('regStatusStatic');
+ const name=($('regNameStatic')?.value||'').trim(),dob=$('regDob500')?.value||'',email=($('regEmailStatic')?.value||'').trim().toLowerCase(),username=($('regUsername500')?.value||'').trim().toLowerCase(),password=$('regPass720')?.value||'',purpose=($('regPurpose500')?.value||'').trim(),examMonth=$('regExamMonth500')?.value||'',target=$('regTarget500')?.value||'';
+ if(!name||!dob||!email.includes('@')||username.length<3||password.length<6||!purpose||!examMonth||!target){if(st)st.textContent='Vui lòng nhập đầy đủ thông tin và mật khẩu ít nhất 6 ký tự.';return}
+ if(!navigator.onLine){if(st)st.textContent='⚠️ Cần có Internet để tạo tài khoản đồng bộ.';return}
+ if(st)st.textContent='☁️ Đang tạo tài khoản trên máy chủ…';cloudStatus('loading','Đang tạo tài khoản…');
+ try{
+  const c=await cloud(); const {data,error}=await c.auth.signUp({email,password,options:{data:{display_name:name,full_name:name,username,birth_date:dob,study_purpose:purpose,exam_month:examMonth,jlpt_level:target}}});
+  if(error)throw error; if(!data?.user)throw new Error('Máy chủ chưa xác nhận tài khoản');
+  localStorage.setItem('gino720_email',email);
+  if(st)st.textContent='✅ Đã tạo tài khoản CLOUD. Có thể dùng cùng email/mật khẩu trên thiết bị khác'+(data.session?' ngay.':'. Nếu Supabase yêu cầu xác nhận email, hãy xác nhận trước.');
+  cloudStatus('online','Tài khoản CLOUD đã tạo ✓');
+ }catch(e){console.error('Gino720 signup',e);if(st)st.textContent='❌ Không tạo tài khoản: '+(e.message||'Lỗi máy chủ');cloudStatus('error','Tạo tài khoản lỗi')}
+}
+async function loginCloud(email,password){
+ if(!navigator.onLine)return false; const c=await cloud(); const {data,error}=await c.auth.signInWithPassword({email,password}); if(error)throw error;
+ const {data:profile,error:pe}=await c.from('profiles').select('id,display_name,username,role,approved,account_enabled,course_permissions').eq('id',data.user.id).maybeSingle(); if(pe)throw pe;
+ if(profile && profile.account_enabled===false){await c.auth.signOut();throw new Error('Tài khoản đang bị khóa')}
+ if(profile && profile.approved===false){await c.auth.signOut();throw new Error('Tài khoản đang chờ quản trị viên phê duyệt')}
+ window.currentUser=email;try{currentUser=email}catch(e){};localStorage.setItem('gino720_email',email);sessionStorage.setItem('gino720_active','1');
+ $('login')?.classList.add('hidden');$('app')?.classList.remove('hidden');try{if(typeof show==='function')show('homeView','Khóa học')}catch(e){};cloudStatus('online','ONLINE · Tài khoản đã đồng bộ ✓');return true;
+}
+function install(){
+ ensurePassword(); document.querySelector('meta[name="tg-app-version"]')?.setAttribute('content',VER);['updateStatus','directStatus510','status590'].forEach(id=>{if($(id))$(id).textContent='Phiên bản hiện tại: v'+VER});
+ const old=$('sendRegisterStatic');if(old&&!old.dataset.cloud720){const b=old.cloneNode(true);b.dataset.cloud720='1';old.replaceWith(b);b.onclick=e=>{e.preventDefault();e.stopPropagation();registerCloud()}}
+ const login=$('loginBtn');if(login&&!login.dataset.cloud720){login.dataset.cloud720='1';login.addEventListener('click',async e=>{const raw=($('user')?.value||'').trim(),pw=$('pass')?.value||'';if(raw==='admin'||!raw.includes('@'))return;e.preventDefault();e.stopImmediatePropagation();cloudStatus('loading','Đang đăng nhập CLOUD…');try{await loginCloud(raw.toLowerCase(),pw)}catch(err){console.error('Gino720 login',err);cloudStatus('error','Đăng nhập CLOUD lỗi');try{toast(err.message||'Đăng nhập không thành công')}catch(_){alert(err.message||'Đăng nhập không thành công')} }},true)}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>setTimeout(install,50),{once:true});else setTimeout(install,50);setTimeout(install,500);
 })();
 </script>
 </body></html>
