@@ -1,6 +1,6 @@
 {
-  "version": "7.1.9",
+  "version": "7.2.0",
   "build": "2026-09-18",
-  "channel": "account-sync-light-ui",
-  "name": "Account Sync + Light UI Fix"
+  "channel": "admin-smooth",
+  "name": "Cloud Account Sync"
 }
