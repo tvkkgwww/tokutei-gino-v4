@@ -2417,4 +2417,78 @@ async function renderUsers(){const h=$('cloudUsers722');if(!h)return;h.innerHTML
 function install(){document.querySelector('meta[name="tg-app-version"]')?.setAttribute('content',VER);['updateStatus','directStatus510','status590'].forEach(id=>{if($(id))$(id).textContent='Phiên bản hiện tại: v'+VER});clearFields();hookLogin();hookLogout();stopPrefill();['gearBtn','settingsBtn'].forEach(id=>$(id)?.addEventListener('click',()=>setTimeout(()=>{try{if(currentUser==='admin')adminBox()}catch(e){}},100)));setTimeout(autoLogin,180)}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();
-</script>\n</body></html>
+</script>\n
+<style id="gino723-offline-login-style">
+#gino723OfflineHint{margin:8px 0 0;font-size:12px;color:#55738a;font-weight:700}
+</style>
+<script id="gino723-offline-cloud-login-fix">
+(()=>{'use strict';
+const VER='7.2.3';
+const $=id=>document.getElementById(id);
+const enc=new TextEncoder();
+function b64(buf){return btoa(String.fromCharCode(...new Uint8Array(buf)))}
+function ub64(s){return Uint8Array.from(atob(s),c=>c.charCodeAt(0))}
+async function derive(password,salt){
+  const base=await crypto.subtle.importKey('raw',enc.encode(password),'PBKDF2',false,['deriveBits']);
+  const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt,iterations:120000,hash:'SHA-256'},base,256);
+  return b64(bits);
+}
+function key(email){return 'gino723_offline_auth:'+String(email||'').trim().toLowerCase()}
+async function saveVerifier(email,password,profile){
+  if(!email||!password||!profile)return;
+  const salt=crypto.getRandomValues(new Uint8Array(16));
+  const hash=await derive(password,salt);
+  localStorage.setItem(key(email),JSON.stringify({email:String(email).toLowerCase(),salt:b64(salt),hash,profile,verifiedAt:Date.now(),v:1}));
+  try{localStorage.setItem('gino722_offline_profile',JSON.stringify({email:String(email).toLowerCase(),profile,verifiedAt:Date.now()}))}catch(e){}
+}
+function read(email){try{return JSON.parse(localStorage.getItem(key(email))||'null')}catch(e){return null}}
+async function verify(email,password){const x=read(email);if(!x?.salt||!x?.hash||!x?.profile)return null;const h=await derive(password,ub64(x.salt));return h===x.hash?x:null}
+function normalizeAccess(p){let a=p?.course_permissions||[];if(a&&!Array.isArray(a)&&typeof a==='object')a=Object.keys(a).filter(k=>a[k]===true);a=(a||[]).map(x=>String(x).toUpperCase().replace('GINOU2','GINO2'));if(String(p?.role||'').toLowerCase()==='admin')a=['N5','N4','N3','N2','N1','GINO2'];return a}
+function enterOffline(email,p){
+  const role=String(p?.role||'student').toLowerCase(),admin=role==='admin',a=normalizeAccess(p);
+  if(p?.account_enabled===false||p?.approved===false)throw Error('Tài khoản này chưa được phép đăng nhập offline.');
+  window.ginoCloudProfile=p;window.ginoCloudEmail=email;
+  try{currentUser=admin?'admin':email}catch(e){}
+  localStorage.setItem('tg_current_role',admin?'admin':'student');
+  if(admin){sessionStorage.setItem('tg_admin_verified_session','1');localStorage.setItem('tg_admin_access',JSON.stringify(a))}
+  else{try{const all=JSON.parse(localStorage.getItem('tg_users')||'{}');all[email]={...(all[email]||{}),name:p?.display_name||email,email,username:p?.username||'',status:'approved',access:a,cloud_uid:p?.id,cloud_role:role};localStorage.setItem('tg_users',JSON.stringify(all))}catch(e){}}
+  sessionStorage.setItem('gino720_active','1');$('login')?.classList.add('hidden');$('app')?.classList.remove('hidden');
+  try{if(typeof show==='function')show('homeView','Khóa học')}catch(e){}
+  try{if(typeof cloudStatus==='function')cloudStatus('loading','OFFLINE · Đăng nhập từ dữ liệu đã xác thực trên máy ✓')}catch(e){}
+  try{toast('Đăng nhập offline thành công')}catch(e){}
+}
+let pending=null;
+// Capture on document runs before the older target-level Cloud handler.
+document.addEventListener('click',async e=>{
+  const b=e.target.closest?.('#loginBtn');if(!b)return;
+  const email=String($('user')?.value||'').trim().toLowerCase(),password=$('pass')?.value||'';
+  if(!email.includes('@'))return; // preserve legacy/admin username login
+  pending={email,password,at:Date.now()};
+  if(navigator.onLine)return; // existing Cloud login remains authoritative online
+  e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+  if(!email||!password){try{toast('Nhập email và mật khẩu')}catch(_){alert('Nhập email và mật khẩu.')}return}
+  try{const x=await verify(email,password);if(!x)throw Error('Thiết bị này chưa lưu xác thực cho tài khoản này hoặc mật khẩu không đúng. Hãy đăng nhập online thành công một lần trước.');enterOffline(email,x.profile)}
+  catch(err){try{toast(err.message)}catch(_){alert(err.message)}}
+},true);
+// After a successful online Cloud login, save only a salted verifier + approved profile, never plaintext password.
+document.addEventListener('click',e=>{
+  if(!e.target.closest?.('#loginBtn'))return;
+  const snap=pending;
+  if(!snap||!navigator.onLine)return;
+  setTimeout(async()=>{
+    if(!$('login')?.classList.contains('hidden'))return;
+    const email=String(window.ginoCloudEmail||snap.email||'').toLowerCase();
+    const p=window.ginoCloudProfile;
+    if(email===snap.email&&p){try{await saveVerifier(email,snap.password,p)}catch(err){console.warn('offline verifier save failed',err)}}
+    pending=null;
+  },700);
+},false);
+function install(){
+  document.querySelector('meta[name="tg-app-version"]')?.setAttribute('content',VER);
+  ['updateStatus','directStatus510','status590'].forEach(id=>{if($(id))$(id).textContent='Phiên bản hiện tại: v'+VER});
+  const card=document.querySelector('#login .login-card');if(card&&!$('gino723OfflineHint')){const n=document.createElement('div');n.id='gino723OfflineHint';n.textContent='📴 Offline: tài khoản Cloud đã đăng nhập thành công trên thiết bị này có thể đăng nhập lại bằng email + mật khẩu.';$('loginBtn')?.insertAdjacentElement('afterend',n)}
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
+})();
+</script>
+</body></html>
