@@ -1,0 +1,17 @@
+GINO2 SAKURA v7.2.4 — BẢN TRÌNH DUYỆT OFFLINE
+
+1. Tải TOÀN BỘ nội dung trong thư mục này lên GitHub Pages. Không chỉ tải riêng index.html.
+2. Trên iPhone/iPad, mở đường dẫn bằng Safari khi đang có mạng.
+3. Chờ trong Cài đặt ứng dụng xuất hiện: “Sẵn sàng mở khi mất mạng”.
+4. Đăng nhập tài khoản Cloud online thành công ít nhất một lần trên từng thiết bị.
+5. Có thể tắt Wi-Fi và 4G, đóng rồi mở lại Safari để kiểm tra.
+
+GHI NHỚ
+- Tài khoản chưa từng đăng nhập online trên thiết bị sẽ không đăng nhập offline được.
+- Nội dung JLPT lấy từ nguồn ngoài chỉ dùng offline sau khi đã tải nội dung đó về máy.
+- Không xóa Dữ liệu trang web của Safari; thao tác này sẽ xóa dữ liệu offline và phiên xác thực trên máy.
+- Khi tải bản cập nhật lên GitHub, phải tải toàn bộ bộ file cùng phiên bản.
+- Trong Cài đặt ứng dụng có nút “Kiểm tra cập nhật”.
+
+File chính: index.html
+Phiên bản: 7.2.4
